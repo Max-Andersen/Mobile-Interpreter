@@ -96,10 +96,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/startEnd">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/blockscreen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <ImageButton
-            android:id="@+id/imageButton2"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/plus1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:backgroundTint="@android:color/transparent"
             android:contentDescription="@string/bottom_sheet_behavior"
             app:layout_constraintBottom_toBottomOf="parent"

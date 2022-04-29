@@ -12,7 +12,10 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:background="#9FEF4F">
+        android:background="#9FEF4F"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/headerText"
@@ -93,8 +96,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/startEnd">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/blockscreen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#4AE37D"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/closeBlockScreen"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="fitStart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/close" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/plus1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@android:color/transparent"
@@ -104,12 +129,5 @@
             app:srcCompat="@drawable/plus1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        tools:layout_editor_absoluteY="125dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

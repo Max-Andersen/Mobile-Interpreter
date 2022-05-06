@@ -27,8 +27,8 @@ class StartBtn @JvmOverloads constructor(
 
         when (event.action){
             DragEvent.ACTION_DRAG_STARTED -> {
-//                if (owner.id != blockscreen.id && owner.id != Workspace.id){
-//                    owner.layoutParams.height -= 200
+//                if (owner.id != blockscreen.id && owner.id != Workspace.id){ // вот тут надо как-то сделать, чтобы
+//                    owner.layoutParams.height -= 200                         // род. блок уменьшался и place for drop бесконечно не рос
 //                }
                 view.invalidate()
                 true
@@ -51,8 +51,8 @@ class StartBtn @JvmOverloads constructor(
             }
 
             DragEvent.ACTION_DROP -> {
-                dragBlock.x = destination.rootView.beginView.x   //event.x - (v1.width / 2)
-                dragBlock.y = destination.rootView.beginView.y   //event.y - (v1.height / 2)
+                dragBlock.x = destination.rootView.beginView.x   //подтягиваем drag block ровно в place for drop
+                dragBlock.y = destination.rootView.beginView.y
 
                 owner.removeView(dragBlock)
 

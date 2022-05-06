@@ -21,20 +21,19 @@ class MainActivity : AppCompatActivity() {
         plus1.setOnClickListener() {
             for (i in 0..Workspace.childCount){
                 val child = Workspace.getChildAt(i)
-                if (child is View){    // TODO: поменять на customView
+                if (child is View){
                     child.visibility = View.INVISIBLE
                 }
             }
 
             blockscreen.visibility = View.VISIBLE
             plus1.visibility = View.INVISIBLE
-
         }
 
         closeBlockScreen.setOnClickListener(){
             for (i in 0..Workspace.childCount){
                 val child = Workspace.getChildAt(i)
-                if (child is View){   // TODO: поменять на customView
+                if (child is View){
                     child.visibility = View.VISIBLE
                 }
             }
@@ -89,17 +88,15 @@ class MainActivity : AppCompatActivity() {
 
             DragEvent.ACTION_DROP -> {
                 val v = event.localState as ConstraintLayout
-                v.x = event.x - (v.width / 2)  //
-                v.y = event.y - (v.height / 2) //
+                v.x = event.x - (v.width / 2)
+                v.y = event.y - (v.height / 2)
 
                 val owner = v.parent as ViewGroup
                 owner.removeView(v)
                 Workspace.addView(v)
 
-                (event.localState as? StartBtn)?.onSet();
-                (event.localState as? WhileBtn)?.onSet();
-
-                //v.placeForDrop.setOnDragListener(dragAndDropListener2)
+                (event.localState as? StartBtn)?.onSet() // ставят обработчик на вложенный в них place for drop
+                (event.localState as? WhileBtn)?.onSet()
 
                 true
             }

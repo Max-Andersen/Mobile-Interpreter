@@ -121,84 +121,13 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/close" />
 
-            <View
-                android:id="@+id/startNode"
-                android:layout_width="213dp"
-                android:layout_height="69dp"
-                android:layout_marginEnd="100dp"
-                android:background="@color/orange"
-                app:layout_constraintEnd_toStartOf="@+id/closeBlockScreen"
-                app:layout_constraintTop_toBottomOf="@+id/closeBlockScreen" />
+            <!--            <com.example.myapplication.StartBtn-->
+            <!--                android:layout_width="213dp"-->
+            <!--                android:layout_height="69dp"-->
+            <!--                android:layout_marginEnd="148dp"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@+id/closeBlockScreen"-->
+            <!--                app:layout_constraintEnd_toStartOf="@+id/closeBlockScreen" />-->
 
-            <View
-                android:id="@+id/startNode1"
-                android:layout_width="213dp"
-                android:layout_height="69dp"
-                android:layout_marginEnd="100dp"
-                android:background="@color/orange"
-                app:layout_constraintEnd_toStartOf="@+id/closeBlockScreen"
-                app:layout_constraintTop_toBottomOf="@+id/closeBlockScreen" />
-
-            <View
-                android:id="@+id/startNode2"
-                android:layout_width="213dp"
-                android:layout_height="69dp"
-                android:layout_marginEnd="100dp"
-                android:background="@color/orange"
-                app:layout_constraintEnd_toStartOf="@+id/closeBlockScreen"
-                app:layout_constraintTop_toBottomOf="@+id/closeBlockScreen" />
-
-            <View
-                android:id="@+id/startNode3"
-                android:layout_width="213dp"
-                android:layout_height="69dp"
-                android:layout_marginEnd="100dp"
-                android:background="@color/orange"
-                app:layout_constraintEnd_toStartOf="@+id/closeBlockScreen"
-                app:layout_constraintTop_toBottomOf="@+id/closeBlockScreen" />
-
-            <View
-                android:id="@+id/startNode4"
-                android:layout_width="213dp"
-                android:layout_height="69dp"
-                android:layout_marginEnd="100dp"
-                android:background="@color/orange"
-                app:layout_constraintEnd_toStartOf="@+id/closeBlockScreen"
-                app:layout_constraintTop_toBottomOf="@+id/closeBlockScreen" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="161dp"
-                android:layout_height="41dp"
-                android:text="@string/startNoneText"
-                android:textSize="35sp"
-                app:layout_constraintBottom_toBottomOf="@+id/startNode"
-                app:layout_constraintEnd_toEndOf="@+id/startNode"
-                app:layout_constraintStart_toStartOf="@+id/startNode"
-                app:layout_constraintTop_toTopOf="@+id/startNode" />
-
-            <View
-                android:id="@+id/whileBlock"
-                android:layout_width="214dp"
-                android:layout_height="81dp"
-                android:layout_marginStart="47dp"
-                android:layout_marginEnd="150dp"
-                android:layout_marginBottom="467dp"
-                android:background="@color/darkGreen"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="182dp"
-                android:layout_height="51dp"
-                android:text="While"
-                android:textSize="35sp"
-                app:layout_constraintBottom_toBottomOf="@+id/whileBlock"
-                app:layout_constraintEnd_toEndOf="@+id/whileBlock"
-                app:layout_constraintStart_toStartOf="@+id/whileBlock"
-                app:layout_constraintTop_toTopOf="@+id/whileBlock" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageButton

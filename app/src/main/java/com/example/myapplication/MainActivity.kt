@@ -1,19 +1,19 @@
 package com.example.myapplication
 
-import android.content.ClipData
-import android.content.ClipDescription
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.DragEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.forEach
+import com.example.myapplication.databinding.ActivityMainBinding
+//import com.example.myapplication.databinding.StartBlockBinding
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
 
             blockscreen.visibility = View.VISIBLE
             plus1.visibility = View.INVISIBLE
+
         }
 
         closeBlockScreen.setOnClickListener(){
@@ -42,44 +43,19 @@ class MainActivity : AppCompatActivity() {
             plus1.visibility = View.VISIBLE
         }
 
+        val start = StartBtn(this)
+
+        val whilee = WhileBtn(this)
+        whilee.y += 300
+
+        val anotherWhilee = WhileBtn(this)
+        anotherWhilee.y += 600
+
+        blockscreen.addView(start)
+        blockscreen.addView(whilee)
+        blockscreen.addView(anotherWhilee)
+
         Workspace.setOnDragListener(dragAndDropListener)
-
-
-        startNode.setOnLongClickListener {
-            val textOnBoard = "This is Start Node"
-            val item = ClipData.Item(textOnBoard)
-            val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
-            val data = ClipData(textOnBoard, mimeTypes, item)
-
-            val dragAndDropBuilder = View.DragShadowBuilder(it)
-            it.startDragAndDrop(data, dragAndDropBuilder, it, 0)
-
-            true
-        }
-
-        startNode1.setOnLongClickListener {
-            val textOnBoard = "This is Start Node"
-            val item = ClipData.Item(textOnBoard)
-            val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
-            val data = ClipData(textOnBoard, mimeTypes, item)
-
-            val dragAndDropBuilder = View.DragShadowBuilder(it)
-            it.startDragAndDrop(data, dragAndDropBuilder, it, 0)
-            true
-        }
-
-        startNode2.setOnLongClickListener {
-            val textOnBoard = "This is Start Node"
-            val item = ClipData.Item(textOnBoard)
-            val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
-            val data = ClipData(textOnBoard, mimeTypes, item)
-
-            val dragAndDropBuilder = View.DragShadowBuilder(it)
-            it.startDragAndDrop(data, dragAndDropBuilder, it, 0)
-            true
-        }
-
-
     }
 
     val dragAndDropListener = View.OnDragListener{ view, event ->
@@ -87,12 +63,13 @@ class MainActivity : AppCompatActivity() {
             DragEvent.ACTION_DRAG_STARTED -> {
                 for (i in 0..Workspace.childCount){
                     val child = Workspace.getChildAt(i)
-                    if (child is View){   // TODO: поменять на customView
+                    if (child is View){
                         child.visibility = View.VISIBLE
                     }
                 }
                 blockscreen.visibility = View.INVISIBLE
                 plus1.visibility = View.VISIBLE
+
                 true
             }
 
@@ -111,14 +88,19 @@ class MainActivity : AppCompatActivity() {
             }
 
             DragEvent.ACTION_DROP -> {
-                val v = event.localState as View
-                v.x = event.x - (v.width / 2)
-                v.y = event.y - (v.height / 2)
+                val v = event.localState as ConstraintLayout
+                v.x = event.x - (v.width / 2)  //
+                v.y = event.y - (v.height / 2) //
 
                 val owner = v.parent as ViewGroup
                 owner.removeView(v)
-
                 Workspace.addView(v)
+
+                (event.localState as? StartBtn)?.onSet();
+                (event.localState as? WhileBtn)?.onSet();
+
+                //v.placeForDrop.setOnDragListener(dragAndDropListener2)
+
                 true
             }
 
@@ -126,9 +108,8 @@ class MainActivity : AppCompatActivity() {
                 view.invalidate()
                 true
             }
+
             else -> {false}
         }
     }
-
-
 }

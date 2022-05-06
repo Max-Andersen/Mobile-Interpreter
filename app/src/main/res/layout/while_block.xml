@@ -24,7 +24,7 @@
         android:id="@+id/textView"
         android:layout_width="160dp"
         android:layout_height="67dp"
-        android:text="while"
+        android:text="@string/While"
         android:textSize="35sp"
         app:layout_constraintBottom_toBottomOf="@+id/beginView"
         app:layout_constraintEnd_toEndOf="@+id/beginView"

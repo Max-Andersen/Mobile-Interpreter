@@ -76,25 +76,25 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        val start = StartBtn(this)
+        var start = StartBtn(this)
         start.y += 200
 
-        val whilee = WhileBtn(this)
+        var whilee = WhileBtn(this)
         whilee.y += 400
 
-        val anotherWhilee = WhileBtn(this)
+        var anotherWhilee = WhileBtn(this)
         anotherWhilee.y +=600
 
-        val variable = VariableConsole(this)
+        var variable = VariableConsole(this)
         variable.y += 200
         plusvar.setOnClickListener(){
             plusvar.y += 100
             variableBlock.addView(variable)
         }
-        val variable1 = VariableBtn(this)
+        var variable1 = VariableBtn(this)
         variable1.y += 800
 
-        val outputblock = OutputBtn(this)
+        var outputblock = OutputBtn(this)
         outputblock.y += 1000
 
         blockscreen.addView(outputblock)

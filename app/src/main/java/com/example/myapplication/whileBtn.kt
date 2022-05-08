@@ -27,9 +27,9 @@ class WhileBtn @JvmOverloads constructor(
 
         when (event.action){
             DragEvent.ACTION_DRAG_STARTED -> {
-//                if (owner.id != blockscreen.id && owner.id != Workspace.id){ // вот тут надо как-то сделать, чтобы
-//                    owner.layoutParams.height -= 200                         // род. блок уменьшался и place for drop бесконечно не рос
-//                }
+ //               if (owner.id != blockscreen.id && owner.id != Workspace.id){ // вот тут надо как-то сделать, чтобы
+ //                   owner.layoutParams.height -= 200                         // род. блок уменьшался и place for drop бесконечно не рос
+ //               }
                 view.invalidate()
                 true
             }
@@ -54,6 +54,7 @@ class WhileBtn @JvmOverloads constructor(
                 dragBlock.x = destination.rootView.beginView.x //подтягиваем drag block ровно в place for drop
                 dragBlock.y = destination.rootView.beginView.y
 
+
                 owner.removeView(dragBlock)
 
                 destination.addView(dragBlock)
@@ -76,7 +77,7 @@ class WhileBtn @JvmOverloads constructor(
 
     init {
         binding.root.setOnLongClickListener(){
-            val textOnBoard = "This is While Node"
+            val textOnBoard = ""
             val item = ClipData.Item(textOnBoard)
             val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
             val data = ClipData(textOnBoard, mimeTypes, item)

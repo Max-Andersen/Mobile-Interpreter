@@ -6,4 +6,10 @@
     <string name="startNoneText">Start</string>
     <string name="ttksmt">TTKSMT</string>
     <string name="While">While</string>
+    <string name="Variable">Variable name:</string>
+    <string name="VariableSolo">Variable:</string>
+    <string name="Get_name_block">Name</string>
+    <string name="When">When</string>
+    <string name="Click">Clicked</string>
+    <string name="Output">Output</string>
 </resources>

@@ -76,33 +76,35 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        var start = StartBtn(this)
+        val start = StartBtn(this)
         start.y += 200
 
-        var whilee = WhileBtn(this)
-        whilee.y += 400
+        val whilee = WhileBtn(this)
+        whilee.y += 450
 
-        var anotherWhilee = WhileBtn(this)
-        anotherWhilee.y +=600
-
-        var variable = VariableConsole(this)
+        val variable = VariableConsole(this)
         variable.y += 200
-        plusvar.setOnClickListener(){
-            plusvar.y += 100
-            variableBlock.addView(variable)
-        }
-        var variable1 = VariableBtn(this)
-        variable1.y += 800
 
-        var outputblock = OutputBtn(this)
-        outputblock.y += 1000
+        var n = 2;
+        plusvar.setOnClickListener(){
+            plusvar.y += 270
+            val anotherVariable = VariableConsole(this)
+            anotherVariable.y += 270 * n
+            variableBlock.addView(anotherVariable)
+            n += 1
+        }
+
+        val variable1 = VariableBtn(this)
+        variable1.y += 700
+
+        val outputblock = OutputBtn(this)
+        outputblock.y += 950
 
         blockscreen.addView(outputblock)
         blockscreen.addView(variable1)
         variableBlock.addView(variable)
         blockscreen.addView(start)
         blockscreen.addView(whilee)
-        blockscreen.addView(anotherWhilee)
 
         Workspace.setOnDragListener(dragAndDropListener)
     }
@@ -119,6 +121,11 @@ class MainActivity : AppCompatActivity() {
                 CreateConsole.visibility = View.INVISIBLE
                 blockAndVariable.visibility = View.INVISIBLE
                 plus1.visibility = View.VISIBLE
+
+//                val x = event.x
+//                val y = event.y
+//
+//                val block = (view as? StartBtn)?.copy()
 
                 true
             }

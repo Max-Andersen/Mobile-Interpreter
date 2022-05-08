@@ -83,13 +83,16 @@ class StartBtn @JvmOverloads constructor(
 
             val dragAndDropBuilder = View.DragShadowBuilder(it)
             it.startDragAndDrop(data, dragAndDropBuilder, it, 0)
-
             true
         }
-
     }
 
     fun onSet(){
         binding.placeForDrop.setOnDragListener(dragAndDropListener)
     }
+
+//    fun copy(): StartBtn {
+//        return StartBtn(context, attrs = attrs, defStyleAttr = 0)
+//    }
+
 }

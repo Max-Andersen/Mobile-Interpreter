@@ -25,7 +25,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="14dp"
             android:fontFamily="@font/jura"
-            android:text="TTKSMT"
+            android:text="@string/ttksmt"
             android:textColor="#4E2828"
             android:textSize="38sp"
             android:textStyle="bold"
@@ -70,7 +70,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/arrow" />
+            app:srcCompat="@drawable/arrow"
+            tools:ignore="DuplicateSpeakableTextCheck" />
 
         <Button
             android:id="@+id/button4"
@@ -90,6 +91,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:background="#9F9C9C"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -97,15 +99,11 @@
         app:layout_constraintTop_toBottomOf="@+id/startEnd">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/blockscreen"
+            android:id="@+id/blockAndVariable"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#4AE37D"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:visibility="invisible">
 
             <ImageButton
                 android:id="@+id/closeBlockScreen"
@@ -114,8 +112,68 @@
                 android:backgroundTint="@android:color/transparent"
                 android:scaleType="fitStart"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/close" />
+                app:srcCompat="@drawable/close"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <Button
+                android:id="@+id/blockbtn"
+                android:layout_width="173dp"
+                android:layout_height="48dp"
+                android:background="#9FEF4F"
+                android:fontFamily="@font/jura"
+                android:text="block"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/varbtn"
+                android:layout_width="173dp"
+                android:layout_height="48dp"
+                android:background="#9FEF4F"
+                android:fontFamily="@font/jura"
+                android:text="variables"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toStartOf="@+id/closeBlockScreen"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/variableBlock"
+                android:layout_width="match_parent"
+                android:layout_height="555dp"
+                android:background="#4AE37D"
+                android:visibility="invisible"
+                tools:layout_editor_absoluteY="48dp">
+
+                <ImageButton
+                    android:id="@+id/plusvar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="150dp"
+                    android:layout_marginBottom="334dp"
+                    android:backgroundTint="@android:color/transparent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0"
+                    app:srcCompat="@drawable/plus1" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/blockscreen"
+                android:layout_width="match_parent"
+                android:layout_height="555dp"
+                android:background="#4AE37D"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@+id/blockbtn">
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageButton
@@ -127,6 +185,37 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/plus1" />
+
+        <ImageButton
+            android:id="@+id/consoleBtn"
+            android:layout_width="56dp"
+            android:layout_height="52dp"
+            android:backgroundTint="@android:color/transparent"
+            android:scaleType="fitStart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/command" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/CreateConsole"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.9"
+            android:background="#1B2549"
+            android:visibility="invisible"
+            tools:layout_editor_absoluteY="48dp">
+
+            <ImageButton
+                android:id="@+id/consoleCloseBtn"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:alpha="1"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="fitStart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/close" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

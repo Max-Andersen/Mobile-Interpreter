@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.myapplication.databinding.VariableBlockBinding
-import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.start_block.view.*
 
 class VariableBtn @JvmOverloads constructor(

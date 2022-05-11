@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.myapplication.databinding.OutputBlockBinding
-import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.start_block.view.*
 
 class OutputBtn @JvmOverloads constructor(
@@ -90,6 +89,7 @@ class OutputBtn @JvmOverloads constructor(
     }
 
     fun onSet(){
-        binding.placeForDrop.setOnDragListener(dragAndDropListener)
+        //binding.placeForDrop.setOnDragListener(dragAndDropListener)
+        //binding.insidePlace.setOnDragListener(dragAndDropListener)
     }
 }

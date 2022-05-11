@@ -1,17 +1,21 @@
 package com.example.myapplication.blocks
-import android.content.Context
 import android.content.ClipData
 import android.content.ClipDescription
+import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
-import android.view.LayoutInflater
+import android.util.TypedValue
 import android.view.DragEvent
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.myapplication.databinding.WhileBlockBinding
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.start_block.view.*
+
 
 class WhileBtn @JvmOverloads constructor(
     context: Context,
@@ -19,6 +23,10 @@ class WhileBtn @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ): ConstraintLayout(context, attrs, defStyleAttr){
     private var binding = WhileBlockBinding.inflate(LayoutInflater.from(context), this)
+    var c = context
+    var oneDP = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP, 1f,
+        context.resources.displayMetrics).toInt()
 
     val dragAndDropListener = View.OnDragListener{ view, event ->
         val dragBlock = event.localState as View
@@ -33,7 +41,7 @@ class WhileBtn @JvmOverloads constructor(
 
             DragEvent.ACTION_DRAG_ENTERED -> {
                 view.invalidate()
-                destination.placeForDrop.setBackgroundColor(Color.GRAY)
+                destination.setBackgroundColor(Color.GRAY)
                 true
             }
 
@@ -43,7 +51,7 @@ class WhileBtn @JvmOverloads constructor(
 
             DragEvent.ACTION_DRAG_EXITED -> {
                 view.invalidate()
-                destination.placeForDrop.setBackgroundColor(Color.TRANSPARENT)
+                destination.setBackgroundColor(Color.TRANSPARENT)
                 true
             }
 
@@ -65,7 +73,14 @@ class WhileBtn @JvmOverloads constructor(
             }
 
             DragEvent.ACTION_DRAG_ENDED -> {
-                //Workspace.setOnDragListener(View.OnDragListener{ view, event -> false})
+//                val text = "${binding.insidePlace.layoutParams.height}"
+//                val duration = Toast.LENGTH_SHORT
+//
+//                val toast = Toast.makeText(context, text, duration)
+//                toast.show()      можно на каждый дроп пересчитывать размер палки, но binding.insidePlace.layoutParams.height
+//                                    почему-то всегда 2...
+//
+//                binding.view.layoutParams = LayoutParams(oneDP * 25, oneDP* binding.insidePlace.layoutParams.height)
                 view.invalidate()
                 true
             }
@@ -77,6 +92,7 @@ class WhileBtn @JvmOverloads constructor(
 
     init {
         binding.root.setOnLongClickListener(){
+
             val textOnBoard = ""
             val item = ClipData.Item(textOnBoard)
             val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
@@ -91,6 +107,13 @@ class WhileBtn @JvmOverloads constructor(
 
     fun onSet(){
         binding.placeForDrop.setOnDragListener(dragAndDropListener)
+        binding.insidePlace.setOnDragListener(dragAndDropListener)
+
+//        val whilee = WhileBtn(c)  вот тут зараза почему-то добавлять не хочет
+//        whilee.y += 450
+//        blockscreen.addView(whilee)
+//        binding.root.blockscreen.addView()
+
     }
 
 }

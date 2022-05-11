@@ -62,8 +62,7 @@
         android:text="@string/Click"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/beginView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintEnd_toEndOf="@+id/beginView"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.533" />

@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.example.myapplication.blocks.*
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.input_variable.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +17,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+        //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~СЛУШАТЕЛИ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
         plus1.setOnClickListener() {
             for (i in 0..Workspace.childCount){
@@ -41,18 +46,21 @@ class MainActivity : AppCompatActivity() {
             blockAndVariable.visibility = View.INVISIBLE
             plus1.visibility = View.VISIBLE
         }
+
         blockbtn.setOnClickListener(){
             variableBlock.visibility = View.INVISIBLE
             blockbtn.visibility = View.INVISIBLE
             blockscreen.visibility = View.VISIBLE
             varbtn.visibility = View.VISIBLE
         }
+
         varbtn.setOnClickListener(){
             blockscreen.visibility = View.INVISIBLE
             variableBlock.visibility = View.VISIBLE
             varbtn.visibility = View.INVISIBLE
             blockbtn.visibility = View.VISIBLE
         }
+
         consoleBtn.setOnClickListener(){
             for (i in 0..Workspace.childCount){
                 val child = Workspace.getChildAt(i)
@@ -63,6 +71,7 @@ class MainActivity : AppCompatActivity() {
             CreateConsole.visibility = View.VISIBLE
             blockAndVariable.visibility = View.INVISIBLE
         }
+
         consoleCloseBtn.setOnClickListener(){
 
             for (i in 0..Workspace.childCount){
@@ -75,6 +84,15 @@ class MainActivity : AppCompatActivity() {
             blockAndVariable.visibility = View.INVISIBLE
         }
 
+        imageButton4.setOnClickListener(){
+
+        }
+
+
+
+        //------------------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------------------
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~БЛОКИ_В_ПАНЕЛЬ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
         val start = StartBtn(this)
         start.y += 200
@@ -108,6 +126,12 @@ class MainActivity : AppCompatActivity() {
 
         Workspace.setOnDragListener(dragAndDropListener)
     }
+
+
+
+    //-----------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~DRAG_AND_DROP~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     val dragAndDropListener = View.OnDragListener{ view, event ->
         when (event.action){
@@ -153,7 +177,8 @@ class MainActivity : AppCompatActivity() {
                 owner.removeView(v)
                 Workspace.addView(v)
 
-                (event.localState as? StartBtn)?.onSet() // ставят обработчик на вложенный в них place for drop
+                // ставим обработчик на вложенный place for drop:
+                (event.localState as? StartBtn)?.onSet()
                 (event.localState as? WhileBtn)?.onSet()
                 (event.localState as? VariableBtn)?.onSet()
                 (event.localState as? OutputBtn)?.onSet()

@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.blocks
 import android.content.Context
 import android.content.ClipData
 import android.content.ClipDescription
@@ -9,16 +9,16 @@ import android.view.DragEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.example.myapplication.databinding.VariableBlockBinding
+import com.example.myapplication.databinding.WhileBlockBinding
 import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.start_block.view.*
 
-class VariableBtn @JvmOverloads constructor(
+class WhileBtn @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-):ConstraintLayout(context, attrs, defStyleAttr){
-    private var binding = VariableBlockBinding.inflate(LayoutInflater.from(context), this)
+): ConstraintLayout(context, attrs, defStyleAttr){
+    private var binding = WhileBlockBinding.inflate(LayoutInflater.from(context), this)
 
     val dragAndDropListener = View.OnDragListener{ view, event ->
         val dragBlock = event.localState as View
@@ -27,9 +27,9 @@ class VariableBtn @JvmOverloads constructor(
 
         when (event.action){
             DragEvent.ACTION_DRAG_STARTED -> {
-                //               if (owner.id != blockscreen.id && owner.id != Workspace.id){ // вот тут надо как-то сделать, чтобы
-                //                   owner.layoutParams.height -= 200                         // род. блок уменьшался и place for drop бесконечно не рос
-                //               }
+ //               if (owner.id != blockscreen.id && owner.id != Workspace.id){ // вот тут надо как-то сделать, чтобы
+ //                   owner.layoutParams.height -= 200                         // род. блок уменьшался и place for drop бесконечно не рос
+ //               }
                 view.invalidate()
                 true
             }

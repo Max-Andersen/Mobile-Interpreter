@@ -27,9 +27,6 @@ class OutputBtn @JvmOverloads constructor(
 
         when (event.action){
             DragEvent.ACTION_DRAG_STARTED -> {
-//                if (owner.id != blockscreen.id && owner.id != Workspace.id){ // вот тут надо как-то сделать, чтобы
-//                    owner.layoutParams.height -= 200                         // род. блок уменьшался и place for drop бесконечно не рос
-//                }
                 view.invalidate()
                 true
             }
@@ -58,9 +55,12 @@ class OutputBtn @JvmOverloads constructor(
 
                 destination.addView(dragBlock)
                 destination.setBackgroundColor(Color.TRANSPARENT)
-//                destination.layoutParams.height += 400
-                view.invalidate()
 
+                (event.localState as? StartBtn)?.onSet()
+                (event.localState as? WhileBtn)?.onSet()
+                (event.localState as? VariableBtn)?.onSet()
+                (event.localState as? OutputBtn)?.onSet()
+                view.invalidate()
                 true
             }
 

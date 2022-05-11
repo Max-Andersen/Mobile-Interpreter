@@ -58,9 +58,13 @@ class StartBtn @JvmOverloads constructor(
 
                 destination.addView(dragBlock)
                 destination.setBackgroundColor(Color.TRANSPARENT)
-//                destination.layoutParams.height += 400
-                view.invalidate()
 
+                (event.localState as? StartBtn)?.onSet()
+                (event.localState as? WhileBtn)?.onSet()
+                (event.localState as? VariableBtn)?.onSet()
+                (event.localState as? OutputBtn)?.onSet()
+
+                view.invalidate()
                 true
             }
 

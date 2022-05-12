@@ -27,12 +27,12 @@ class MainActivity : AppCompatActivity() {
             for (i in 0..Workspace.childCount){
                 val child = Workspace.getChildAt(i)
                 if (child is View){
-                    child.visibility = View.INVISIBLE
+                    child.visibility = View.GONE
                 }
             }
 
             blockAndVariable.visibility = View.VISIBLE
-            plus1.visibility = View.INVISIBLE
+            plus1.visibility = View.GONE
         }
 
         closeBlockScreen.setOnClickListener(){
@@ -42,22 +42,22 @@ class MainActivity : AppCompatActivity() {
                     child.visibility = View.VISIBLE
                 }
             }
-            CreateConsole.visibility = View.INVISIBLE
-            blockAndVariable.visibility = View.INVISIBLE
+            CreateConsole.visibility = View.GONE
+            blockAndVariable.visibility = View.GONE
             plus1.visibility = View.VISIBLE
         }
 
         blockbtn.setOnClickListener(){
-            variableBlock.visibility = View.INVISIBLE
-            blockbtn.visibility = View.INVISIBLE
+            variableBlock.visibility = View.GONE
+            blockbtn.visibility = View.GONE
             blockscreen.visibility = View.VISIBLE
             varbtn.visibility = View.VISIBLE
         }
 
         varbtn.setOnClickListener(){
-            blockscreen.visibility = View.INVISIBLE
+            blockscreen.visibility = View.GONE
             variableBlock.visibility = View.VISIBLE
-            varbtn.visibility = View.INVISIBLE
+            varbtn.visibility = View.GONE
             blockbtn.visibility = View.VISIBLE
         }
 
@@ -65,23 +65,22 @@ class MainActivity : AppCompatActivity() {
             for (i in 0..Workspace.childCount){
                 val child = Workspace.getChildAt(i)
                 if (child is View){
-                    child.visibility = View.INVISIBLE
+                    child.visibility = View.GONE
                 }
             }
             CreateConsole.visibility = View.VISIBLE
-            blockAndVariable.visibility = View.INVISIBLE
+            blockAndVariable.visibility = View.GONE
         }
 
         consoleCloseBtn.setOnClickListener(){
-
             for (i in 0..Workspace.childCount){
                 val child = Workspace.getChildAt(i)
                 if (child is View){
                     child.visibility = View.VISIBLE
                 }
             }
-            CreateConsole.visibility = View.INVISIBLE
-            blockAndVariable.visibility = View.INVISIBLE
+            CreateConsole.visibility = View.GONE
+            blockAndVariable.visibility = View.GONE
         }
 
         imageButton4.setOnClickListener(){
@@ -127,8 +126,6 @@ class MainActivity : AppCompatActivity() {
         Workspace.setOnDragListener(dragAndDropListener)
     }
 
-
-
     //-----------------------------------------------------------------------------------------
     //-----------------------------------------------------------------------------------------
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~DRAG_AND_DROP~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -142,8 +139,8 @@ class MainActivity : AppCompatActivity() {
                         child.visibility = View.VISIBLE
                     }
                 }
-                CreateConsole.visibility = View.INVISIBLE
-                blockAndVariable.visibility = View.INVISIBLE
+                CreateConsole.visibility = View.GONE
+                blockAndVariable.visibility = View.GONE
                 plus1.visibility = View.VISIBLE
 
 //                val x = event.x

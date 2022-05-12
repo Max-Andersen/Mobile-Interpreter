@@ -73,14 +73,14 @@ class WhileBtn @JvmOverloads constructor(
             }
 
             DragEvent.ACTION_DRAG_ENDED -> {
-//                val text = "${binding.insidePlace.layoutParams.height}"
-//                val duration = Toast.LENGTH_SHORT
-//
-//                val toast = Toast.makeText(context, text, duration)
-//                toast.show()      можно на каждый дроп пересчитывать размер палки, но binding.insidePlace.layoutParams.height
+                val text = "${binding.insidePlace.layoutParams.height}"
+                val duration = Toast.LENGTH_SHORT
+
+                val toast = Toast.makeText(context, text, duration)
+                toast.show()      //можно на каждый дроп пересчитывать размер палки, но binding.insidePlace.layoutParams.height
 //                                    почему-то всегда 2...
 //
-//                binding.view.layoutParams = LayoutParams(oneDP * 25, oneDP* binding.insidePlace.layoutParams.height)
+                //binding.view.layoutParams = LayoutParams(oneDP * 25, oneDP* binding.insidePlace.layoutParams.height)
                 view.invalidate()
                 true
             }
@@ -92,7 +92,8 @@ class WhileBtn @JvmOverloads constructor(
 
     init {
         binding.root.setOnLongClickListener(){
-
+            binding.placeForDrop.setOnDragListener { _, _ -> false }
+            binding.insidePlace.setOnDragListener { _, _ -> false }
             val textOnBoard = ""
             val item = ClipData.Item(textOnBoard)
             val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
@@ -109,10 +110,13 @@ class WhileBtn @JvmOverloads constructor(
         binding.placeForDrop.setOnDragListener(dragAndDropListener)
         binding.insidePlace.setOnDragListener(dragAndDropListener)
 
-//        val whilee = WhileBtn(c)  вот тут зараза почему-то добавлять не хочет
-//        whilee.y += 450
+        val whilee = WhileBtn(c)  //вот тут зараза почему-то добавлять не хочет
+        whilee.y += 450
+        //binding.root.blockscreen.visibility = View.VISIBLE
+        //blockscreen.addView(whilee)
+
 //        blockscreen.addView(whilee)
-//        binding.root.blockscreen.addView()
+        //binding.root.blockscreen.addView(whilee)
 
     }
 

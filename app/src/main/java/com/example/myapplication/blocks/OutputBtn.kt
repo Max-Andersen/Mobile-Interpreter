@@ -75,6 +75,7 @@ class OutputBtn @JvmOverloads constructor(
 
     init {
         binding.root.setOnLongClickListener(){
+            binding.placeForDrop.setOnDragListener { _, _ -> false }
             val textOnBoard = "This is Start Node"
             val item = ClipData.Item(textOnBoard)
             val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)

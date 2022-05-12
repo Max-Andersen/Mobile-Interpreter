@@ -76,6 +76,7 @@ class VariableBtn @JvmOverloads constructor(
 
     init {
         binding.root.setOnLongClickListener(){
+            binding.placeForDrop.setOnDragListener { _, _ -> false }
             val textOnBoard = ""
             val item = ClipData.Item(textOnBoard)
             val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)

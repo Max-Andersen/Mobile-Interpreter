@@ -48,4 +48,5 @@ dependencies {
     apply plugin: 'com.android.application'
     apply plugin: 'kotlin-android'
     apply plugin: 'kotlin-android-extensions'
+    implementation("com.otaliastudios:zoomlayout:1.9.0")
 }

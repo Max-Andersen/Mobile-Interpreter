@@ -20,6 +20,8 @@
         <entry key="..\:/mobile-interpreter/app/src/main/res/layout/start_block.xml" value="0.2" />
         <entry key="..\:/mobile-interpreter/app/src/main/res/layout/variable_block.xml" value="0.33" />
         <entry key="..\:/mobile-interpreter/app/src/main/res/layout/while_block.xml" value="0.22" />
+        <entry key="..\:/mobile-interpreter1/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/mobile-interpreter1/app/src/main/res/layout/while_block.xml" value="0.1" />
       </map>
     </option>
   </component>

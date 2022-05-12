@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.myapplication.blocks.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.view.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -24,24 +25,27 @@ class MainActivity : AppCompatActivity() {
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~СЛУШАТЕЛИ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
         plus1.setOnClickListener() {
-            for (i in 0..Workspace.childCount){
-                val child = Workspace.getChildAt(i)
+            for (i in 0..zoomLayout.childCount){
+                val child = zoomLayout.getChildAt(i)
                 if (child is View){
                     child.visibility = View.INVISIBLE
                 }
             }
 
+            consoleBtn.visibility = View.INVISIBLE
             blockAndVariable.visibility = View.VISIBLE
             plus1.visibility = View.INVISIBLE
         }
 
         closeBlockScreen.setOnClickListener(){
-            for (i in 0..Workspace.childCount){
-                val child = Workspace.getChildAt(i)
+            for (i in 0..zoomLayout.childCount){
+                val child = zoomLayout.getChildAt(i)
                 if (child is View){
                     child.visibility = View.VISIBLE
                 }
             }
+            consoleBtn.visibility = View.VISIBLE
+
             CreateConsole.visibility = View.INVISIBLE
             blockAndVariable.visibility = View.INVISIBLE
             plus1.visibility = View.VISIBLE
@@ -62,24 +66,25 @@ class MainActivity : AppCompatActivity() {
         }
 
         consoleBtn.setOnClickListener(){
-            for (i in 0..Workspace.childCount){
-                val child = Workspace.getChildAt(i)
+            for (i in 0..zoomLayout.childCount){
+                val child = zoomLayout.getChildAt(i)
                 if (child is View){
                     child.visibility = View.INVISIBLE
                 }
             }
+
             CreateConsole.visibility = View.VISIBLE
             blockAndVariable.visibility = View.INVISIBLE
         }
 
         consoleCloseBtn.setOnClickListener(){
-
-            for (i in 0..Workspace.childCount){
-                val child = Workspace.getChildAt(i)
+            for (i in 0..zoomLayout.childCount){
+                val child = zoomLayout.getChildAt(i)
                 if (child is View){
                     child.visibility = View.VISIBLE
                 }
             }
+
             CreateConsole.visibility = View.INVISIBLE
             blockAndVariable.visibility = View.INVISIBLE
         }
@@ -136,8 +141,8 @@ class MainActivity : AppCompatActivity() {
     val dragAndDropListener = View.OnDragListener{ view, event ->
         when (event.action){
             DragEvent.ACTION_DRAG_STARTED -> {
-                for (i in 0..Workspace.childCount){
-                    val child = Workspace.getChildAt(i)
+                for (i in 0..zoomLayout.childCount){
+                    val child = zoomLayout.getChildAt(i)
                     if (child is View){
                         child.visibility = View.VISIBLE
                     }

@@ -11,10 +11,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.children
 import com.example.myapplication.databinding.WhileBlockBinding
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
-import kotlinx.android.synthetic.main.start_block.view.*
+import kotlinx.android.synthetic.main.while_block.view.*
 
 
 class WhileBtn @JvmOverloads constructor(
@@ -73,7 +74,7 @@ class WhileBtn @JvmOverloads constructor(
             }
 
             DragEvent.ACTION_DRAG_ENDED -> {
-                val text = "${binding.insidePlace.layoutParams.height}"
+                val text = "${destination.children.count()}"
                 val duration = Toast.LENGTH_SHORT
 
                 val toast = Toast.makeText(context, text, duration)

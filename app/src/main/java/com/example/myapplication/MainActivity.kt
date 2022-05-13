@@ -84,10 +84,6 @@ class MainActivity : AppCompatActivity() {
             blockAndVariable.visibility = View.GONE
         }
 
-        imageButton4.setOnClickListener(){
-
-        }
-
 
 
         //------------------------------------------------------------------------------------------
@@ -125,6 +121,14 @@ class MainActivity : AppCompatActivity() {
         blockscreen.addView(whilee)
 
         Workspace.setOnDragListener(dragAndDropListener)
+
+
+        //ЗАПУСК!!!!!!!!!!!!!ИУУУУУУУУУУУУ!!!!!!!!
+        imageButton4.setOnClickListener(){
+            val program = StartProgram(this, start)
+            program.main()
+        }
+
     }
 
     //-----------------------------------------------------------------------------------------

@@ -4,5 +4,5 @@
         android:centerColor="@color/white"
         android:type="linear"
         android:centerX="@integer/material_motion_duration_long_2"
-        android:centerY="@integer/material_motion_duration_long_2"
+        android:centerY="@integer/material_motion_duration_long_2"/>
 </shape>

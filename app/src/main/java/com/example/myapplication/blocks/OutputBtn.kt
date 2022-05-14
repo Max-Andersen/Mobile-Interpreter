@@ -64,7 +64,6 @@ class OutputBtn @JvmOverloads constructor(
             }
 
             DragEvent.ACTION_DRAG_ENDED -> {
-                //Workspace.setOnDragListener(View.OnDragListener{ view, event -> false})
                 view.invalidate()
                 true
             }
@@ -90,7 +89,7 @@ class OutputBtn @JvmOverloads constructor(
     }
 
     fun onSet(){
-        //binding.placeForDrop.setOnDragListener(dragAndDropListener)
+        binding.placeForDrop.setOnDragListener(dragAndDropListener)
         //binding.insidePlace.setOnDragListener(dragAndDropListener)
     }
 }

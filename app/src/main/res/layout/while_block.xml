@@ -3,64 +3,85 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
-    android:layout_width="250dp"
-    android:layout_height="140dp"
-    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
     android:id="@+id/whileNode"
-    >
+    android:layout_width="250dp"
+    android:layout_height="210dp"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
     <View
         android:id="@+id/beginView"
         android:layout_width="250dp"
         android:layout_height="70dp"
-        android:background="@color/darkGreen"
-
-        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/round"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="73dp"
-        android:layout_height="36dp"
+        android:layout_width="83dp"
+        android:layout_height="40dp"
+        android:fontFamily="@font/jura"
         android:text="@string/While"
-        android:textSize="20sp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="@+id/beginView"
         app:layout_constraintEnd_toEndOf="@+id/beginView"
-        app:layout_constraintHorizontal_bias="0.09"
+        app:layout_constraintHorizontal_bias="0.095"
         app:layout_constraintStart_toStartOf="@+id/beginView"
         app:layout_constraintTop_toTopOf="@+id/beginView"
         app:layout_constraintVertical_bias="1.0" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/placeForDrop"
+        android:id="@+id/insidePlace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:minWidth="210dp"
+        android:layout_marginStart="25dp"
+        android:minWidth="225dp"
         android:minHeight="70dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/beginView"></androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toBottomOf="@+id/beginView">
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <EditText
         android:id="@+id/editTextTextPersonName2"
         android:layout_width="131dp"
         android:layout_height="36dp"
         android:ems="10"
+        android:fontFamily="@font/jura"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="@+id/beginView"
         app:layout_constraintEnd_toEndOf="@+id/beginView"
         app:layout_constraintStart_toEndOf="@+id/textView" />
 
+    <View
+        android:id="@+id/view"
+        android:layout_width="25dp"
+        android:layout_height="70dp"
+        android:background="@drawable/round_second"
+        android:maxWidth="25dp"
+        android:minHeight="70dp"
+        app:layout_constraintEnd_toStartOf="@+id/insidePlace"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/beginView" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/placeForDrop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="250dp"
+        android:minHeight="70dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/insidePlace">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <!--    <View-->
-<!--        android:id="@+id/placeForDrop"-->
-<!--        android:layout_width="236dp"-->
-<!--        android:layout_height="69dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/startView" />-->
-
+    <!--        android:id="@+id/placeForDrop"-->
+    <!--        android:layout_width="236dp"-->
+    <!--        android:layout_height="69dp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/startView" />-->
 
 </merge>

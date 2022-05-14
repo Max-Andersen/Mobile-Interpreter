@@ -20,8 +20,23 @@
         <entry key="..\:/mobile-interpreter/app/src/main/res/layout/start_block.xml" value="0.2" />
         <entry key="..\:/mobile-interpreter/app/src/main/res/layout/variable_block.xml" value="0.33" />
         <entry key="..\:/mobile-interpreter/app/src/main/res/layout/while_block.xml" value="0.22" />
-        <entry key="..\:/mobile-interpreter1/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/mobile-interpreter1/app/src/main/res/layout/while_block.xml" value="0.1" />
+        <entry key="..\:/mobile-interpreter1/app/src/main/res/drawable/round.xml" value="0.1" />
+        <entry key="..\:/mobile-interpreter1/app/src/main/res/drawable/round_for_header.xml" value="0.2705" />
+        <entry key="..\:/mobile-interpreter1/app/src/main/res/drawable/round_for_input_variable.xml" value="0.2705" />
+        <entry key="..\:/mobile-interpreter1/app/src/main/res/drawable/round_for_output_block.xml" value="0.2705" />
+        <entry key="..\:/mobile-interpreter1/app/src/main/res/drawable/round_for_start_and_end.xml" value="0.2705" />
+        <entry key="..\:/mobile-interpreter1/app/src/main/res/drawable/round_for_start_block.xml" value="0.2705" />
+        <entry key="..\:/mobile-interpreter1/app/src/main/res/drawable/round_for_vaiable_block.xml" value="0.2705" />
+        <entry key="..\:/mobile-interpreter1/app/src/main/res/drawable/round_for_variable_block.xml" value="0.2705" />
+        <entry key="..\:/mobile-interpreter1/app/src/main/res/drawable/round_second.xml" value="0.2875" />
+        <entry key="..\:/mobile-interpreter1/app/src/main/res/drawable/roundsecond.xml" value="0.2875" />
+        <entry key="..\:/mobile-interpreter1/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/mobile-interpreter1/app/src/main/res/layout/fragment_variables.xml" value="0.291213768115942" />
+        <entry key="..\:/mobile-interpreter1/app/src/main/res/layout/input_variable.xml" value="0.291213768115942" />
+        <entry key="..\:/mobile-interpreter1/app/src/main/res/layout/output_block.xml" value="0.5" />
+        <entry key="..\:/mobile-interpreter1/app/src/main/res/layout/start_block.xml" value="0.75" />
+        <entry key="..\:/mobile-interpreter1/app/src/main/res/layout/variable_block.xml" value="0.67" />
+        <entry key="..\:/mobile-interpreter1/app/src/main/res/layout/while_block.xml" value="0.75" />
       </map>
     </option>
   </component>

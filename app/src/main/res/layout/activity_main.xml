@@ -10,8 +10,8 @@
 
     <com.otaliastudios.zoom.ZoomLayout
         android:id="@+id/zoomLayout"
-        android:layout_width="999dp"
-        android:layout_height="999dp"
+        android:layout_width="9999dp"
+        android:layout_height="9999dp"
         android:layout_marginEnd="-100dp"
         android:scrollbars="vertical|horizontal"
         app:alignment="center"
@@ -49,6 +49,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/startEnd">
+            
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -58,7 +59,7 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:background="#9FEF4F"
+        android:background="@drawable/round_for_header"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -96,7 +97,7 @@
         android:id="@+id/startEnd"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/white"
+        android:background="@drawable/round_for_start_and_end"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header">

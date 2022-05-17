@@ -223,6 +223,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             DragEvent.ACTION_DROP -> {
+
                 val v = event.localState as ConstraintLayout
                 v.x = event.x - (v.width / 2)
                 v.y = event.y - (v.height / 2)
@@ -230,6 +231,26 @@ class MainActivity : AppCompatActivity() {
                 val owner = v.parent as ViewGroup
                 owner.removeView(v)
                 Workspace.addView(v)
+
+
+                //---------------------------------
+                //---------------------------------
+                //УМЕНЬШЕНИЕ ПОЛОСКИ ВЛОЖЕННОСТИ!!!
+
+                var x = owner.parent as View
+
+                while(true){
+                    if(x is WhileBtn){
+                        x[4].layoutParams.height -= v.height-x[0].layoutParams.height/2
+                        x = x.parent.parent as View
+                    }
+                    else if(x is VariableBtn || x is OutputBtn || x is StartBtn){
+                        x = x.parent.parent as View
+                    }
+                    else{
+                        break
+                    }
+                }
 
                 // ставим обработчик на вложенный place for drop:
                 (event.localState as? StartBtn)?.onSet()

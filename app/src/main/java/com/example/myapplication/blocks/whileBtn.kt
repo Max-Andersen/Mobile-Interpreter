@@ -7,10 +7,17 @@ import android.util.AttributeSet
 import android.view.DragEvent
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnDragListener
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.children
+import androidx.core.view.get
 import com.example.myapplication.databinding.WhileBlockBinding
+import kotlinx.android.synthetic.main.output_block.view.*
+import kotlinx.android.synthetic.main.start_block.view.*
+import kotlinx.android.synthetic.main.variable_block.view.*
 import kotlinx.android.synthetic.main.while_block.view.*
+import kotlinx.android.synthetic.main.while_block.view.beginView
 
 
 class WhileBtn @JvmOverloads constructor(
@@ -19,10 +26,7 @@ class WhileBtn @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ): ConstraintLayout(context, attrs, defStyleAttr){
     private var binding = WhileBlockBinding.inflate(LayoutInflater.from(context), this)
-    //private var c = context
-    /*var oneDP = TypedValue.applyDimension(
-        TypedValue.COMPLEX_UNIT_DIP, 1f,
-        context.resources.displayMetrics).toInt()*/
+    private var c = context
 
     private val dragAndDropListener = OnDragListener{ view, event ->
         val dragBlock = event.localState as View
@@ -53,7 +57,43 @@ class WhileBtn @JvmOverloads constructor(
 
             DragEvent.ACTION_DROP -> {
 
+                //---------------------------------
+                //---------------------------------
+                //УВЕЛИЧЕНИЕ ПОЛОСКИ ВЛОЖЕННОСТИ!!!
 
+                var x = destination.parent as View
+
+                while(true){
+                    if(x is WhileBtn){
+                        x[4].layoutParams.height += dragBlock.height-x[0].layoutParams.height/2
+                        x = x.parent.parent as View
+                    }
+                    else if(x is VariableBtn || x is OutputBtn || x is StartBtn){
+                            x = x.parent.parent as View
+                    }
+                    else{
+                        break
+                    }
+                }
+
+                //---------------------------------
+                //---------------------------------
+                //УМЕНЬШЕНИЕ ПОЛОСКИ ВЛОЖЕННОСТИ!!!
+
+                x = owner.parent as View
+
+                while(true){
+                    if(x is WhileBtn){
+                        x[4].layoutParams.height -= dragBlock.height-x[0].layoutParams.height/2
+                        x = x.parent.parent as View
+                    }
+                    else if(x is VariableBtn || x is OutputBtn || x is StartBtn){
+                        x = x.parent.parent as View
+                    }
+                    else{
+                        break
+                    }
+                }
 
                 //Toast.makeText(context, "упал на вайл", Toast.LENGTH_SHORT).show()
 

@@ -9,8 +9,14 @@ import android.view.DragEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.children
+import androidx.core.view.get
 import com.example.myapplication.databinding.VariableBlockBinding
+import kotlinx.android.synthetic.main.output_block.view.*
 import kotlinx.android.synthetic.main.start_block.view.*
+import kotlinx.android.synthetic.main.start_block.view.beginView
+import kotlinx.android.synthetic.main.variable_block.view.*
+import kotlinx.android.synthetic.main.while_block.view.*
 
 
 class VariableBtn @JvmOverloads constructor(
@@ -50,7 +56,43 @@ class VariableBtn @JvmOverloads constructor(
 
             DragEvent.ACTION_DROP -> {
 
-                //Toast.makeText(context, "упал на var", Toast.LENGTH_SHORT).show()
+                //---------------------------------
+                //---------------------------------
+                //УВЕЛИЧЕНИЕ ПОЛОСКИ ВЛОЖЕННОСТИ!!!
+
+                var x = destination.parent as View
+
+                while(true){
+                    if(x is WhileBtn){
+                        x[4].layoutParams.height += dragBlock.height-x[0].layoutParams.height/2
+                        x = x.parent.parent as View
+                    }
+                    else if(x is VariableBtn || x is OutputBtn || x is StartBtn){
+                        x = x.parent.parent as View
+                    }
+                    else{
+                        break
+                    }
+                }
+
+                //---------------------------------
+                //---------------------------------
+                //УМЕНЬШЕНИЕ ПОЛОСКИ ВЛОЖЕННОСТИ!!!
+
+                x = owner.parent as View
+
+                while(true){
+                    if(x is WhileBtn){
+                        x[4].layoutParams.height -= dragBlock.height-x[0].layoutParams.height/2
+                        x = x.parent.parent as View
+                    }
+                    else if(x is VariableBtn || x is OutputBtn || x is StartBtn){
+                        x = x.parent.parent as View
+                    }
+                    else{
+                        break
+                    }
+                }
 
                 dragBlock.x = destination.rootView.beginView.x //подтягиваем drag block ровно в place for drop
                 dragBlock.y = destination.rootView.beginView.y

@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.myapplication.databinding.StartBlockBinding
-import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.start_block.view.*
 
 class StartBtn @JvmOverloads constructor(
@@ -20,23 +19,20 @@ class StartBtn @JvmOverloads constructor(
 ): ConstraintLayout(context, attrs, defStyleAttr){
     private var binding = StartBlockBinding.inflate(LayoutInflater.from(context), this)
 
-    val dragAndDropListener = View.OnDragListener{ view, event ->
+    private val dragAndDropListener = OnDragListener{ view, event ->
         val dragBlock = event.localState as View
         val destination = view as ConstraintLayout
         val owner = dragBlock.parent as ViewGroup
 
         when (event.action){
             DragEvent.ACTION_DRAG_STARTED -> {
-//                if (owner.id != blockscreen.id && owner.id != Workspace.id){ // вот тут надо как-то сделать, чтобы
-//                    owner.layoutParams.height -= 200                         // род. блок уменьшался и place for drop бесконечно не рос
-//                }
                 view.invalidate()
                 true
             }
 
             DragEvent.ACTION_DRAG_ENTERED -> {
                 view.invalidate()
-                destination.placeForDrop.setBackgroundColor(Color.GRAY)
+                destination.setBackgroundColor(Color.GRAY)
                 true
             }
 
@@ -46,7 +42,7 @@ class StartBtn @JvmOverloads constructor(
 
             DragEvent.ACTION_DRAG_EXITED -> {
                 view.invalidate()
-                destination.placeForDrop.setBackgroundColor(Color.TRANSPARENT)
+                destination.setBackgroundColor(Color.TRANSPARENT)
                 true
             }
 
@@ -79,24 +75,21 @@ class StartBtn @JvmOverloads constructor(
     }
 
     init {
-        binding.root.setOnLongClickListener(){
+        binding.root.setOnLongClickListener{
+            binding.startPlaceForDrop.setOnDragListener { _, _ -> false }
             val textOnBoard = "This is Start Node"
             val item = ClipData.Item(textOnBoard)
             val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
             val data = ClipData(textOnBoard, mimeTypes, item)
 
-            val dragAndDropBuilder = View.DragShadowBuilder(it)
+            val dragAndDropBuilder = DragShadowBuilder(it)
             it.startDragAndDrop(data, dragAndDropBuilder, it, 0)
             true
         }
     }
 
     fun onSet(){
-        binding.placeForDrop.setOnDragListener(dragAndDropListener)
+        binding.startPlaceForDrop.setOnDragListener(dragAndDropListener)
     }
-
-//    fun copy(): StartBtn {
-//        return StartBtn(context, attrs = attrs, defStyleAttr = 0)
-//    }
 
 }

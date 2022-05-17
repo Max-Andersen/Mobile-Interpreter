@@ -87,7 +87,7 @@ class TreeNode<T>(val value: T){
                 }
             }
 
-            println()
+            println("~~~~~~~~~~nextLEVEL~~~~~~~~~~")
         }
     }
 }

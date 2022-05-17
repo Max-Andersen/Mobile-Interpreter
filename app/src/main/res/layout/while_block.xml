@@ -5,7 +5,7 @@
 
     android:id="@+id/whileNode"
     android:layout_width="250dp"
-    android:layout_height="210dp"
+    android:layout_height="175dp"
     tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
     <View
@@ -31,15 +31,14 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/insidePlace"
+        android:id="@+id/whileInsidePlace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:minWidth="225dp"
         android:minHeight="70dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/beginView">
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toBottomOf="@+id/beginView" />
 
     <EditText
         android:id="@+id/editTextTextPersonName2"
@@ -59,18 +58,18 @@
         android:background="@drawable/round_second"
         android:maxWidth="25dp"
         android:minHeight="70dp"
-        app:layout_constraintEnd_toStartOf="@+id/insidePlace"
+        app:layout_constraintEnd_toStartOf="@+id/whileInsidePlace"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/beginView" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/placeForDrop"
+        android:id="@+id/whilePlaceForDrop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minWidth="250dp"
-        android:minHeight="70dp"
+        android:minHeight="35dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/insidePlace">
+        app:layout_constraintTop_toBottomOf="@+id/whileInsidePlace">
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

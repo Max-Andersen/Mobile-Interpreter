@@ -10,8 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.myapplication.databinding.VariableBlockBinding
-import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.start_block.view.*
+
 
 class VariableBtn @JvmOverloads constructor(
     context: Context,
@@ -20,7 +20,8 @@ class VariableBtn @JvmOverloads constructor(
 ):ConstraintLayout(context, attrs, defStyleAttr){
     private var binding = VariableBlockBinding.inflate(LayoutInflater.from(context), this)
 
-    val dragAndDropListener = View.OnDragListener{ view, event ->
+
+    private val dragAndDropListener = OnDragListener{ view, event ->
         val dragBlock = event.localState as View
         val destination = view as ConstraintLayout
         val owner = dragBlock.parent as ViewGroup
@@ -33,7 +34,7 @@ class VariableBtn @JvmOverloads constructor(
 
             DragEvent.ACTION_DRAG_ENTERED -> {
                 view.invalidate()
-                destination.placeForDrop.setBackgroundColor(Color.GRAY)
+                destination.setBackgroundColor(Color.GRAY)
                 true
             }
 
@@ -43,11 +44,14 @@ class VariableBtn @JvmOverloads constructor(
 
             DragEvent.ACTION_DRAG_EXITED -> {
                 view.invalidate()
-                destination.placeForDrop.setBackgroundColor(Color.TRANSPARENT)
+                destination.setBackgroundColor(Color.TRANSPARENT)
                 true
             }
 
             DragEvent.ACTION_DROP -> {
+
+                //Toast.makeText(context, "упал на var", Toast.LENGTH_SHORT).show()
+
                 dragBlock.x = destination.rootView.beginView.x //подтягиваем drag block ровно в place for drop
                 dragBlock.y = destination.rootView.beginView.y
 
@@ -61,6 +65,7 @@ class VariableBtn @JvmOverloads constructor(
                 (event.localState as? VariableBtn)?.onSet()
                 (event.localState as? OutputBtn)?.onSet()
                 view.invalidate()
+
                 true
             }
 
@@ -76,13 +81,14 @@ class VariableBtn @JvmOverloads constructor(
 
 
     init {
-        binding.root.setOnLongClickListener(){
+        binding.root.setOnLongClickListener{
+            binding.varPlaceForDrop.setOnDragListener { _, _ -> false }
             val textOnBoard = ""
             val item = ClipData.Item(textOnBoard)
             val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
             val data = ClipData(textOnBoard, mimeTypes, item)
 
-            val dragAndDropBuilder = View.DragShadowBuilder(it)
+            val dragAndDropBuilder = DragShadowBuilder(it)
             it.startDragAndDrop(data, dragAndDropBuilder, it, 0)
             true
         }
@@ -90,7 +96,7 @@ class VariableBtn @JvmOverloads constructor(
     }
 
     fun onSet(){
-        binding.placeForDrop.setOnDragListener(dragAndDropListener)
+        binding.varPlaceForDrop.setOnDragListener(dragAndDropListener)
     }
 
 }

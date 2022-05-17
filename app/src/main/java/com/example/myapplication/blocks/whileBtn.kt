@@ -1,17 +1,17 @@
 package com.example.myapplication.blocks
-import android.content.Context
 import android.content.ClipData
 import android.content.ClipDescription
+import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
-import android.view.LayoutInflater
 import android.view.DragEvent
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.myapplication.databinding.WhileBlockBinding
-import kotlinx.android.synthetic.main.activity_main.view.*
-import kotlinx.android.synthetic.main.start_block.view.*
+import kotlinx.android.synthetic.main.while_block.view.*
+
 
 class WhileBtn @JvmOverloads constructor(
     context: Context,
@@ -19,8 +19,12 @@ class WhileBtn @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ): ConstraintLayout(context, attrs, defStyleAttr){
     private var binding = WhileBlockBinding.inflate(LayoutInflater.from(context), this)
+    //private var c = context
+    /*var oneDP = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP, 1f,
+        context.resources.displayMetrics).toInt()*/
 
-    val dragAndDropListener = View.OnDragListener{ view, event ->
+    private val dragAndDropListener = OnDragListener{ view, event ->
         val dragBlock = event.localState as View
         val destination = view as ConstraintLayout
         val owner = dragBlock.parent as ViewGroup
@@ -33,7 +37,7 @@ class WhileBtn @JvmOverloads constructor(
 
             DragEvent.ACTION_DRAG_ENTERED -> {
                 view.invalidate()
-                destination.placeForDrop.setBackgroundColor(Color.GRAY)
+                destination.setBackgroundColor(Color.GRAY)
                 true
             }
 
@@ -43,11 +47,16 @@ class WhileBtn @JvmOverloads constructor(
 
             DragEvent.ACTION_DRAG_EXITED -> {
                 view.invalidate()
-                destination.placeForDrop.setBackgroundColor(Color.TRANSPARENT)
+                destination.setBackgroundColor(Color.TRANSPARENT)
                 true
             }
 
             DragEvent.ACTION_DROP -> {
+
+
+
+                //Toast.makeText(context, "упал на вайл", Toast.LENGTH_SHORT).show()
+
                 dragBlock.x = destination.rootView.beginView.x //подтягиваем drag block ровно в place for drop
                 dragBlock.y = destination.rootView.beginView.y
 
@@ -61,11 +70,13 @@ class WhileBtn @JvmOverloads constructor(
                 (event.localState as? VariableBtn)?.onSet()
                 (event.localState as? OutputBtn)?.onSet()
                 view.invalidate()
+
                 true
             }
 
             DragEvent.ACTION_DRAG_ENDED -> {
-                //Workspace.setOnDragListener(View.OnDragListener{ view, event -> false})
+
+                //binding.view.layoutParams = LayoutParams(oneDP * 25, oneDP* binding.insidePlace.layoutParams.height)
                 view.invalidate()
                 true
             }
@@ -76,21 +87,23 @@ class WhileBtn @JvmOverloads constructor(
 
 
     init {
-        binding.root.setOnLongClickListener(){
+        binding.root.setOnLongClickListener{
+            binding.whilePlaceForDrop.setOnDragListener { _, _ -> false }
+            binding.whileInsidePlace.setOnDragListener { _, _ -> false }
             val textOnBoard = ""
             val item = ClipData.Item(textOnBoard)
             val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
             val data = ClipData(textOnBoard, mimeTypes, item)
 
-            val dragAndDropBuilder = View.DragShadowBuilder(it)
+            val dragAndDropBuilder = DragShadowBuilder(it)
             it.startDragAndDrop(data, dragAndDropBuilder, it, 0)
             true
         }
-
     }
 
     fun onSet(){
-        binding.placeForDrop.setOnDragListener(dragAndDropListener)
+        binding.whilePlaceForDrop.setOnDragListener(dragAndDropListener)
+        binding.whileInsidePlace.setOnDragListener(dragAndDropListener)
     }
 
 }

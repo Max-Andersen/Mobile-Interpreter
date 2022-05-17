@@ -61,7 +61,6 @@ class WhileBtn @JvmOverloads constructor(
 
                 Toast.makeText(context, "упал на вайл", Toast.LENGTH_SHORT).show()
 
-
                 dragBlock.x = destination.rootView.beginView.x //подтягиваем drag block ровно в place for drop
                 dragBlock.y = destination.rootView.beginView.y
 
@@ -76,7 +75,6 @@ class WhileBtn @JvmOverloads constructor(
                 (event.localState as? OutputBtn)?.onSet()
                 view.invalidate()
 
-                Toast.makeText(context, "упал на while", Toast.LENGTH_SHORT).show()
                 true
             }
 

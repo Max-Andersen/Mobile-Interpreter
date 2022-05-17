@@ -289,40 +289,41 @@ class StartProgram(context: Context, start: StartBtn) {
         return res
     }
 
-    private fun printNods(node: View) {
+    private fun printNodes(node: View) {
 
         when(node){
             is WhileBtn -> {
-                if (node.placeForDrop.children.count() != 0)
-                {
-                    printNods(node.placeForDrop[0])
-                    println("parent: PFD ${node}\n child: ${node.placeForDrop[0]}")
-                }
                 if (node.insidePlace.children.count() != 0)
                 {
-                    printNods(node.insidePlace[0])
                     println("parent: INSIDE ${node}\n child: ${node.insidePlace[0]}")
+                    printNodes(node.insidePlace[0])
+                }
+                if (node.placeForDrop.children.count() != 0)
+                {
+                    println(node.placeForDrop.parent)
+                    println("parent: PFD ${node}\n child: ${node.placeForDrop[0]}")
+                    printNodes(node.placeForDrop[0])
                 }
             }
             is OutputBtn -> {
                 if (node.placeForDrop.children.count() != 0)
                 {
-                    printNods(node.placeForDrop[0])
                     println("parent: ${node}\n child: ${node.placeForDrop[0]}")
+                    printNodes(node.placeForDrop[0])
                 }
             }
             is VariableBtn -> {
                 if (node.placeForDrop.children.count() != 0)
                 {
-                    printNods(node.placeForDrop[0])
                     println("parent: ${node}\n child: ${node.placeForDrop[0]}")
+                    printNodes(node.placeForDrop[0])
                 }
             }
             is StartBtn -> {
                 if (node.placeForDrop.children.count() != 0)
                 {
-                    printNods(node.placeForDrop[0])
                     println("parent: ${node}\n child: ${node.placeForDrop[0]}")
+                    printNodes(node.placeForDrop[0])
                 }
             }
         }
@@ -332,7 +333,7 @@ class StartProgram(context: Context, start: StartBtn) {
 
         //println(receivedRoot.placeForDrop[0].placeForDrop.children.count())
 
-        printNods(receivedRoot)
+        printNodes(receivedRoot)
 
         //Заполнение дерева
         fillTree(receivedRoot)

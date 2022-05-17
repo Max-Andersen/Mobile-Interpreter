@@ -13,12 +13,14 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.myapplication.databinding.VariableBlockBinding
 import kotlinx.android.synthetic.main.start_block.view.*
 
+
 class VariableBtn @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ):ConstraintLayout(context, attrs, defStyleAttr){
     private var binding = VariableBlockBinding.inflate(LayoutInflater.from(context), this)
+
 
     val dragAndDropListener = View.OnDragListener{ view, event ->
         val dragBlock = event.localState as View
@@ -33,7 +35,7 @@ class VariableBtn @JvmOverloads constructor(
 
             DragEvent.ACTION_DRAG_ENTERED -> {
                 view.invalidate()
-                destination.placeForDrop.setBackgroundColor(Color.GRAY)
+                destination.setBackgroundColor(Color.GRAY)
                 true
             }
 
@@ -43,7 +45,7 @@ class VariableBtn @JvmOverloads constructor(
 
             DragEvent.ACTION_DRAG_EXITED -> {
                 view.invalidate()
-                destination.placeForDrop.setBackgroundColor(Color.TRANSPARENT)
+                destination.setBackgroundColor(Color.TRANSPARENT)
                 true
             }
 
@@ -66,8 +68,6 @@ class VariableBtn @JvmOverloads constructor(
                 (event.localState as? VariableBtn)?.onSet()
                 (event.localState as? OutputBtn)?.onSet()
                 view.invalidate()
-
-                Toast.makeText(context, "упал на var", Toast.LENGTH_SHORT).show()
 
                 true
             }

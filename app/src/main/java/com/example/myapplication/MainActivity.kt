@@ -7,9 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.children
+import androidx.core.view.get
 import com.example.myapplication.blocks.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.main.start_block.view.*
+import kotlinx.android.synthetic.main.while_block.view.*
+import kotlinx.android.synthetic.main.while_block.view.placeForDrop
 
 
 class MainActivity : AppCompatActivity() {
@@ -129,10 +134,58 @@ class MainActivity : AppCompatActivity() {
 
         //ЗАПУСК!!!!!!!!!!!!!ИУУУУУУУУУУУУ!!!!!!!!
         imageButton4.setOnClickListener(){
-            val program = StartProgram(this, start)
-            program.main()
+
+            printNodes(start)
+
+            //val program = StartProgram(this, start)
+            //program.main()
         }
 
+    }
+
+
+    private fun printNodes(node: View) {
+
+        when(node){
+            is WhileBtn -> {
+                if (node.insidePlace.children.count() != 0)
+                {
+                    println("parent: INSIDE ${node}\n child: ${node.insidePlace[0]}")
+                    printNodes(node.insidePlace[0])
+                }
+                if (node.placeForDrop.children.count() != 0)
+                {
+                    println(node.placeForDrop.children.count())
+                    println("parent: PFD ${node}\n child: ${node.placeForDrop[0]}")
+                    printNodes(node.placeForDrop[0])
+                }else{
+                    println("$node\n ${node.placeForDrop}")
+                }
+            }
+            is OutputBtn -> {
+                if (node.placeForDrop.children.count() != 0)
+                {
+                    println("parent: ${node}\n child: ${node.placeForDrop[0]}")
+                    printNodes(node.placeForDrop[0])
+                }
+            }
+            is VariableBtn -> {
+                println("$node\n ${node.placeForDrop}")
+
+                if (node.placeForDrop.children.count() != 0)
+                {
+                    println("parent: ${node}\n child: ${node.placeForDrop[0]}")
+                    printNodes(node.placeForDrop[0])
+                }
+            }
+            is StartBtn -> {
+                if (node.placeForDrop.children.count() != 0)
+                {
+                    println("parent: ${node}\n child: ${node.placeForDrop[0]}")
+                    printNodes(node.placeForDrop[0])
+                }
+            }
+        }
     }
 
     //-----------------------------------------------------------------------------------------

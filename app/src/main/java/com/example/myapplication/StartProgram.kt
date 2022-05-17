@@ -296,12 +296,12 @@ class StartProgram(context: Context, start: StartBtn) {
                 if (node.placeForDrop.children.count() != 0)
                 {
                     printNods(node.placeForDrop[0])
-                    println("parent: ${node}\n child: ${node.placeForDrop[0]}")
+                    println("parent: PFD ${node}\n child: ${node.placeForDrop[0]}")
                 }
                 if (node.insidePlace.children.count() != 0)
                 {
                     printNods(node.insidePlace[0])
-                    println("parent: ${node}\n child: ${node.insidePlace[0]}")
+                    println("parent: INSIDE ${node}\n child: ${node.insidePlace[0]}")
                 }
             }
             is OutputBtn -> {

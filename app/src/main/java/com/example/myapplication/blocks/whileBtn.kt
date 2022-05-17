@@ -57,6 +57,11 @@ class WhileBtn @JvmOverloads constructor(
             }
 
             DragEvent.ACTION_DROP -> {
+
+
+                Toast.makeText(context, "упал на вайл", Toast.LENGTH_SHORT).show()
+
+
                 dragBlock.x = destination.rootView.beginView.x //подтягиваем drag block ровно в place for drop
                 dragBlock.y = destination.rootView.beginView.y
 
@@ -74,13 +79,7 @@ class WhileBtn @JvmOverloads constructor(
             }
 
             DragEvent.ACTION_DRAG_ENDED -> {
-                /*val text = "${destination.children.count()}"
-                val duration = Toast.LENGTH_SHORT
 
-                val toast = Toast.makeText(context, text, duration)
-                toast.show()  */    //можно на каждый дроп пересчитывать размер палки, но binding.insidePlace.layoutParams.height
-//                                    почему-то всегда 2...
-//
                 //binding.view.layoutParams = LayoutParams(oneDP * 25, oneDP* binding.insidePlace.layoutParams.height)
                 view.invalidate()
                 true

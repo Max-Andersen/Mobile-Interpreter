@@ -74,11 +74,11 @@ class WhileBtn @JvmOverloads constructor(
             }
 
             DragEvent.ACTION_DRAG_ENDED -> {
-                val text = "${destination.children.count()}"
+                /*val text = "${destination.children.count()}"
                 val duration = Toast.LENGTH_SHORT
 
                 val toast = Toast.makeText(context, text, duration)
-                toast.show()      //можно на каждый дроп пересчитывать размер палки, но binding.insidePlace.layoutParams.height
+                toast.show()  */    //можно на каждый дроп пересчитывать размер палки, но binding.insidePlace.layoutParams.height
 //                                    почему-то всегда 2...
 //
                 //binding.view.layoutParams = LayoutParams(oneDP * 25, oneDP* binding.insidePlace.layoutParams.height)

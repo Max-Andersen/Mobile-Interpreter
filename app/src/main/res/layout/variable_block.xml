@@ -3,31 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
-    android:layout_width="250dp"
-    android:layout_height="138dp"
-    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
     android:id="@+id/variableNode"
+    android:layout_width="250dp"
+    android:layout_height="105dp"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
 
     >
 
     <View
         android:id="@+id/beginView"
         android:layout_width="250dp"
-        android:layout_height="69dp"
+        android:layout_height="70dp"
         android:background="@color/variable_purple"
 
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/placeForDrop"
-        android:minHeight="70dp"
-        android:minWidth="250dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/beginView">
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:minWidth="250dp"
+        android:minHeight="35dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/beginView"></androidx.constraintlayout.widget.ConstraintLayout>
 
     <EditText
         android:id="@+id/editTextTextPersonName2"

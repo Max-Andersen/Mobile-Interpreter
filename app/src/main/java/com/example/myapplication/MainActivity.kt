@@ -128,8 +128,9 @@ class MainActivity : AppCompatActivity() {
         blockscreen.addView(start)
 
 
+        Workspace.x = 0F
+        Workspace.y = 0F
         Workspace.setOnDragListener(dragAndDropListener)
-
 
         //----------------------------------------
         //----------------------------------------

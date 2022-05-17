@@ -15,6 +15,21 @@ import kotlinx.android.synthetic.main.activity_main.view.*
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
+    fun blockInit(){
+        val whilee = WhileBtn(this)
+        whilee.y += 450
+
+        val variable1 = VariableBtn(this)
+        variable1.y += 700
+
+        val outputblock = OutputBtn(this)
+        outputblock.y += 950
+
+        blockscreen.addView(whilee)
+        blockscreen.addView(outputblock)
+        blockscreen.addView(variable1)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -31,7 +46,7 @@ class MainActivity : AppCompatActivity() {
                     child.visibility = View.GONE
                 }
             }
-
+            blockInit()
             blockAndVariable.visibility = View.VISIBLE
             plus1.visibility = View.GONE
         }
@@ -93,9 +108,6 @@ class MainActivity : AppCompatActivity() {
         val start = StartBtn(this)
         start.y += 200
 
-        val whilee = WhileBtn(this)
-        whilee.y += 450
-
         val variable = VariableConsole(this)
         variable.y += 200
 
@@ -108,17 +120,9 @@ class MainActivity : AppCompatActivity() {
             n += 1
         }
 
-        val variable1 = VariableBtn(this)
-        variable1.y += 700
-
-        val outputblock = OutputBtn(this)
-        outputblock.y += 950
-
-        blockscreen.addView(outputblock)
-        blockscreen.addView(variable1)
         variableBlock.addView(variable)
         blockscreen.addView(start)
-        blockscreen.addView(whilee)
+
 
         Workspace.setOnDragListener(dragAndDropListener)
 
@@ -147,12 +151,6 @@ class MainActivity : AppCompatActivity() {
                 CreateConsole.visibility = View.GONE
                 blockAndVariable.visibility = View.GONE
                 plus1.visibility = View.VISIBLE
-
-//                val x = event.x
-//                val y = event.y
-//
-//                val block = (view as? StartBtn)?.copy()
-
                 true
             }
 

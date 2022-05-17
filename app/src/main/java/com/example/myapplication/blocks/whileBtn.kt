@@ -75,6 +75,8 @@ class WhileBtn @JvmOverloads constructor(
                 (event.localState as? VariableBtn)?.onSet()
                 (event.localState as? OutputBtn)?.onSet()
                 view.invalidate()
+
+                Toast.makeText(context, "упал на while", Toast.LENGTH_SHORT).show()
                 true
             }
 

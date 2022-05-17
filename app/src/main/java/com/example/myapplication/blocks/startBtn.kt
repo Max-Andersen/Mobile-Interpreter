@@ -26,16 +26,13 @@ class StartBtn @JvmOverloads constructor(
 
         when (event.action){
             DragEvent.ACTION_DRAG_STARTED -> {
-//                if (owner.id != blockscreen.id && owner.id != Workspace.id){ // вот тут надо как-то сделать, чтобы
-//                    owner.layoutParams.height -= 200                         // род. блок уменьшался и place for drop бесконечно не рос
-//                }
                 view.invalidate()
                 true
             }
 
             DragEvent.ACTION_DRAG_ENTERED -> {
                 view.invalidate()
-                destination.placeForDrop.setBackgroundColor(Color.GRAY)
+                destination.setBackgroundColor(Color.GRAY)
                 true
             }
 
@@ -45,7 +42,7 @@ class StartBtn @JvmOverloads constructor(
 
             DragEvent.ACTION_DRAG_EXITED -> {
                 view.invalidate()
-                destination.placeForDrop.setBackgroundColor(Color.TRANSPARENT)
+                destination.setBackgroundColor(Color.TRANSPARENT)
                 true
             }
 
@@ -79,7 +76,7 @@ class StartBtn @JvmOverloads constructor(
 
     init {
         binding.root.setOnLongClickListener(){
-            binding.placeForDrop.setOnDragListener { _, _ -> false }
+            binding.startPlaceForDrop.setOnDragListener { _, _ -> false }
             val textOnBoard = "This is Start Node"
             val item = ClipData.Item(textOnBoard)
             val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
@@ -92,11 +89,7 @@ class StartBtn @JvmOverloads constructor(
     }
 
     fun onSet(){
-        binding.placeForDrop.setOnDragListener(dragAndDropListener)
+        binding.startPlaceForDrop.setOnDragListener(dragAndDropListener)
     }
-
-//    fun copy(): StartBtn {
-//        return StartBtn(context, attrs = attrs, defStyleAttr = 0)
-//    }
 
 }

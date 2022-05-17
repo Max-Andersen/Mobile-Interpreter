@@ -51,7 +51,7 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:background="#9FEF4F"
+        android:background="@drawable/round_for_header"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -89,7 +89,7 @@
         android:id="@+id/startEnd"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/white"
+        android:background="@drawable/round_for_start_and_end"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header">
@@ -125,28 +125,47 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/CreateConsole"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="0.9"
+        android:alpha="1"
         android:background="#1B2549"
+        android:orientation="vertical"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/blockAndVariable"
-        app:layout_constraintTop_toTopOf="@+id/header"
+        android:weightSum="100"
         tools:layout_editor_absoluteX="0dp">
 
         <ImageButton
             android:id="@+id/consoleCloseBtn"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:layout_weight="10"
             android:alpha="1"
             android:backgroundTint="@android:color/transparent"
             android:scaleType="fitStart"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/close" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/StartConsoleMessage"
+            android:layout_width="307dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jura"
+            android:text="@string/console"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:fontFamily="@font/jura"
+            android:text=">>"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+    </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/blockAndVariable"
@@ -195,31 +214,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/variableBlock"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#4AE37D"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageButton
-                android:id="@+id/plusvar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="230dp"
-                android:backgroundTint="@android:color/transparent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.501"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/plus1" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
         <ImageButton
             android:id="@+id/closeBlockScreen"
             android:layout_width="50dp"
@@ -230,6 +224,35 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/close"
             tools:ignore="SpeakableTextPresentCheck" />
+
+        <ScrollView
+            android:id="@+id/ScrollVar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:visibility="invisible">
+
+            <LinearLayout
+                android:id="@+id/variableBlock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#4AE37D"
+                android:orientation="vertical"
+                android:visibility="visible"
+                android:weightSum="100">
+
+                <ImageButton
+                    android:id="@+id/plusvar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@android:color/transparent"
+                    app:layout_constraintHorizontal_bias="0.501"
+                    app:srcCompat="@drawable/plus1" />
+
+            </LinearLayout>
+        </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

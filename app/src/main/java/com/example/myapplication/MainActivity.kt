@@ -15,6 +15,8 @@ import kotlinx.android.synthetic.main.output_block.view.*
 import kotlinx.android.synthetic.main.start_block.view.*
 import kotlinx.android.synthetic.main.variable_block.view.*
 import kotlinx.android.synthetic.main.while_block.view.*
+import android.os.Handler;
+import android.widget.ImageButton
 
 
 class MainActivity : AppCompatActivity() {
@@ -42,7 +44,6 @@ class MainActivity : AppCompatActivity() {
         //-------------------------------------------------------------------------------------
         //-------------------------------------------------------------------------------------
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~СЛУШАТЕЛИ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
         plus1.setOnClickListener {
             for (i in 0..zoomLayout.Workspace.childCount){
                 val child = zoomLayout.Workspace.getChildAt(i)
@@ -54,7 +55,6 @@ class MainActivity : AppCompatActivity() {
             blockAndVariable.visibility = View.VISIBLE
             plus1.visibility = View.GONE
         }
-
         closeBlockScreen.setOnClickListener{
             for (i in 0..zoomLayout.Workspace.childCount){
                 val child = zoomLayout.Workspace.getChildAt(i)
@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         blockbtn.setOnClickListener{
-            variableBlock.visibility = View.GONE
+            ScrollVar.visibility = View.GONE
             blockbtn.visibility = View.GONE
             blockscreen.visibility = View.VISIBLE
             varbtn.visibility = View.VISIBLE
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
 
         varbtn.setOnClickListener{
             blockscreen.visibility = View.GONE
-            variableBlock.visibility = View.VISIBLE
+            ScrollVar.visibility = View.VISIBLE
             varbtn.visibility = View.GONE
             blockbtn.visibility = View.VISIBLE
         }
@@ -88,8 +88,30 @@ class MainActivity : AppCompatActivity() {
                     child.visibility = View.GONE
                 }
             }
+            blockbtn.visibility = View.INVISIBLE
+            consoleBtn.visibility = View.INVISIBLE
             CreateConsole.visibility = View.VISIBLE
+            plus1.visibility = View.INVISIBLE
             blockAndVariable.visibility = View.GONE
+            val handler = Handler()
+            var time = 0;
+            while (time < 10000) {
+                handler.postDelayed({
+                    StartConsoleMessage.text = "TTKSMT is ready to work . "
+                }, time.toLong())
+                time = time + 1000
+                handler.postDelayed({
+                    StartConsoleMessage.text = "TTKSMT is ready to work . ."
+                }, time.toLong())
+                time = time + 1000
+                handler.postDelayed({
+                    StartConsoleMessage.text = "TTKSMT is ready to work . . ."
+                }, time.toLong())
+                time = time + 1000
+                if(CreateConsole.visibility == View.INVISIBLE){
+                    break
+                }
+            }
         }
 
         consoleCloseBtn.setOnClickListener{
@@ -99,8 +121,11 @@ class MainActivity : AppCompatActivity() {
                     child.visibility = View.VISIBLE
                 }
             }
+            plus1.visibility = View.VISIBLE
             CreateConsole.visibility = View.GONE
             blockAndVariable.visibility = View.GONE
+            blockbtn.visibility = View.VISIBLE
+            consoleBtn.visibility = View.VISIBLE
         }
 
 
@@ -117,14 +142,13 @@ class MainActivity : AppCompatActivity() {
 
         var n = 2
         plusvar.setOnClickListener{
-            plusvar.y += 270
             val anotherVariable = VariableConsole(this)
-            anotherVariable.y += 270 * n
+//            anotherVariable.y += 270 * n
             variableBlock.addView(anotherVariable)
             n += 1
         }
 
-        variableBlock.addView(variable)
+//        variableBlock.addView(variable)
         blockscreen.addView(start)
 
 

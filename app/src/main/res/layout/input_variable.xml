@@ -2,12 +2,11 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/consoleVariable"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
-    android:id="@+id/consoleVariable"
-    >
-
+    android:backgroundTint="@android:color/transparent"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
 
     <View
@@ -45,5 +44,15 @@
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="@+id/view"
         app:layout_constraintVertical_bias="0.48" />
+
+    <ImageButton
+        android:id="@+id/imageButton5"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:backgroundTint="@android:color/transparent"
+        android:scaleType="fitStart"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view"
+        app:srcCompat="@drawable/close" />
 
 </merge>

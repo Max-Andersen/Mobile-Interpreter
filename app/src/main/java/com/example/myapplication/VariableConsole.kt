@@ -12,5 +12,9 @@ class VariableConsole @JvmOverloads constructor(
 ):ConstraintLayout(context, attrs, defStyleAttr){
     private var binding = InputVariableBinding.inflate(LayoutInflater.from(context), this)
 
-
+    init {
+        binding.imageButton5.setOnClickListener(){
+            removeAllViews()
+        }
+    }
 }

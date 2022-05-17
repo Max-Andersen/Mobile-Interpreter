@@ -1,6 +1,5 @@
 package com.example.myapplication
 
-import com.example.myapplication.databinding.ActivityMainBinding
 import android.os.Bundle
 import android.view.DragEvent
 import android.view.View
@@ -19,20 +18,19 @@ import kotlinx.android.synthetic.main.while_block.view.*
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
 
-    fun blockInit(){
-        val whilee = WhileBtn(this)
-        whilee.y += 450
+    private fun blockInit(){
+        val whileBlock = WhileBtn(this)
+        whileBlock.y += 450
 
         val variable1 = VariableBtn(this)
         variable1.y += 700
 
-        val outputblock = OutputBtn(this)
-        outputblock.y += 950
+        val outputBlock = OutputBtn(this)
+        outputBlock.y += 950
 
-        blockscreen.addView(whilee)
-        blockscreen.addView(outputblock)
+        blockscreen.addView(whileBlock)
+        blockscreen.addView(outputBlock)
         blockscreen.addView(variable1)
     }
 
@@ -45,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         //-------------------------------------------------------------------------------------
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~СЛУШАТЕЛИ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-        plus1.setOnClickListener() {
+        plus1.setOnClickListener {
             for (i in 0..zoomLayout.Workspace.childCount){
                 val child = zoomLayout.Workspace.getChildAt(i)
                 if (child is View){
@@ -57,7 +55,7 @@ class MainActivity : AppCompatActivity() {
             plus1.visibility = View.GONE
         }
 
-        closeBlockScreen.setOnClickListener(){
+        closeBlockScreen.setOnClickListener{
             for (i in 0..zoomLayout.Workspace.childCount){
                 val child = zoomLayout.Workspace.getChildAt(i)
                 if (child is View){
@@ -69,21 +67,21 @@ class MainActivity : AppCompatActivity() {
             plus1.visibility = View.VISIBLE
         }
 
-        blockbtn.setOnClickListener(){
+        blockbtn.setOnClickListener{
             variableBlock.visibility = View.GONE
             blockbtn.visibility = View.GONE
             blockscreen.visibility = View.VISIBLE
             varbtn.visibility = View.VISIBLE
         }
 
-        varbtn.setOnClickListener(){
+        varbtn.setOnClickListener{
             blockscreen.visibility = View.GONE
             variableBlock.visibility = View.VISIBLE
             varbtn.visibility = View.GONE
             blockbtn.visibility = View.VISIBLE
         }
 
-        consoleBtn.setOnClickListener(){
+        consoleBtn.setOnClickListener{
             for (i in 0..zoomLayout.Workspace.childCount){
                 val child = zoomLayout.Workspace.getChildAt(i)
                 if (child is View){
@@ -94,7 +92,7 @@ class MainActivity : AppCompatActivity() {
             blockAndVariable.visibility = View.GONE
         }
 
-        consoleCloseBtn.setOnClickListener(){
+        consoleCloseBtn.setOnClickListener{
             for (i in 0..zoomLayout.Workspace.childCount){
                 val child = zoomLayout.Workspace.getChildAt(i)
                 if (child is View){
@@ -117,8 +115,8 @@ class MainActivity : AppCompatActivity() {
         val variable = VariableConsole(this)
         variable.y += 200
 
-        var n = 2;
-        plusvar.setOnClickListener(){
+        var n = 2
+        plusvar.setOnClickListener{
             plusvar.y += 270
             val anotherVariable = VariableConsole(this)
             anotherVariable.y += 270 * n
@@ -136,7 +134,7 @@ class MainActivity : AppCompatActivity() {
         //----------------------------------------
         //----------------------------------------
         //ЗАПУСК!!!!!!!!!!!!!ИУУУУУУУУУУУУ!!!!!!!!
-        imageButton4.setOnClickListener(){
+        imageButton4.setOnClickListener {
 
             printNodes(start)
 
@@ -194,7 +192,7 @@ class MainActivity : AppCompatActivity() {
     //-----------------------------------------------------------------------------------------
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~DRAG_AND_DROP~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    val dragAndDropListener = View.OnDragListener{ view, event ->
+    private val dragAndDropListener = View.OnDragListener{ view, event ->
         when (event.action){
             DragEvent.ACTION_DRAG_STARTED -> {
                 for (i in 0..zoomLayout.Workspace.childCount){

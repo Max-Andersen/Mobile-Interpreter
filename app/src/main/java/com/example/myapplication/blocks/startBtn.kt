@@ -19,7 +19,7 @@ class StartBtn @JvmOverloads constructor(
 ): ConstraintLayout(context, attrs, defStyleAttr){
     private var binding = StartBlockBinding.inflate(LayoutInflater.from(context), this)
 
-    val dragAndDropListener = View.OnDragListener{ view, event ->
+    private val dragAndDropListener = OnDragListener{ view, event ->
         val dragBlock = event.localState as View
         val destination = view as ConstraintLayout
         val owner = dragBlock.parent as ViewGroup
@@ -75,14 +75,14 @@ class StartBtn @JvmOverloads constructor(
     }
 
     init {
-        binding.root.setOnLongClickListener(){
+        binding.root.setOnLongClickListener{
             binding.startPlaceForDrop.setOnDragListener { _, _ -> false }
             val textOnBoard = "This is Start Node"
             val item = ClipData.Item(textOnBoard)
             val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
             val data = ClipData(textOnBoard, mimeTypes, item)
 
-            val dragAndDropBuilder = View.DragShadowBuilder(it)
+            val dragAndDropBuilder = DragShadowBuilder(it)
             it.startDragAndDrop(data, dragAndDropBuilder, it, 0)
             true
         }

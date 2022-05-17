@@ -4,17 +4,12 @@ import android.content.ClipDescription
 import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
-import android.util.TypedValue
 import android.view.DragEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.children
 import com.example.myapplication.databinding.WhileBlockBinding
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.while_block.view.*
 
 
@@ -24,12 +19,12 @@ class WhileBtn @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ): ConstraintLayout(context, attrs, defStyleAttr){
     private var binding = WhileBlockBinding.inflate(LayoutInflater.from(context), this)
-    var c = context
-    var oneDP = TypedValue.applyDimension(
+    //private var c = context
+    /*var oneDP = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP, 1f,
-        context.resources.displayMetrics).toInt()
+        context.resources.displayMetrics).toInt()*/
 
-    val dragAndDropListener = View.OnDragListener{ view, event ->
+    private val dragAndDropListener = OnDragListener{ view, event ->
         val dragBlock = event.localState as View
         val destination = view as ConstraintLayout
         val owner = dragBlock.parent as ViewGroup
@@ -90,7 +85,7 @@ class WhileBtn @JvmOverloads constructor(
 
 
     init {
-        binding.root.setOnLongClickListener(){
+        binding.root.setOnLongClickListener{
             binding.whilePlaceForDrop.setOnDragListener { _, _ -> false }
             binding.whileInsidePlace.setOnDragListener { _, _ -> false }
             val textOnBoard = ""
@@ -98,20 +93,15 @@ class WhileBtn @JvmOverloads constructor(
             val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
             val data = ClipData(textOnBoard, mimeTypes, item)
 
-            val dragAndDropBuilder = View.DragShadowBuilder(it)
+            val dragAndDropBuilder = DragShadowBuilder(it)
             it.startDragAndDrop(data, dragAndDropBuilder, it, 0)
             true
         }
-
     }
 
     fun onSet(){
         binding.whilePlaceForDrop.setOnDragListener(dragAndDropListener)
         binding.whileInsidePlace.setOnDragListener(dragAndDropListener)
-
-        val whilee = WhileBtn(c)  //вот тут зараза почему-то добавлять не хочет
-        whilee.y += 450
-
     }
 
 }

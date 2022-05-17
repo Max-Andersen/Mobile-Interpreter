@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.DragEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.myapplication.databinding.VariableBlockBinding
 import kotlinx.android.synthetic.main.start_block.view.*
@@ -22,7 +21,7 @@ class VariableBtn @JvmOverloads constructor(
     private var binding = VariableBlockBinding.inflate(LayoutInflater.from(context), this)
 
 
-    val dragAndDropListener = View.OnDragListener{ view, event ->
+    private val dragAndDropListener = OnDragListener{ view, event ->
         val dragBlock = event.localState as View
         val destination = view as ConstraintLayout
         val owner = dragBlock.parent as ViewGroup
@@ -82,14 +81,14 @@ class VariableBtn @JvmOverloads constructor(
 
 
     init {
-        binding.root.setOnLongClickListener(){
+        binding.root.setOnLongClickListener{
             binding.varPlaceForDrop.setOnDragListener { _, _ -> false }
             val textOnBoard = ""
             val item = ClipData.Item(textOnBoard)
             val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
             val data = ClipData(textOnBoard, mimeTypes, item)
 
-            val dragAndDropBuilder = View.DragShadowBuilder(it)
+            val dragAndDropBuilder = DragShadowBuilder(it)
             it.startDragAndDrop(data, dragAndDropBuilder, it, 0)
             true
         }

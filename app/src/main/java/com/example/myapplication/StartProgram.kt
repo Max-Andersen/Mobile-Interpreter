@@ -1,29 +1,30 @@
 package com.example.myapplication
 
 import android.content.Context
-import android.view.View
 import android.widget.Toast
 import androidx.core.view.children
 import com.example.myapplication.structs.tree.TreeNode
 
 import androidx.core.view.get
 import com.example.myapplication.blocks.*
-import kotlinx.android.synthetic.main.start_block.view.placeForDrop
+import kotlinx.android.synthetic.main.output_block.view.*
+import kotlinx.android.synthetic.main.start_block.view.*
+import kotlinx.android.synthetic.main.variable_block.view.*
 import kotlinx.android.synthetic.main.while_block.view.*
 
 class StartProgram(context: Context, start: StartBtn) {
 
-    val ctx = context
+    private val ctx = context
 
-    val receivedRoot = start
+    private val receivedRoot = start
 
 //-----------------------------------------------------------------
 //~~~~~~~~~~~~~~~~~~~~~Глобальные важные штуки~~~~~~~~~~~~~~~~~~~~~
 
-    val myTree = TreeNode("start")
-    val varsIntMap: MutableMap<String, Int> = mutableMapOf("a" to 10, "b" to 20, "c" to 0)
-    val errorList: MutableList<String> = mutableListOf()
-    val outputList: MutableList<String> = mutableListOf()
+    private val myTree = TreeNode("start")
+    private val varsIntMap: MutableMap<String, Int> = mutableMapOf("a" to 10, "b" to 20, "c" to 0)
+    private val errorList: MutableList<String> = mutableListOf()
+    private val outputList: MutableList<String> = mutableListOf()
 
 
 //-----------------------------------------------------------------
@@ -31,44 +32,38 @@ class StartProgram(context: Context, start: StartBtn) {
 
     private fun workWithWhile(tree: TreeNode<String>, view: WhileBtn){
 
-        Toast.makeText(ctx, "while", Toast.LENGTH_SHORT).show()
-
-        if(view.insidePlace.children.count()!=0)
+        if(view.whileInsidePlace.children.count()!=0)
         {
 
-            Toast.makeText(ctx, "not empty inside place", Toast.LENGTH_SHORT).show()
-
-            when(view.insidePlace[0]){
+            when(view.whileInsidePlace[0]){
                 is WhileBtn-> {
                     tree.add(TreeNode("while"))
-                    workWithWhile(tree.children.last(), view.insidePlace[0] as WhileBtn)
+                    workWithWhile(tree.children.last(), view.whileInsidePlace[0] as WhileBtn)
                 }
                 is OutputBtn->{
                     tree.add(TreeNode("print"))
-                    workWithPrint(tree.children.last(), view.insidePlace[0] as OutputBtn)
+                    workWithPrint(tree.children.last(), view.whileInsidePlace[0] as OutputBtn)
                 }
                 is VariableBtn->{
                     tree.add(TreeNode("assign"))
-                    workWithVarAssignment(tree.children.last(), view.insidePlace[0] as VariableBtn)
+                    workWithVarAssignment(tree.children.last(), view.whileInsidePlace[0] as VariableBtn)
                 }
             }
         }
-        if(view.placeForDrop.children.count()!=0){
+        if(view.whilePlaceForDrop.children.count()!=0){
 
-            Toast.makeText(ctx, "not empty while place for drop", Toast.LENGTH_SHORT).show()
-
-            when(view.placeForDrop[0]){
+            when(view.whilePlaceForDrop[0]){
                 is WhileBtn-> {
                     tree.parent?.add(TreeNode("while"))
-                    workWithWhile(tree.parent?.children?.last()!!, view.placeForDrop[0] as WhileBtn)
+                    workWithWhile(tree.parent?.children?.last()!!, view.whilePlaceForDrop[0] as WhileBtn)
                 }
                 is OutputBtn->{
                     tree.parent?.add(TreeNode("print"))
-                    workWithPrint(tree.parent?.children?.last()!!, view.placeForDrop[0] as OutputBtn)
+                    workWithPrint(tree.parent?.children?.last()!!, view.whilePlaceForDrop[0] as OutputBtn)
                 }
                 is VariableBtn->{
                     tree.parent?.add(TreeNode("assign"))
-                    workWithVarAssignment(tree.parent?.children?.last()!!, view.placeForDrop[0] as VariableBtn)
+                    workWithVarAssignment(tree.parent?.children?.last()!!, view.whilePlaceForDrop[0] as VariableBtn)
                 }
             }
         }
@@ -76,24 +71,19 @@ class StartProgram(context: Context, start: StartBtn) {
 
     private fun workWithPrint(tree: TreeNode<String>, view: OutputBtn){
 
-        val text = "print"
-        val duration = Toast.LENGTH_SHORT
-        var toast = Toast.makeText(ctx, text, duration)
-        toast.show()
-
-        if(view.placeForDrop.children.count()!=0){
-            when(view.placeForDrop[0]){
+        if(view.outputPlaceForDrop.children.count()!=0){
+            when(view.outputPlaceForDrop[0]){
                 is WhileBtn-> {
                     tree.parent?.add(TreeNode("while"))
-                    workWithWhile(tree.parent?.children?.last()!!, view.placeForDrop[0] as WhileBtn)
+                    workWithWhile(tree.parent?.children?.last()!!, view.outputPlaceForDrop[0] as WhileBtn)
                 }
                 is OutputBtn->{
                     tree.parent?.add(TreeNode("print"))
-                    workWithPrint(tree.parent?.children?.last()!!, view.placeForDrop[0] as OutputBtn)
+                    workWithPrint(tree.parent?.children?.last()!!, view.outputPlaceForDrop[0] as OutputBtn)
                 }
                 is VariableBtn->{
                     tree.parent?.add(TreeNode("assign"))
-                    workWithVarAssignment(tree.parent?.children?.last()!!, view.placeForDrop[0] as VariableBtn)
+                    workWithVarAssignment(tree.parent?.children?.last()!!, view.outputPlaceForDrop[0] as VariableBtn)
                 }
             }
         }
@@ -101,25 +91,20 @@ class StartProgram(context: Context, start: StartBtn) {
 
     private fun workWithVarAssignment(tree: TreeNode<String>, view: VariableBtn){
 
+        if(view.varPlaceForDrop.children.count()!=0){
 
-        Toast.makeText(ctx, "var", Toast.LENGTH_SHORT).show()
-
-        if(view.placeForDrop.children.count()!=0){
-
-            Toast.makeText(ctx, "not empty var place for drop", Toast.LENGTH_SHORT).show()
-
-            when(view.placeForDrop[0]){
+            when(view.varPlaceForDrop[0]){
                 is WhileBtn-> {
                     tree.parent?.add(TreeNode("while"))
-                    workWithWhile(tree.parent?.children?.last()!!, view.placeForDrop[0] as WhileBtn)
+                    workWithWhile(tree.parent?.children?.last()!!, view.varPlaceForDrop[0] as WhileBtn)
                 }
                 is OutputBtn->{
                     tree.parent?.add(TreeNode("print"))
-                    workWithPrint(tree.parent?.children?.last()!!, view.placeForDrop[0] as OutputBtn)
+                    workWithPrint(tree.parent?.children?.last()!!, view.varPlaceForDrop[0] as OutputBtn)
                 }
                 is VariableBtn->{
                     tree.parent?.add(TreeNode("assign"))
-                    workWithVarAssignment(tree.parent?.children?.last()!!, view.placeForDrop[0] as VariableBtn)
+                    workWithVarAssignment(tree.parent?.children?.last()!!, view.varPlaceForDrop[0] as VariableBtn)
                 }
             }
         }
@@ -127,30 +112,22 @@ class StartProgram(context: Context, start: StartBtn) {
 
     private fun fillTree(start: StartBtn) {
 
-
-        //val text = "${start.placeForDrop.children.count()}, ${start.placeForDrop?.insidePlace?.children?.count()}"
-        //val duration = Toast.LENGTH_SHORT
-        //var toast = Toast.makeText(ctx, text, duration)
-        //toast.show()
-
-        if(start.placeForDrop.children.count() != 0){
-            when(start.placeForDrop[0]){
+        if(start.startPlaceForDrop.children.count() != 0){
+            when(start.startPlaceForDrop[0]){
                 is WhileBtn-> {
                     myTree.add(TreeNode("while"))
-                    workWithWhile(myTree.children.last(), start.placeForDrop[0] as WhileBtn)
+                    workWithWhile(myTree.children.last(), start.startPlaceForDrop[0] as WhileBtn)
                 }
                 is OutputBtn->{
                     myTree.add(TreeNode("print"))
-                    workWithPrint(myTree.children.last(), start.placeForDrop[0] as OutputBtn)
+                    workWithPrint(myTree.children.last(), start.startPlaceForDrop[0] as OutputBtn)
                 }
                 is VariableBtn->{
                     myTree.add(TreeNode("assign"))
-                    workWithVarAssignment(myTree.children.last(), start.placeForDrop[0] as VariableBtn)
+                    workWithVarAssignment(myTree.children.last(), start.startPlaceForDrop[0] as VariableBtn)
                 }
             }
         }
-
-        //toast.show()
     }
 
 
@@ -289,51 +266,7 @@ class StartProgram(context: Context, start: StartBtn) {
         return res
     }
 
-    private fun printNodes(node: View) {
-
-        when(node){
-            is WhileBtn -> {
-                if (node.insidePlace.children.count() != 0)
-                {
-                    println("parent: INSIDE ${node}\n child: ${node.insidePlace[0]}")
-                    printNodes(node.insidePlace[0])
-                }
-                if (node.placeForDrop.children.count() != 0)
-                {
-                    println(node.placeForDrop.parent)
-                    println("parent: PFD ${node}\n child: ${node.placeForDrop[0]}")
-                    printNodes(node.placeForDrop[0])
-                }
-            }
-            is OutputBtn -> {
-                if (node.placeForDrop.children.count() != 0)
-                {
-                    println("parent: ${node}\n child: ${node.placeForDrop[0]}")
-                    printNodes(node.placeForDrop[0])
-                }
-            }
-            is VariableBtn -> {
-                if (node.placeForDrop.children.count() != 0)
-                {
-                    println("parent: ${node}\n child: ${node.placeForDrop[0]}")
-                    printNodes(node.placeForDrop[0])
-                }
-            }
-            is StartBtn -> {
-                if (node.placeForDrop.children.count() != 0)
-                {
-                    println("parent: ${node}\n child: ${node.placeForDrop[0]}")
-                    printNodes(node.placeForDrop[0])
-                }
-            }
-        }
-    }
-
     fun main() {
-
-        //println(receivedRoot.placeForDrop[0].placeForDrop.children.count())
-
-        printNodes(receivedRoot)
 
         //Заполнение дерева
         fillTree(receivedRoot)

@@ -12,9 +12,10 @@ import androidx.core.view.get
 import com.example.myapplication.blocks.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.main.output_block.view.*
 import kotlinx.android.synthetic.main.start_block.view.*
+import kotlinx.android.synthetic.main.variable_block.view.*
 import kotlinx.android.synthetic.main.while_block.view.*
-import kotlinx.android.synthetic.main.while_block.view.placeForDrop
 
 
 class MainActivity : AppCompatActivity() {
@@ -132,57 +133,58 @@ class MainActivity : AppCompatActivity() {
         Workspace.setOnDragListener(dragAndDropListener)
 
 
+        //----------------------------------------
+        //----------------------------------------
         //ЗАПУСК!!!!!!!!!!!!!ИУУУУУУУУУУУУ!!!!!!!!
         imageButton4.setOnClickListener(){
 
             printNodes(start)
 
-            //val program = StartProgram(this, start)
-            //program.main()
+            val program = StartProgram(this, start)
+            program.main()
         }
 
     }
 
 
+    //--------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
+    //~~~~~~~~~~~~~~~~~~~~~~~ФУНКЦИЯ ДЛЯ ПРОСМОТРА ДЕРЕВА~~~~~~~~~~~~~~~~~~~~~~~
+
     private fun printNodes(node: View) {
 
         when(node){
             is WhileBtn -> {
-                if (node.insidePlace.children.count() != 0)
+                if (node.whileInsidePlace.children.count() != 0)
                 {
-                    println("parent: INSIDE ${node}\n child: ${node.insidePlace[0]}")
-                    printNodes(node.insidePlace[0])
+                    println("parent: INSIDE ${node}\n child: ${node.whileInsidePlace[0]}")
+                    printNodes(node.whileInsidePlace[0])
                 }
-                if (node.placeForDrop.children.count() != 0)
+                if (node.whilePlaceForDrop.children.count() != 0)
                 {
-                    println(node.placeForDrop.children.count())
-                    println("parent: PFD ${node}\n child: ${node.placeForDrop[0]}")
-                    printNodes(node.placeForDrop[0])
-                }else{
-                    println("$node\n ${node.placeForDrop}")
+                    println("parent: PFD ${node}\n child: ${node.whilePlaceForDrop[0]}")
+                    printNodes(node.whilePlaceForDrop[0])
                 }
             }
             is OutputBtn -> {
-                if (node.placeForDrop.children.count() != 0)
+                if (node.outputPlaceForDrop.children.count() != 0)
                 {
-                    println("parent: ${node}\n child: ${node.placeForDrop[0]}")
-                    printNodes(node.placeForDrop[0])
+                    println("parent: ${node}\n child: ${node.outputPlaceForDrop[0]}")
+                    printNodes(node.outputPlaceForDrop[0])
                 }
             }
             is VariableBtn -> {
-                println("$node\n ${node.placeForDrop}")
-
-                if (node.placeForDrop.children.count() != 0)
+                if (node.varPlaceForDrop.children.count() != 0)
                 {
-                    println("parent: ${node}\n child: ${node.placeForDrop[0]}")
-                    printNodes(node.placeForDrop[0])
+                    println("parent: ${node}\n child: ${node.varPlaceForDrop[0]}")
+                    printNodes(node.varPlaceForDrop[0])
                 }
             }
             is StartBtn -> {
-                if (node.placeForDrop.children.count() != 0)
+                if (node.startPlaceForDrop.children.count() != 0)
                 {
-                    println("parent: ${node}\n child: ${node.placeForDrop[0]}")
-                    printNodes(node.placeForDrop[0])
+                    println("parent: ${node}\n child: ${node.startPlaceForDrop[0]}")
+                    printNodes(node.startPlaceForDrop[0])
                 }
             }
         }

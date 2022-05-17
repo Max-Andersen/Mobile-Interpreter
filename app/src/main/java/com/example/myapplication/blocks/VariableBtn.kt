@@ -51,9 +51,7 @@ class VariableBtn @JvmOverloads constructor(
 
             DragEvent.ACTION_DROP -> {
 
-
-                Toast.makeText(context, "упал на var", Toast.LENGTH_SHORT).show()
-
+                //Toast.makeText(context, "упал на var", Toast.LENGTH_SHORT).show()
 
                 dragBlock.x = destination.rootView.beginView.x //подтягиваем drag block ровно в place for drop
                 dragBlock.y = destination.rootView.beginView.y
@@ -85,7 +83,7 @@ class VariableBtn @JvmOverloads constructor(
 
     init {
         binding.root.setOnLongClickListener(){
-            binding.placeForDrop.setOnDragListener { _, _ -> false }
+            binding.varPlaceForDrop.setOnDragListener { _, _ -> false }
             val textOnBoard = ""
             val item = ClipData.Item(textOnBoard)
             val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
@@ -99,7 +97,7 @@ class VariableBtn @JvmOverloads constructor(
     }
 
     fun onSet(){
-        binding.placeForDrop.setOnDragListener(dragAndDropListener)
+        binding.varPlaceForDrop.setOnDragListener(dragAndDropListener)
     }
 
 }

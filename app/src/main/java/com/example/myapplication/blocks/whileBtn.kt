@@ -58,8 +58,7 @@ class WhileBtn @JvmOverloads constructor(
 
             DragEvent.ACTION_DROP -> {
 
-
-                Toast.makeText(context, "упал на вайл", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(context, "упал на вайл", Toast.LENGTH_SHORT).show()
 
                 dragBlock.x = destination.rootView.beginView.x //подтягиваем drag block ровно в place for drop
                 dragBlock.y = destination.rootView.beginView.y
@@ -92,8 +91,8 @@ class WhileBtn @JvmOverloads constructor(
 
     init {
         binding.root.setOnLongClickListener(){
-            binding.placeForDrop.setOnDragListener { _, _ -> false }
-            binding.insidePlace.setOnDragListener { _, _ -> false }
+            binding.whilePlaceForDrop.setOnDragListener { _, _ -> false }
+            binding.whileInsidePlace.setOnDragListener { _, _ -> false }
             val textOnBoard = ""
             val item = ClipData.Item(textOnBoard)
             val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
@@ -107,16 +106,11 @@ class WhileBtn @JvmOverloads constructor(
     }
 
     fun onSet(){
-        binding.placeForDrop.setOnDragListener(dragAndDropListener)
-        binding.insidePlace.setOnDragListener(dragAndDropListener)
+        binding.whilePlaceForDrop.setOnDragListener(dragAndDropListener)
+        binding.whileInsidePlace.setOnDragListener(dragAndDropListener)
 
         val whilee = WhileBtn(c)  //вот тут зараза почему-то добавлять не хочет
         whilee.y += 450
-        //binding.root.blockscreen.visibility = View.VISIBLE
-        //blockscreen.addView(whilee)
-
-//        blockscreen.addView(whilee)
-        //binding.root.blockscreen.addView(whilee)
 
     }
 

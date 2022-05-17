@@ -74,7 +74,7 @@ class OutputBtn @JvmOverloads constructor(
 
     init {
         binding.root.setOnLongClickListener(){
-            binding.placeForDrop.setOnDragListener { _, _ -> false }
+            binding.outputPlaceForDrop.setOnDragListener { _, _ -> false }
             val textOnBoard = ""
             val item = ClipData.Item(textOnBoard)
             val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
@@ -89,6 +89,6 @@ class OutputBtn @JvmOverloads constructor(
     }
 
     fun onSet(){
-        binding.placeForDrop.setOnDragListener(dragAndDropListener)
+        binding.outputPlaceForDrop.setOnDragListener(dragAndDropListener)
     }
 }

@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.DragEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.myapplication.databinding.VariableBlockBinding
 import kotlinx.android.synthetic.main.start_block.view.*
@@ -60,6 +61,9 @@ class VariableBtn @JvmOverloads constructor(
                 (event.localState as? VariableBtn)?.onSet()
                 (event.localState as? OutputBtn)?.onSet()
                 view.invalidate()
+
+                Toast.makeText(context, "упал на var", Toast.LENGTH_SHORT).show()
+
                 true
             }
 

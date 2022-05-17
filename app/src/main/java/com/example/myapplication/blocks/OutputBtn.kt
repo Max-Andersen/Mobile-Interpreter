@@ -90,6 +90,5 @@ class OutputBtn @JvmOverloads constructor(
 
     fun onSet(){
         binding.placeForDrop.setOnDragListener(dragAndDropListener)
-        //binding.insidePlace.setOnDragListener(dragAndDropListener)
     }
 }

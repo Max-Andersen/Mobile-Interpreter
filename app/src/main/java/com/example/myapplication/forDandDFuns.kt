@@ -3,10 +3,7 @@ package com.example.myapplication
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.children
-import com.example.myapplication.blocks.OutputBtn
-import com.example.myapplication.blocks.StartBtn
-import com.example.myapplication.blocks.VariableBtn
-import com.example.myapplication.blocks.WhileBtn
+import com.example.myapplication.blocks.*
 
 fun checkForLink(destination: ConstraintLayout, dragBlock: View): Boolean{
 

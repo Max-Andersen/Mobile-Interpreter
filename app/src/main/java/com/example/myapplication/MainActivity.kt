@@ -11,10 +11,6 @@ import androidx.core.view.get
 import com.example.myapplication.blocks.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
-import kotlinx.android.synthetic.main.output_block.view.*
-import kotlinx.android.synthetic.main.start_block.view.*
-import kotlinx.android.synthetic.main.variable_block.view.*
-import kotlinx.android.synthetic.main.while_block.view.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -137,7 +133,7 @@ class MainActivity : AppCompatActivity() {
         //ЗАПУСК!!!!!!!!!!!!!ИУУУУУУУУУУУУ!!!!!!!!
         imageButton4.setOnClickListener {
 
-            printNodes(start)
+            //printNodes(start)
 
             val program = StartProgram(this, start)
             program.main()
@@ -154,36 +150,36 @@ class MainActivity : AppCompatActivity() {
 
         when(node){
             is WhileBtn -> {
-                if (node.whileInsidePlace.children.count() != 0)
+                if ((node[2] as ViewGroup).children.count() != 0)
                 {
-                    println("parent: INSIDE ${node}\n child: ${node.whileInsidePlace[0]}")
-                    printNodes(node.whileInsidePlace[0])
+                    println("parent: INSIDE ${node}\n child: ${(node[2] as ViewGroup)[0]}")
+                    printNodes((node[2] as ViewGroup)[0])
                 }
-                if (node.whilePlaceForDrop.children.count() != 0)
+                if ((node[5] as ViewGroup).children.count() != 0)
                 {
-                    println("parent: PFD ${node}\n child: ${node.whilePlaceForDrop[0]}")
-                    printNodes(node.whilePlaceForDrop[0])
+                    println("parent: PFD ${node}\n child: ${(node[5] as ViewGroup)[0]}")
+                    printNodes((node[5] as ViewGroup)[0])
                 }
             }
             is OutputBtn -> {
-                if (node.outputPlaceForDrop.children.count() != 0)
+                if ((node[2] as ViewGroup).children.count() != 0)
                 {
-                    println("parent: ${node}\n child: ${node.outputPlaceForDrop[0]}")
-                    printNodes(node.outputPlaceForDrop[0])
+                    println("parent: ${node}\n child: ${(node[2] as ViewGroup)[0]}")
+                    printNodes((node[2] as ViewGroup)[0])
                 }
             }
             is VariableBtn -> {
-                if (node.varPlaceForDrop.children.count() != 0)
+                if ((node[1] as ViewGroup).children.count() != 0)
                 {
-                    println("parent: ${node}\n child: ${node.varPlaceForDrop[0]}")
-                    printNodes(node.varPlaceForDrop[0])
+                    println("parent: ${node}\n child: ${(node[1] as ViewGroup)[0]}")
+                    printNodes((node[1] as ViewGroup)[0])
                 }
             }
             is StartBtn -> {
-                if (node.startPlaceForDrop.children.count() != 0)
+                if ((node[2] as ViewGroup).children.count() != 0)
                 {
-                    println("parent: ${node}\n child: ${node.startPlaceForDrop[0]}")
-                    printNodes(node.startPlaceForDrop[0])
+                    println("parent: ${node}\n child: ${(node[2] as ViewGroup)[0]}")
+                    printNodes((node[2] as ViewGroup)[0])
                 }
             }
         }

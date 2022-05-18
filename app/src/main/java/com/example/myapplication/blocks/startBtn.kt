@@ -9,14 +9,8 @@ import android.view.DragEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.children
 import androidx.core.view.get
 import com.example.myapplication.databinding.StartBlockBinding
-import kotlinx.android.synthetic.main.output_block.view.*
-import kotlinx.android.synthetic.main.start_block.view.*
-import kotlinx.android.synthetic.main.start_block.view.beginView
-import kotlinx.android.synthetic.main.variable_block.view.*
-import kotlinx.android.synthetic.main.while_block.view.*
 
 class StartBtn @JvmOverloads constructor(
     context: Context,
@@ -92,11 +86,14 @@ class StartBtn @JvmOverloads constructor(
                     }
                 }
 
-                dragBlock.x = destination.rootView.beginView.x   //подтягиваем drag block ровно в place for drop
-                dragBlock.y = destination.rootView.beginView.y
+                //---------------------------------------------
+                //подтягиваем drag block ровно в place for drop
+                dragBlock.x = (destination.rootView as ViewGroup)[0].x
+                dragBlock.y = (destination.rootView as ViewGroup)[0].y
 
+                //-------------------------
+                //устанавливаем новые связи
                 owner.removeView(dragBlock)
-
                 destination.addView(dragBlock)
                 destination.setBackgroundColor(Color.TRANSPARENT)
 
@@ -104,13 +101,11 @@ class StartBtn @JvmOverloads constructor(
                 (event.localState as? WhileBtn)?.onSet()
                 (event.localState as? VariableBtn)?.onSet()
                 (event.localState as? OutputBtn)?.onSet()
-
                 view.invalidate()
                 true
             }
 
             DragEvent.ACTION_DRAG_ENDED -> {
-                //Workspace.setOnDragListener(View.OnDragListener{ view, event -> false})
                 view.invalidate()
                 true
             }

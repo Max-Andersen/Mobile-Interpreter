@@ -10,15 +10,8 @@ import android.view.View
 import android.view.View.OnDragListener
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.children
 import androidx.core.view.get
 import com.example.myapplication.databinding.WhileBlockBinding
-import kotlinx.android.synthetic.main.output_block.view.*
-import kotlinx.android.synthetic.main.start_block.view.*
-import kotlinx.android.synthetic.main.variable_block.view.*
-import kotlinx.android.synthetic.main.while_block.view.*
-import kotlinx.android.synthetic.main.while_block.view.beginView
-
 
 class WhileBtn @JvmOverloads constructor(
     context: Context,
@@ -97,11 +90,14 @@ class WhileBtn @JvmOverloads constructor(
 
                 //Toast.makeText(context, "упал на вайл", Toast.LENGTH_SHORT).show()
 
-                dragBlock.x = destination.rootView.beginView.x //подтягиваем drag block ровно в place for drop
-                dragBlock.y = destination.rootView.beginView.y
+                //---------------------------------------------
+                //подтягиваем drag block ровно в place for drop
+                dragBlock.x = (destination.rootView as ViewGroup)[0].x
+                dragBlock.y = (destination.rootView as ViewGroup)[0].y
 
+                //-------------------------
+                //устанавливаем новые связи
                 owner.removeView(dragBlock)
-
                 destination.addView(dragBlock)
                 destination.setBackgroundColor(Color.TRANSPARENT)
 
@@ -115,8 +111,6 @@ class WhileBtn @JvmOverloads constructor(
             }
 
             DragEvent.ACTION_DRAG_ENDED -> {
-
-                //binding.view.layoutParams = LayoutParams(oneDP * 25, oneDP* binding.insidePlace.layoutParams.height)
                 view.invalidate()
                 true
             }

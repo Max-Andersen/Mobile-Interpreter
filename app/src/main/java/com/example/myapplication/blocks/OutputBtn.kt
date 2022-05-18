@@ -9,14 +9,8 @@ import android.view.DragEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.children
 import androidx.core.view.get
 import com.example.myapplication.databinding.OutputBlockBinding
-import kotlinx.android.synthetic.main.output_block.view.*
-import kotlinx.android.synthetic.main.start_block.view.*
-import kotlinx.android.synthetic.main.start_block.view.beginView
-import kotlinx.android.synthetic.main.variable_block.view.*
-import kotlinx.android.synthetic.main.while_block.view.*
 
 class OutputBtn @JvmOverloads constructor(
     context: Context,
@@ -25,7 +19,7 @@ class OutputBtn @JvmOverloads constructor(
 ): ConstraintLayout(context, attrs, defStyleAttr){
     private var binding = OutputBlockBinding.inflate(LayoutInflater.from(context), this)
 
-    val dragAndDropListener = View.OnDragListener{ view, event ->
+    private val dragAndDropListener = OnDragListener{ view, event ->
         val dragBlock = event.localState as View
         val destination = view as ConstraintLayout
         val owner = dragBlock.parent as ViewGroup
@@ -92,11 +86,14 @@ class OutputBtn @JvmOverloads constructor(
                     }
                 }
 
-                dragBlock.x = destination.rootView.beginView.x   //подтягиваем drag block ровно в place for drop
-                dragBlock.y = destination.rootView.beginView.y
+                //---------------------------------------------
+                //подтягиваем drag block ровно в place for drop
+                dragBlock.x = (destination.rootView as ViewGroup)[0].x
+                dragBlock.y = (destination.rootView as ViewGroup)[0].y
 
+                //-------------------------
+                //устанавливаем новые связи
                 owner.removeView(dragBlock)
-
                 destination.addView(dragBlock)
                 destination.setBackgroundColor(Color.TRANSPARENT)
 
@@ -118,14 +115,14 @@ class OutputBtn @JvmOverloads constructor(
     }
 
     init {
-        binding.root.setOnLongClickListener(){
+        binding.root.setOnLongClickListener{
             binding.outputPlaceForDrop.setOnDragListener { _, _ -> false }
             val textOnBoard = ""
             val item = ClipData.Item(textOnBoard)
             val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
             val data = ClipData(textOnBoard, mimeTypes, item)
 
-            val dragAndDropBuilder = View.DragShadowBuilder(it)
+            val dragAndDropBuilder = DragShadowBuilder(it)
             it.startDragAndDrop(data, dragAndDropBuilder, it, 0)
 
             true

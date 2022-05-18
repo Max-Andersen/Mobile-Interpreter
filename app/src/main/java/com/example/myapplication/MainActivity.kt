@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.variable_block.view.*
 import kotlinx.android.synthetic.main.while_block.view.*
 import android.os.Handler;
 import android.widget.ImageButton
+import kotlin.system.exitProcess
 
 
 class MainActivity : AppCompatActivity() {
@@ -44,6 +45,20 @@ class MainActivity : AppCompatActivity() {
         //-------------------------------------------------------------------------------------
         //-------------------------------------------------------------------------------------
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~СЛУШАТЕЛИ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        BurgerOpen.setOnClickListener(){
+            burgerMenu.visibility = View.VISIBLE
+            plus1.isClickable = false
+            consoleBtn.isClickable = false
+        }
+        Exit.setOnClickListener(){
+            exitProcess(-1)
+        }
+        closeBurgerMenu.setOnClickListener(){
+            burgerMenu.visibility = View.INVISIBLE
+            plus1.isClickable = true
+            consoleBtn.isClickable = true
+        }
         plus1.setOnClickListener {
             for (i in 0..zoomLayout.Workspace.childCount){
                 val child = zoomLayout.Workspace.getChildAt(i)

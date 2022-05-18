@@ -219,6 +219,7 @@ class MainActivity : AppCompatActivity() {
                 CreateConsole.visibility = View.GONE
                 blockAndVariable.visibility = View.GONE
                 plus1.visibility = View.VISIBLE
+                consoleBtn.visibility = View.VISIBLE
                 zoomLayout.setVerticalPanEnabled(true)
                 zoomLayout.setHorizontalPanEnabled(true)
                 true

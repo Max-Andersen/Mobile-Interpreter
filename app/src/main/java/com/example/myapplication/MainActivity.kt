@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import com.example.myapplication.databinding.ActivityMainBinding
 import android.os.Bundle
 import android.view.DragEvent
 import android.view.View
@@ -11,22 +12,27 @@ import androidx.core.view.get
 import com.example.myapplication.blocks.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.main.output_block.view.*
+import kotlinx.android.synthetic.main.start_block.view.*
+import kotlinx.android.synthetic.main.variable_block.view.*
+import kotlinx.android.synthetic.main.while_block.view.*
 
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
 
-    private fun blockInit(){
-        val whileBlock = WhileBtn(this)
-        whileBlock.y += 450
+    fun blockInit(){
+        val whilee = WhileBtn(this)
+        whilee.y += 450
 
         val variable1 = VariableBtn(this)
         variable1.y += 700
 
-        val outputBlock = OutputBtn(this)
-        outputBlock.y += 950
+        val outputblock = OutputBtn(this)
+        outputblock.y += 950
 
-        blockscreen.addView(whileBlock)
-        blockscreen.addView(outputBlock)
+        blockscreen.addView(whilee)
+        blockscreen.addView(outputblock)
         blockscreen.addView(variable1)
     }
 
@@ -39,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         //-------------------------------------------------------------------------------------
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~СЛУШАТЕЛИ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-        plus1.setOnClickListener {
+        plus1.setOnClickListener() {
             for (i in 0..zoomLayout.Workspace.childCount){
                 val child = zoomLayout.Workspace.getChildAt(i)
                 if (child is View){
@@ -51,7 +57,7 @@ class MainActivity : AppCompatActivity() {
             plus1.visibility = View.GONE
         }
 
-        closeBlockScreen.setOnClickListener{
+        closeBlockScreen.setOnClickListener(){
             for (i in 0..zoomLayout.Workspace.childCount){
                 val child = zoomLayout.Workspace.getChildAt(i)
                 if (child is View){
@@ -63,21 +69,21 @@ class MainActivity : AppCompatActivity() {
             plus1.visibility = View.VISIBLE
         }
 
-        blockbtn.setOnClickListener{
+        blockbtn.setOnClickListener(){
             variableBlock.visibility = View.GONE
             blockbtn.visibility = View.GONE
             blockscreen.visibility = View.VISIBLE
             varbtn.visibility = View.VISIBLE
         }
 
-        varbtn.setOnClickListener{
+        varbtn.setOnClickListener(){
             blockscreen.visibility = View.GONE
             variableBlock.visibility = View.VISIBLE
             varbtn.visibility = View.GONE
             blockbtn.visibility = View.VISIBLE
         }
 
-        consoleBtn.setOnClickListener{
+        consoleBtn.setOnClickListener(){
             for (i in 0..zoomLayout.Workspace.childCount){
                 val child = zoomLayout.Workspace.getChildAt(i)
                 if (child is View){
@@ -88,7 +94,7 @@ class MainActivity : AppCompatActivity() {
             blockAndVariable.visibility = View.GONE
         }
 
-        consoleCloseBtn.setOnClickListener{
+        consoleCloseBtn.setOnClickListener(){
             for (i in 0..zoomLayout.Workspace.childCount){
                 val child = zoomLayout.Workspace.getChildAt(i)
                 if (child is View){
@@ -111,8 +117,8 @@ class MainActivity : AppCompatActivity() {
         val variable = VariableConsole(this)
         variable.y += 200
 
-        var n = 2
-        plusvar.setOnClickListener{
+        var n = 2;
+        plusvar.setOnClickListener(){
             plusvar.y += 270
             val anotherVariable = VariableConsole(this)
             anotherVariable.y += 270 * n
@@ -124,16 +130,15 @@ class MainActivity : AppCompatActivity() {
         blockscreen.addView(start)
 
 
-        Workspace.x = 0F
-        Workspace.y = 0F
         Workspace.setOnDragListener(dragAndDropListener)
+
 
         //----------------------------------------
         //----------------------------------------
         //ЗАПУСК!!!!!!!!!!!!!ИУУУУУУУУУУУУ!!!!!!!!
-        imageButton4.setOnClickListener {
+        imageButton4.setOnClickListener(){
 
-            //printNodes(start)
+            printNodes(start)
 
             val program = StartProgram(this, start)
             program.main()
@@ -150,36 +155,36 @@ class MainActivity : AppCompatActivity() {
 
         when(node){
             is WhileBtn -> {
-                if ((node[2] as ViewGroup).children.count() != 0)
+                if (node.whileInsidePlace.children.count() != 0)
                 {
-                    println("parent: INSIDE ${node}\n child: ${(node[2] as ViewGroup)[0]}")
-                    printNodes((node[2] as ViewGroup)[0])
+                    println("parent: INSIDE ${node}\n child: ${node.whileInsidePlace[0]}")
+                    printNodes(node.whileInsidePlace[0])
                 }
-                if ((node[5] as ViewGroup).children.count() != 0)
+                if (node.whilePlaceForDrop.children.count() != 0)
                 {
-                    println("parent: PFD ${node}\n child: ${(node[5] as ViewGroup)[0]}")
-                    printNodes((node[5] as ViewGroup)[0])
+                    println("parent: PFD ${node}\n child: ${node.whilePlaceForDrop[0]}")
+                    printNodes(node.whilePlaceForDrop[0])
                 }
             }
             is OutputBtn -> {
-                if ((node[2] as ViewGroup).children.count() != 0)
+                if (node.outputPlaceForDrop.children.count() != 0)
                 {
-                    println("parent: ${node}\n child: ${(node[2] as ViewGroup)[0]}")
-                    printNodes((node[2] as ViewGroup)[0])
+                    println("parent: ${node}\n child: ${node.outputPlaceForDrop[0]}")
+                    printNodes(node.outputPlaceForDrop[0])
                 }
             }
             is VariableBtn -> {
-                if ((node[1] as ViewGroup).children.count() != 0)
+                if (node.varPlaceForDrop.children.count() != 0)
                 {
-                    println("parent: ${node}\n child: ${(node[1] as ViewGroup)[0]}")
-                    printNodes((node[1] as ViewGroup)[0])
+                    println("parent: ${node}\n child: ${node.varPlaceForDrop[0]}")
+                    printNodes(node.varPlaceForDrop[0])
                 }
             }
             is StartBtn -> {
-                if ((node[2] as ViewGroup).children.count() != 0)
+                if (node.startPlaceForDrop.children.count() != 0)
                 {
-                    println("parent: ${node}\n child: ${(node[2] as ViewGroup)[0]}")
-                    printNodes((node[2] as ViewGroup)[0])
+                    println("parent: ${node}\n child: ${node.startPlaceForDrop[0]}")
+                    printNodes(node.startPlaceForDrop[0])
                 }
             }
         }
@@ -189,7 +194,7 @@ class MainActivity : AppCompatActivity() {
     //-----------------------------------------------------------------------------------------
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~DRAG_AND_DROP~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    private val dragAndDropListener = View.OnDragListener{ view, event ->
+    val dragAndDropListener = View.OnDragListener{ view, event ->
         when (event.action){
             DragEvent.ACTION_DRAG_STARTED -> {
                 for (i in 0..zoomLayout.Workspace.childCount){
@@ -219,7 +224,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             DragEvent.ACTION_DROP -> {
-
                 val v = event.localState as ConstraintLayout
                 v.x = event.x - (v.width / 2)
                 v.y = event.y - (v.height / 2)
@@ -227,26 +231,6 @@ class MainActivity : AppCompatActivity() {
                 val owner = v.parent as ViewGroup
                 owner.removeView(v)
                 Workspace.addView(v)
-
-
-                //---------------------------------
-                //---------------------------------
-                //УМЕНЬШЕНИЕ ПОЛОСКИ ВЛОЖЕННОСТИ!!!
-
-                var x = owner.parent as View
-
-                while(true){
-                    if(x is WhileBtn){
-                        x[4].layoutParams.height -= v.height-x[0].layoutParams.height/2
-                        x = x.parent.parent as View
-                    }
-                    else if(x is VariableBtn || x is OutputBtn || x is StartBtn){
-                        x = x.parent.parent as View
-                    }
-                    else{
-                        break
-                    }
-                }
 
                 // ставим обработчик на вложенный place for drop:
                 (event.localState as? StartBtn)?.onSet()

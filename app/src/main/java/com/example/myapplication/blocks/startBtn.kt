@@ -9,8 +9,8 @@ import android.view.DragEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.get
 import com.example.myapplication.databinding.StartBlockBinding
+import kotlinx.android.synthetic.main.start_block.view.*
 
 class StartBtn @JvmOverloads constructor(
     context: Context,
@@ -19,7 +19,7 @@ class StartBtn @JvmOverloads constructor(
 ): ConstraintLayout(context, attrs, defStyleAttr){
     private var binding = StartBlockBinding.inflate(LayoutInflater.from(context), this)
 
-    private val dragAndDropListener = OnDragListener{ view, event ->
+    val dragAndDropListener = View.OnDragListener{ view, event ->
         val dragBlock = event.localState as View
         val destination = view as ConstraintLayout
         val owner = dragBlock.parent as ViewGroup
@@ -47,53 +47,11 @@ class StartBtn @JvmOverloads constructor(
             }
 
             DragEvent.ACTION_DROP -> {
+                dragBlock.x = destination.rootView.beginView.x   //подтягиваем drag block ровно в place for drop
+                dragBlock.y = destination.rootView.beginView.y
 
-                //---------------------------------
-                //---------------------------------
-                //УВЕЛИЧЕНИЕ ПОЛОСКИ ВЛОЖЕННОСТИ!!!
-
-                var x = destination.parent as View
-
-                while(true){
-                    if(x is WhileBtn){
-                        x[4].layoutParams.height += dragBlock.height-x[0].layoutParams.height/2
-                        x = x.parent.parent as View
-                    }
-                    else if(x is VariableBtn || x is OutputBtn || x is StartBtn){
-                        x = x.parent.parent as View
-                    }
-                    else{
-                        break
-                    }
-                }
-
-                //---------------------------------
-                //---------------------------------
-                //УМЕНЬШЕНИЕ ПОЛОСКИ ВЛОЖЕННОСТИ!!!
-
-                x = owner.parent as View
-
-                while(true){
-                    if(x is WhileBtn){
-                        x[4].layoutParams.height -= dragBlock.height-x[0].layoutParams.height/2
-                        x = x.parent.parent as View
-                    }
-                    else if(x is VariableBtn || x is OutputBtn || x is StartBtn){
-                        x = x.parent.parent as View
-                    }
-                    else{
-                        break
-                    }
-                }
-
-                //---------------------------------------------
-                //подтягиваем drag block ровно в place for drop
-                dragBlock.x = (destination.rootView as ViewGroup)[0].x
-                dragBlock.y = (destination.rootView as ViewGroup)[0].y
-
-                //-------------------------
-                //устанавливаем новые связи
                 owner.removeView(dragBlock)
+
                 destination.addView(dragBlock)
                 destination.setBackgroundColor(Color.TRANSPARENT)
 
@@ -101,11 +59,13 @@ class StartBtn @JvmOverloads constructor(
                 (event.localState as? WhileBtn)?.onSet()
                 (event.localState as? VariableBtn)?.onSet()
                 (event.localState as? OutputBtn)?.onSet()
+
                 view.invalidate()
                 true
             }
 
             DragEvent.ACTION_DRAG_ENDED -> {
+                //Workspace.setOnDragListener(View.OnDragListener{ view, event -> false})
                 view.invalidate()
                 true
             }
@@ -115,14 +75,14 @@ class StartBtn @JvmOverloads constructor(
     }
 
     init {
-        binding.root.setOnLongClickListener{
+        binding.root.setOnLongClickListener(){
             binding.startPlaceForDrop.setOnDragListener { _, _ -> false }
             val textOnBoard = "This is Start Node"
             val item = ClipData.Item(textOnBoard)
             val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
             val data = ClipData(textOnBoard, mimeTypes, item)
 
-            val dragAndDropBuilder = DragShadowBuilder(it)
+            val dragAndDropBuilder = View.DragShadowBuilder(it)
             it.startDragAndDrop(data, dragAndDropBuilder, it, 0)
             true
         }

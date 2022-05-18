@@ -4,14 +4,19 @@ import android.content.ClipDescription
 import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.DragEvent
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnDragListener
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.get
+import androidx.core.view.children
 import com.example.myapplication.databinding.WhileBlockBinding
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.main.while_block.view.*
+
 
 class WhileBtn @JvmOverloads constructor(
     context: Context,
@@ -19,9 +24,12 @@ class WhileBtn @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ): ConstraintLayout(context, attrs, defStyleAttr){
     private var binding = WhileBlockBinding.inflate(LayoutInflater.from(context), this)
-    private var c = context
+    var c = context
+    var oneDP = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP, 1f,
+        context.resources.displayMetrics).toInt()
 
-    private val dragAndDropListener = OnDragListener{ view, event ->
+    val dragAndDropListener = View.OnDragListener{ view, event ->
         val dragBlock = event.localState as View
         val destination = view as ConstraintLayout
         val owner = dragBlock.parent as ViewGroup
@@ -50,54 +58,13 @@ class WhileBtn @JvmOverloads constructor(
 
             DragEvent.ACTION_DROP -> {
 
-                //---------------------------------
-                //---------------------------------
-                //УВЕЛИЧЕНИЕ ПОЛОСКИ ВЛОЖЕННОСТИ!!!
-
-                var x = destination.parent as View
-
-                while(true){
-                    if(x is WhileBtn){
-                        x[4].layoutParams.height += dragBlock.height-x[0].layoutParams.height/2
-                        x = x.parent.parent as View
-                    }
-                    else if(x is VariableBtn || x is OutputBtn || x is StartBtn){
-                            x = x.parent.parent as View
-                    }
-                    else{
-                        break
-                    }
-                }
-
-                //---------------------------------
-                //---------------------------------
-                //УМЕНЬШЕНИЕ ПОЛОСКИ ВЛОЖЕННОСТИ!!!
-
-                x = owner.parent as View
-
-                while(true){
-                    if(x is WhileBtn){
-                        x[4].layoutParams.height -= dragBlock.height-x[0].layoutParams.height/2
-                        x = x.parent.parent as View
-                    }
-                    else if(x is VariableBtn || x is OutputBtn || x is StartBtn){
-                        x = x.parent.parent as View
-                    }
-                    else{
-                        break
-                    }
-                }
-
                 //Toast.makeText(context, "упал на вайл", Toast.LENGTH_SHORT).show()
 
-                //---------------------------------------------
-                //подтягиваем drag block ровно в place for drop
-                dragBlock.x = (destination.rootView as ViewGroup)[0].x
-                dragBlock.y = (destination.rootView as ViewGroup)[0].y
+                dragBlock.x = destination.rootView.beginView.x //подтягиваем drag block ровно в place for drop
+                dragBlock.y = destination.rootView.beginView.y
 
-                //-------------------------
-                //устанавливаем новые связи
                 owner.removeView(dragBlock)
+
                 destination.addView(dragBlock)
                 destination.setBackgroundColor(Color.TRANSPARENT)
 
@@ -111,6 +78,8 @@ class WhileBtn @JvmOverloads constructor(
             }
 
             DragEvent.ACTION_DRAG_ENDED -> {
+
+                //binding.view.layoutParams = LayoutParams(oneDP * 25, oneDP* binding.insidePlace.layoutParams.height)
                 view.invalidate()
                 true
             }
@@ -121,7 +90,7 @@ class WhileBtn @JvmOverloads constructor(
 
 
     init {
-        binding.root.setOnLongClickListener{
+        binding.root.setOnLongClickListener(){
             binding.whilePlaceForDrop.setOnDragListener { _, _ -> false }
             binding.whileInsidePlace.setOnDragListener { _, _ -> false }
             val textOnBoard = ""
@@ -129,15 +98,20 @@ class WhileBtn @JvmOverloads constructor(
             val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
             val data = ClipData(textOnBoard, mimeTypes, item)
 
-            val dragAndDropBuilder = DragShadowBuilder(it)
+            val dragAndDropBuilder = View.DragShadowBuilder(it)
             it.startDragAndDrop(data, dragAndDropBuilder, it, 0)
             true
         }
+
     }
 
     fun onSet(){
         binding.whilePlaceForDrop.setOnDragListener(dragAndDropListener)
         binding.whileInsidePlace.setOnDragListener(dragAndDropListener)
+
+        val whilee = WhileBtn(c)  //вот тут зараза почему-то добавлять не хочет
+        whilee.y += 450
+
     }
 
 }

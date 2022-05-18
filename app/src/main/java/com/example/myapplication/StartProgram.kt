@@ -1,12 +1,16 @@
 package com.example.myapplication
 
 import android.content.Context
-import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.children
 import com.example.myapplication.structs.tree.TreeNode
 
 import androidx.core.view.get
 import com.example.myapplication.blocks.*
+import kotlinx.android.synthetic.main.output_block.view.*
+import kotlinx.android.synthetic.main.start_block.view.*
+import kotlinx.android.synthetic.main.variable_block.view.*
+import kotlinx.android.synthetic.main.while_block.view.*
 
 class StartProgram(context: Context, start: StartBtn) {
 
@@ -28,38 +32,38 @@ class StartProgram(context: Context, start: StartBtn) {
 
     private fun workWithWhile(tree: TreeNode<String>, view: WhileBtn){
 
-        if((view[2] as ViewGroup).children.count()!=0)
+        if(view.whileInsidePlace.children.count()!=0)
         {
 
-            when((view[2] as ViewGroup)[0]){
+            when(view.whileInsidePlace[0]){
                 is WhileBtn-> {
                     tree.add(TreeNode("while"))
-                    workWithWhile(tree.children.last(), (view[2] as ViewGroup)[0] as WhileBtn)
+                    workWithWhile(tree.children.last(), view.whileInsidePlace[0] as WhileBtn)
                 }
                 is OutputBtn->{
                     tree.add(TreeNode("print"))
-                    workWithPrint(tree.children.last(), (view[2] as ViewGroup)[0] as OutputBtn)
+                    workWithPrint(tree.children.last(), view.whileInsidePlace[0] as OutputBtn)
                 }
                 is VariableBtn->{
                     tree.add(TreeNode("assign"))
-                    workWithVarAssignment(tree.children.last(), (view[2] as ViewGroup)[0] as VariableBtn)
+                    workWithVarAssignment(tree.children.last(), view.whileInsidePlace[0] as VariableBtn)
                 }
             }
         }
-        if((view[5] as ViewGroup).children.count()!=0){
+        if(view.whilePlaceForDrop.children.count()!=0){
 
-            when((view[5] as ViewGroup)[0]){
+            when(view.whilePlaceForDrop[0]){
                 is WhileBtn-> {
                     tree.parent?.add(TreeNode("while"))
-                    workWithWhile(tree.parent?.children?.last()!!, (view[5] as ViewGroup)[0] as WhileBtn)
+                    workWithWhile(tree.parent?.children?.last()!!, view.whilePlaceForDrop[0] as WhileBtn)
                 }
                 is OutputBtn->{
                     tree.parent?.add(TreeNode("print"))
-                    workWithPrint(tree.parent?.children?.last()!!, (view[5] as ViewGroup)[0] as OutputBtn)
+                    workWithPrint(tree.parent?.children?.last()!!, view.whilePlaceForDrop[0] as OutputBtn)
                 }
                 is VariableBtn->{
                     tree.parent?.add(TreeNode("assign"))
-                    workWithVarAssignment(tree.parent?.children?.last()!!, (view[5] as ViewGroup)[0] as VariableBtn)
+                    workWithVarAssignment(tree.parent?.children?.last()!!, view.whilePlaceForDrop[0] as VariableBtn)
                 }
             }
         }
@@ -67,19 +71,19 @@ class StartProgram(context: Context, start: StartBtn) {
 
     private fun workWithPrint(tree: TreeNode<String>, view: OutputBtn){
 
-        if((view[2] as ViewGroup).children.count()!=0){
-            when((view[2] as ViewGroup)[0]){
+        if(view.outputPlaceForDrop.children.count()!=0){
+            when(view.outputPlaceForDrop[0]){
                 is WhileBtn-> {
                     tree.parent?.add(TreeNode("while"))
-                    workWithWhile(tree.parent?.children?.last()!!, (view[2] as ViewGroup)[0] as WhileBtn)
+                    workWithWhile(tree.parent?.children?.last()!!, view.outputPlaceForDrop[0] as WhileBtn)
                 }
                 is OutputBtn->{
                     tree.parent?.add(TreeNode("print"))
-                    workWithPrint(tree.parent?.children?.last()!!, (view[2] as ViewGroup)[0] as OutputBtn)
+                    workWithPrint(tree.parent?.children?.last()!!, view.outputPlaceForDrop[0] as OutputBtn)
                 }
                 is VariableBtn->{
                     tree.parent?.add(TreeNode("assign"))
-                    workWithVarAssignment(tree.parent?.children?.last()!!, (view[2] as ViewGroup)[0] as VariableBtn)
+                    workWithVarAssignment(tree.parent?.children?.last()!!, view.outputPlaceForDrop[0] as VariableBtn)
                 }
             }
         }
@@ -87,20 +91,20 @@ class StartProgram(context: Context, start: StartBtn) {
 
     private fun workWithVarAssignment(tree: TreeNode<String>, view: VariableBtn){
 
-        if((view[1] as ViewGroup).children.count()!=0){
+        if(view.varPlaceForDrop.children.count()!=0){
 
-            when((view[1] as ViewGroup)[0]){
+            when(view.varPlaceForDrop[0]){
                 is WhileBtn-> {
                     tree.parent?.add(TreeNode("while"))
-                    workWithWhile(tree.parent?.children?.last()!!, (view[1] as ViewGroup)[0] as WhileBtn)
+                    workWithWhile(tree.parent?.children?.last()!!, view.varPlaceForDrop[0] as WhileBtn)
                 }
                 is OutputBtn->{
                     tree.parent?.add(TreeNode("print"))
-                    workWithPrint(tree.parent?.children?.last()!!, (view[1] as ViewGroup)[0] as OutputBtn)
+                    workWithPrint(tree.parent?.children?.last()!!, view.varPlaceForDrop[0] as OutputBtn)
                 }
                 is VariableBtn->{
                     tree.parent?.add(TreeNode("assign"))
-                    workWithVarAssignment(tree.parent?.children?.last()!!, (view[1] as ViewGroup)[0] as VariableBtn)
+                    workWithVarAssignment(tree.parent?.children?.last()!!, view.varPlaceForDrop[0] as VariableBtn)
                 }
             }
         }
@@ -108,19 +112,19 @@ class StartProgram(context: Context, start: StartBtn) {
 
     private fun fillTree(start: StartBtn) {
 
-        if((start[2] as ViewGroup).children.count() != 0){
-            when((start[2] as ViewGroup)[0]){
+        if(start.startPlaceForDrop.children.count() != 0){
+            when(start.startPlaceForDrop[0]){
                 is WhileBtn-> {
                     myTree.add(TreeNode("while"))
-                    workWithWhile(myTree.children.last(), (start[2] as ViewGroup)[0] as WhileBtn)
+                    workWithWhile(myTree.children.last(), start.startPlaceForDrop[0] as WhileBtn)
                 }
                 is OutputBtn->{
                     myTree.add(TreeNode("print"))
-                    workWithPrint(myTree.children.last(), (start[2] as ViewGroup)[0] as OutputBtn)
+                    workWithPrint(myTree.children.last(), start.startPlaceForDrop[0] as OutputBtn)
                 }
                 is VariableBtn->{
                     myTree.add(TreeNode("assign"))
-                    workWithVarAssignment(myTree.children.last(), (start[2] as ViewGroup)[0] as VariableBtn)
+                    workWithVarAssignment(myTree.children.last(), start.startPlaceForDrop[0] as VariableBtn)
                 }
             }
         }

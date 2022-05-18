@@ -12,14 +12,14 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.get
 import com.example.myapplication.checkForChildren
 import com.example.myapplication.checkForLink
-import com.example.myapplication.databinding.VariableBlockBinding
+import com.example.myapplication.databinding.CreateVarBinding
 
-class VariableBtn @JvmOverloads constructor(
+class CreateVarBtn @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-):ConstraintLayout(context, attrs, defStyleAttr){
-    private var binding = VariableBlockBinding.inflate(LayoutInflater.from(context), this)
+): ConstraintLayout(context, attrs, defStyleAttr){
+    private var binding = CreateVarBinding.inflate(LayoutInflater.from(context), this)
 
     private val dragAndDropListener = OnDragListener{ view, event ->
         val dragBlock = event.localState as View
@@ -123,7 +123,7 @@ class VariableBtn @JvmOverloads constructor(
 
     init {
         binding.root.setOnLongClickListener{
-            binding.varPlaceForDrop.setOnDragListener { _, _ -> false }
+            binding.createVarPlaceForDrop.setOnDragListener { _, _ -> false }
             val textOnBoard = ""
             val item = ClipData.Item(textOnBoard)
             val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
@@ -131,13 +131,13 @@ class VariableBtn @JvmOverloads constructor(
 
             val dragAndDropBuilder = DragShadowBuilder(it)
             it.startDragAndDrop(data, dragAndDropBuilder, it, 0)
+
             true
         }
 
     }
 
     fun onSet(){
-        binding.varPlaceForDrop.setOnDragListener(dragAndDropListener)
+        binding.createVarPlaceForDrop.setOnDragListener(dragAndDropListener)
     }
-
 }

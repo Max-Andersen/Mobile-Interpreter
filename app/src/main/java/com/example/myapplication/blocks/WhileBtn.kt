@@ -11,6 +11,8 @@ import android.view.View.OnDragListener
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.get
+import com.example.myapplication.checkForChildren
+import com.example.myapplication.checkForLink
 import com.example.myapplication.databinding.WhileBlockBinding
 
 class WhileBtn @JvmOverloads constructor(
@@ -33,8 +35,9 @@ class WhileBtn @JvmOverloads constructor(
             }
 
             DragEvent.ACTION_DRAG_ENTERED -> {
+                if(checkForLink(destination, dragBlock) && checkForChildren(destination))
+                    destination.setBackgroundColor(Color.GRAY)
                 view.invalidate()
-                destination.setBackgroundColor(Color.GRAY)
                 true
             }
 
@@ -50,63 +53,64 @@ class WhileBtn @JvmOverloads constructor(
 
             DragEvent.ACTION_DROP -> {
 
-                //---------------------------------
-                //---------------------------------
-                //УВЕЛИЧЕНИЕ ПОЛОСКИ ВЛОЖЕННОСТИ!!!
+                //-------------------------------------------
+                //ПРОВЕРКА: НЕ ЛЕЖИТ ЛИ destination под owner
 
-                var x = destination.parent as View
+                if(checkForLink(destination, dragBlock) && checkForChildren(destination)) {
 
-                while(true){
-                    if(x is WhileBtn){
-                        x[4].layoutParams.height += dragBlock.height-x[0].layoutParams.height/2
-                        x = x.parent.parent as View
-                    }
-                    else if(x is VariableBtn || x is OutputBtn || x is StartBtn){
+                    //---------------------------------
+                    //УВЕЛИЧЕНИЕ ПОЛОСКИ ВЛОЖЕННОСТИ!!!
+
+                    var x = destination.parent as View
+
+                    while (true) {
+                        if (x is WhileBtn) {
+                            x[4].layoutParams.height += dragBlock.height - x[0].layoutParams.height / 2
                             x = x.parent.parent as View
+                        } else if (x is VariableBtn || x is OutputBtn || x is StartBtn) {
+                            x = x.parent.parent as View
+                        } else {
+                            break
+                        }
                     }
-                    else{
-                        break
+
+                    //---------------------------------
+                    //УМЕНЬШЕНИЕ ПОЛОСКИ ВЛОЖЕННОСТИ!!!
+
+                    x = owner.parent as View
+
+                    while (true) {
+                        if (x is WhileBtn) {
+                            x[4].layoutParams.height -= dragBlock.height - x[0].layoutParams.height / 2
+                            x = x.parent.parent as View
+                        } else if (x is VariableBtn || x is OutputBtn || x is StartBtn) {
+                            x = x.parent.parent as View
+                        } else {
+                            break
+                        }
                     }
+
+                    //---------------------------------------------
+                    //подтягиваем drag block ровно в place for drop
+                    dragBlock.x = (destination.rootView as ViewGroup)[0].x
+                    dragBlock.y = (destination.rootView as ViewGroup)[0].y
+
+                    //-------------------------
+                    //устанавливаем новые связи
+                    owner.removeView(dragBlock)
+                    destination.addView(dragBlock)
                 }
 
-                //---------------------------------
-                //---------------------------------
-                //УМЕНЬШЕНИЕ ПОЛОСКИ ВЛОЖЕННОСТИ!!!
 
-                x = owner.parent as View
-
-                while(true){
-                    if(x is WhileBtn){
-                        x[4].layoutParams.height -= dragBlock.height-x[0].layoutParams.height/2
-                        x = x.parent.parent as View
-                    }
-                    else if(x is VariableBtn || x is OutputBtn || x is StartBtn){
-                        x = x.parent.parent as View
-                    }
-                    else{
-                        break
-                    }
-                }
-
-                //Toast.makeText(context, "упал на вайл", Toast.LENGTH_SHORT).show()
-
-                //---------------------------------------------
-                //подтягиваем drag block ровно в place for drop
-                dragBlock.x = (destination.rootView as ViewGroup)[0].x
-                dragBlock.y = (destination.rootView as ViewGroup)[0].y
-
-                //-------------------------
-                //устанавливаем новые связи
-                owner.removeView(dragBlock)
-                destination.addView(dragBlock)
                 destination.setBackgroundColor(Color.TRANSPARENT)
 
                 (event.localState as? StartBtn)?.onSet()
                 (event.localState as? WhileBtn)?.onSet()
                 (event.localState as? VariableBtn)?.onSet()
                 (event.localState as? OutputBtn)?.onSet()
-                view.invalidate()
+                (event.localState as? CreateVarBtn)?.onSet()
 
+                view.invalidate()
                 true
             }
 

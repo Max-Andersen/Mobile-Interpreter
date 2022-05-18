@@ -25,9 +25,13 @@ class MainActivity : AppCompatActivity() {
         val outputBlock = OutputBtn(this)
         outputBlock.y += 950
 
+        val createVarBlock = CreateVarBtn(this)
+        createVarBlock.y += 1200
+
         blockscreen.addView(whileBlock)
         blockscreen.addView(outputBlock)
         blockscreen.addView(variable1)
+        blockscreen.addView(createVarBlock)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +53,9 @@ class MainActivity : AppCompatActivity() {
             blockInit()
             blockAndVariable.visibility = View.VISIBLE
             plus1.visibility = View.GONE
+            zoomLayout.visibility = View.GONE
+            consoleBtn.visibility = View.GONE
+            CreateConsole.visibility = View.GONE
         }
 
         closeBlockScreen.setOnClickListener{
@@ -58,9 +65,10 @@ class MainActivity : AppCompatActivity() {
                     child.visibility = View.VISIBLE
                 }
             }
-            CreateConsole.visibility = View.GONE
             blockAndVariable.visibility = View.GONE
             plus1.visibility = View.VISIBLE
+            zoomLayout.visibility = View.VISIBLE
+            consoleBtn.visibility = View.VISIBLE
         }
 
         blockbtn.setOnClickListener{
@@ -85,7 +93,9 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             CreateConsole.visibility = View.VISIBLE
-            blockAndVariable.visibility = View.GONE
+            consoleBtn.visibility = View.GONE
+            plus1.visibility = View.GONE
+            zoomLayout.visibility = View.GONE
         }
 
         consoleCloseBtn.setOnClickListener{
@@ -96,7 +106,9 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             CreateConsole.visibility = View.GONE
-            blockAndVariable.visibility = View.GONE
+            consoleBtn.visibility = View.VISIBLE
+            plus1.visibility = View.VISIBLE
+            zoomLayout.visibility = View.VISIBLE
         }
 
 
@@ -198,9 +210,11 @@ class MainActivity : AppCompatActivity() {
                         child.visibility = View.VISIBLE
                     }
                 }
+                zoomLayout.visibility = View.VISIBLE
                 CreateConsole.visibility = View.GONE
                 blockAndVariable.visibility = View.GONE
                 plus1.visibility = View.VISIBLE
+                consoleBtn.visibility = View.VISIBLE
                 true
             }
 
@@ -253,6 +267,7 @@ class MainActivity : AppCompatActivity() {
                 (event.localState as? WhileBtn)?.onSet()
                 (event.localState as? VariableBtn)?.onSet()
                 (event.localState as? OutputBtn)?.onSet()
+                (event.localState as? CreateVarBtn)?.onSet()
 
                 true
             }

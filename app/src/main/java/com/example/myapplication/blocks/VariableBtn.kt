@@ -106,6 +106,7 @@ class VariableBtn @JvmOverloads constructor(
                 (event.localState as? WhileBtn)?.onSet()
                 (event.localState as? VariableBtn)?.onSet()
                 (event.localState as? OutputBtn)?.onSet()
+                (event.localState as? CreateVarBtn)?.onSet()
 
                 view.invalidate()
                 true

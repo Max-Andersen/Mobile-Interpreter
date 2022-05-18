@@ -13,6 +13,7 @@ import androidx.core.view.get
 import com.example.myapplication.checkForChildren
 import com.example.myapplication.checkForLink
 import com.example.myapplication.databinding.OutputBlockBinding
+import com.example.myapplication.dragAndDropListenerOther
 
 class OutputBtn @JvmOverloads constructor(
     context: Context,
@@ -106,6 +107,7 @@ class OutputBtn @JvmOverloads constructor(
                 (event.localState as? WhileBtn)?.onSet()
                 (event.localState as? VariableBtn)?.onSet()
                 (event.localState as? OutputBtn)?.onSet()
+                (event.localState as? CreateVarBtn)?.onSet()
 
                 view.invalidate()
                 true
@@ -123,6 +125,7 @@ class OutputBtn @JvmOverloads constructor(
     init {
         binding.root.setOnLongClickListener{
             binding.outputPlaceForDrop.setOnDragListener { _, _ -> false }
+            binding.outputInput.setOnDragListener { _, _ -> false }
             val textOnBoard = ""
             val item = ClipData.Item(textOnBoard)
             val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
@@ -138,5 +141,6 @@ class OutputBtn @JvmOverloads constructor(
 
     fun onSet(){
         binding.outputPlaceForDrop.setOnDragListener(dragAndDropListener)
+        binding.outputInput.setOnDragListener(dragAndDropListenerOther)
     }
 }

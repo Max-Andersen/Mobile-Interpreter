@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/createVar"
+    android:layout_width="300dp"
+    android:layout_height="105dp"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+
+    <View
+        android:id="@+id/createVarBeginView"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
+        android:background="#FFC107"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/createVarPlaceForDrop"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:minWidth="300dp"
+        app:layout_constraintStart_toStartOf="@id/createVarBeginView"
+        app:layout_constraintTop_toBottomOf="@+id/createVarBeginView">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="50dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="10dp"
+        android:text="new"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/createVarBeginView"
+        app:layout_constraintStart_toStartOf="@+id/createVarBeginView"
+        app:layout_constraintTop_toTopOf="@+id/createVarBeginView" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:hint="type"
+        app:layout_constraintBottom_toBottomOf="@+id/createVarBeginView"
+        app:layout_constraintStart_toEndOf="@+id/textView7"
+        app:layout_constraintTop_toTopOf="@+id/createVarBeginView">
+
+        <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <EditText
+        android:id="@+id/createVarName"
+        android:layout_width="100dp"
+        android:layout_height="36dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/createVarBeginView"
+        app:layout_constraintEnd_toEndOf="@+id/createVarBeginView"
+        app:layout_constraintTop_toTopOf="@+id/createVarBeginView" />
+
+
+</merge>

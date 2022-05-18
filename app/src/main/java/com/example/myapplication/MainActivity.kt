@@ -25,9 +25,13 @@ class MainActivity : AppCompatActivity() {
         val outputBlock = OutputBtn(this)
         outputBlock.y += 950
 
+        val createVarBlock = CreateVarBtn(this)
+        createVarBlock.y += 1200
+
         blockscreen.addView(whileBlock)
         blockscreen.addView(outputBlock)
         blockscreen.addView(variable1)
+        blockscreen.addView(createVarBlock)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -269,6 +273,7 @@ class MainActivity : AppCompatActivity() {
                 (event.localState as? WhileBtn)?.onSet()
                 (event.localState as? VariableBtn)?.onSet()
                 (event.localState as? OutputBtn)?.onSet()
+                (event.localState as? CreateVarBtn)?.onSet()
 
                 true
             }

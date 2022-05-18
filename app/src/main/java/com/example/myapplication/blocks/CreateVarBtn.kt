@@ -12,16 +12,16 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.get
 import com.example.myapplication.checkForChildren
 import com.example.myapplication.checkForLink
-import com.example.myapplication.databinding.OutputBlockBinding
+import com.example.myapplication.databinding.CreateVarBinding
 import com.example.myapplication.decreaseLineHeight
 import com.example.myapplication.increaseLineHeight
 
-class OutputBtn @JvmOverloads constructor(
+class CreateVarBtn @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ): ConstraintLayout(context, attrs, defStyleAttr){
-    private var binding = OutputBlockBinding.inflate(LayoutInflater.from(context), this)
+    private var binding = CreateVarBinding.inflate(LayoutInflater.from(context), this)
 
     private val dragAndDropListener = OnDragListener{ view, event ->
         val dragBlock = event.localState as View
@@ -94,7 +94,7 @@ class OutputBtn @JvmOverloads constructor(
 
     init {
         binding.root.setOnLongClickListener{
-            binding.outputPlaceForDrop.setOnDragListener { _, _ -> false }
+            binding.createVarPlaceForDrop.setOnDragListener { _, _ -> false }
             val textOnBoard = ""
             val item = ClipData.Item(textOnBoard)
             val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
@@ -109,6 +109,6 @@ class OutputBtn @JvmOverloads constructor(
     }
 
     fun onSet(){
-        binding.outputPlaceForDrop.setOnDragListener(dragAndDropListener)
+        binding.createVarPlaceForDrop.setOnDragListener(dragAndDropListener)
     }
 }

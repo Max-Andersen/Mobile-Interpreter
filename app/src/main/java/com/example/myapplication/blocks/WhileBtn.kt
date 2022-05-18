@@ -14,6 +14,8 @@ import androidx.core.view.get
 import com.example.myapplication.checkForChildren
 import com.example.myapplication.checkForLink
 import com.example.myapplication.databinding.WhileBlockBinding
+import com.example.myapplication.decreaseLineHeight
+import com.example.myapplication.increaseLineHeight
 
 class WhileBtn @JvmOverloads constructor(
     context: Context,
@@ -53,42 +55,11 @@ class WhileBtn @JvmOverloads constructor(
 
             DragEvent.ACTION_DROP -> {
 
-                //-------------------------------------------
-                //ПРОВЕРКА: НЕ ЛЕЖИТ ЛИ destination под owner
-
                 if(checkForLink(destination, dragBlock) && checkForChildren(destination)) {
 
-                    //---------------------------------
-                    //УВЕЛИЧЕНИЕ ПОЛОСКИ ВЛОЖЕННОСТИ!!!
+                    increaseLineHeight(destination, dragBlock)
 
-                    var x = destination.parent as View
-
-                    while (true) {
-                        if (x is WhileBtn) {
-                            x[4].layoutParams.height += dragBlock.height - x[0].layoutParams.height / 2
-                            x = x.parent.parent as View
-                        } else if (x is VariableBtn || x is OutputBtn || x is StartBtn) {
-                            x = x.parent.parent as View
-                        } else {
-                            break
-                        }
-                    }
-
-                    //---------------------------------
-                    //УМЕНЬШЕНИЕ ПОЛОСКИ ВЛОЖЕННОСТИ!!!
-
-                    x = owner.parent as View
-
-                    while (true) {
-                        if (x is WhileBtn) {
-                            x[4].layoutParams.height -= dragBlock.height - x[0].layoutParams.height / 2
-                            x = x.parent.parent as View
-                        } else if (x is VariableBtn || x is OutputBtn || x is StartBtn) {
-                            x = x.parent.parent as View
-                        } else {
-                            break
-                        }
-                    }
+                    decreaseLineHeight(owner, dragBlock)
 
                     //---------------------------------------------
                     //подтягиваем drag block ровно в place for drop
@@ -108,6 +79,7 @@ class WhileBtn @JvmOverloads constructor(
                 (event.localState as? WhileBtn)?.onSet()
                 (event.localState as? VariableBtn)?.onSet()
                 (event.localState as? OutputBtn)?.onSet()
+                (event.localState as? CreateVarBtn)?.onSet()
 
                 view.invalidate()
                 true
@@ -121,7 +93,6 @@ class WhileBtn @JvmOverloads constructor(
             else -> {false}
         }
     }
-
 
     init {
         binding.root.setOnLongClickListener{

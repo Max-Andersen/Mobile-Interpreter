@@ -34,7 +34,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         //-------------------------------------------------------------------------------------
         //-------------------------------------------------------------------------------------
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~СЛУШАТЕЛИ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -48,7 +47,11 @@ class MainActivity : AppCompatActivity() {
             }
             blockInit()
             blockAndVariable.visibility = View.VISIBLE
+            closeBlockScreen.visibility = View.VISIBLE
             plus1.visibility = View.GONE
+            consoleBtn.visibility = View.GONE
+            zoomLayout.setVerticalPanEnabled(false)
+            zoomLayout.setHorizontalPanEnabled(false)
         }
 
         closeBlockScreen.setOnClickListener{
@@ -58,9 +61,12 @@ class MainActivity : AppCompatActivity() {
                     child.visibility = View.VISIBLE
                 }
             }
-            CreateConsole.visibility = View.GONE
             blockAndVariable.visibility = View.GONE
+            closeBlockScreen.visibility = View.GONE
+            consoleBtn.visibility = View.VISIBLE
             plus1.visibility = View.VISIBLE
+            zoomLayout.setVerticalPanEnabled(true)
+            zoomLayout.setHorizontalPanEnabled(true)
         }
 
         blockbtn.setOnClickListener{
@@ -85,7 +91,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             CreateConsole.visibility = View.VISIBLE
-            blockAndVariable.visibility = View.GONE
+            consoleCloseBtn.visibility = View.VISIBLE
+            plus1.visibility = View.GONE
+            consoleBtn.visibility = View.GONE
+            zoomLayout.setVerticalPanEnabled(false)
+            zoomLayout.setHorizontalPanEnabled(false)
         }
 
         consoleCloseBtn.setOnClickListener{
@@ -96,7 +106,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             CreateConsole.visibility = View.GONE
-            blockAndVariable.visibility = View.GONE
+            consoleCloseBtn.visibility = View.GONE
+            plus1.visibility = View.VISIBLE
+            consoleBtn.visibility = View.VISIBLE
+            zoomLayout.setVerticalPanEnabled(true)
+            zoomLayout.setHorizontalPanEnabled(true)
         }
 
 
@@ -201,6 +215,8 @@ class MainActivity : AppCompatActivity() {
                 CreateConsole.visibility = View.GONE
                 blockAndVariable.visibility = View.GONE
                 plus1.visibility = View.VISIBLE
+                zoomLayout.setVerticalPanEnabled(true)
+                zoomLayout.setHorizontalPanEnabled(true)
                 true
             }
 

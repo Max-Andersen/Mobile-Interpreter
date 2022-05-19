@@ -11,6 +11,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.children
 import androidx.core.view.get
 import com.example.myapplication.blocks.*
+import com.example.myapplication.databinding.IfBlockBinding
+import com.example.myapplication.databinding.IfElseBlockBinding
 import com.otaliastudios.zoom.ZoomLayout
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
@@ -69,16 +71,33 @@ fun mainActivityDandD(zoomLayout: ZoomLayout, CreateConsole: LinearLayout, block
                 //УМЕНЬШЕНИЕ ПОЛОСКИ ВЛОЖЕННОСТИ!!!
 
                 var x = owner.parent as View
+                var oldX = owner as ConstraintLayout
 
-                while(true){
-                    if(x is WhileBtn){
-                        x[4].layoutParams.height -= v.height-x[0].layoutParams.height/2
+                while (true) {
+                    if (x is WhileBtn) {
+                        x[4].layoutParams.height -= v.height - x[0].layoutParams.height / 2
+                        oldX = oldX.parent.parent as ConstraintLayout
                         x = x.parent.parent as View
                     }
-                    else if(x is VariableBtn || x is OutputBtn || x is StartBtn){
+                    else if(x is IfBtn)
+                    {
+                        x[4].layoutParams.height -= v.height - x[0].layoutParams.height / 2
+                        oldX = oldX.parent.parent as ConstraintLayout
                         x = x.parent.parent as View
                     }
-                    else{
+                    else if(x is IfElseBtn)
+                    {
+                        if(oldX == x[2] as ConstraintLayout)
+                            x[5].layoutParams.height -= v.height - x[0].layoutParams.height / 2
+                        else
+                            x[7].layoutParams.height -= v.height - x[0].layoutParams.height / 2
+                        oldX = oldX.parent.parent as ConstraintLayout
+                        x = x.parent.parent as View
+                    }
+                    else if (x is VariableBtn || x is OutputBtn || x is StartBtn || x is CreateVarBtn) {
+                        oldX = oldX.parent.parent as ConstraintLayout
+                        x = x.parent.parent as View
+                    } else {
                         break
                     }
                 }
@@ -89,6 +108,8 @@ fun mainActivityDandD(zoomLayout: ZoomLayout, CreateConsole: LinearLayout, block
                 (event.localState as? VariableBtn)?.onSet()
                 (event.localState as? OutputBtn)?.onSet()
                 (event.localState as? CreateVarBtn)?.onSet()
+                (event.localState as? IfBtn)?.onSet()
+                (event.localState as? IfElseBtn)?.onSet()
 
                 true
             }

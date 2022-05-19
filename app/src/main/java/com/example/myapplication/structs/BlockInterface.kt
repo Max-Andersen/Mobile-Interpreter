@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.view.DragEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.children
 import androidx.core.view.get
@@ -67,6 +68,8 @@ interface BlockInterface {
                     (event.localState as? VariableBtn)?.onSet()
                     (event.localState as? OutputBtn)?.onSet()
                     (event.localState as? CreateVarBtn)?.onSet()
+                    (event.localState as? IfBtn)?.onSet()
+                    (event.localState as? IfElseBtn)?.onSet()
 
                     view.invalidate()
                     true
@@ -93,7 +96,9 @@ interface BlockInterface {
         //println(dragBlock)
 
         while(true){
-            if(checkView is WhileBtn || checkView is VariableBtn || checkView is OutputBtn || checkView is StartBtn || checkView is CreateVarBtn){
+            if(checkView is WhileBtn || checkView is VariableBtn || checkView is OutputBtn
+                || checkView is StartBtn || checkView is CreateVarBtn || checkView is IfBtn
+                || checkView is IfElseBtn){
                 if(checkView == dragBlock){
                     flag = false
                     break
@@ -121,12 +126,31 @@ interface BlockInterface {
         //УВЕЛИЧЕНИЕ ПОЛОСКИ ВЛОЖЕННОСТИ!!!
 
         var x = destination.parent as View
+        var oldX = destination
 
         while (true) {
             if (x is WhileBtn) {
                 x[4].layoutParams.height += dragBlock.height - x[0].layoutParams.height / 2
+                oldX = oldX.parent.parent as ConstraintLayout
                 x = x.parent.parent as View
-            } else if (x is VariableBtn || x is OutputBtn || x is StartBtn || x is CreateVarBtn) {
+            }
+            else if(x is IfBtn)
+            {
+                x[4].layoutParams.height += dragBlock.height - x[0].layoutParams.height / 2
+                oldX = oldX.parent.parent as ConstraintLayout
+                x = x.parent.parent as View
+            }
+            else if(x is IfElseBtn)
+            {
+                if(oldX == x[2] as ConstraintLayout)
+                    x[5].layoutParams.height += dragBlock.height - x[0].layoutParams.height / 2
+                else
+                    x[7].layoutParams.height += dragBlock.height - x[0].layoutParams.height / 2
+                oldX = oldX.parent.parent as ConstraintLayout
+                x = x.parent.parent as View
+            }
+            else if (x is VariableBtn || x is OutputBtn || x is StartBtn || x is CreateVarBtn) {
+                oldX = oldX.parent.parent as ConstraintLayout
                 x = x.parent.parent as View
             } else {
                 break
@@ -141,12 +165,31 @@ interface BlockInterface {
         //УМЕНЬШЕНИЕ ПОЛОСКИ ВЛОЖЕННОСТИ!!!
 
         var x = owner.parent as View
+        var oldX = owner as ConstraintLayout
 
         while (true) {
             if (x is WhileBtn) {
                 x[4].layoutParams.height -= dragBlock.height - x[0].layoutParams.height / 2
+                oldX = oldX.parent.parent as ConstraintLayout
                 x = x.parent.parent as View
-            } else if (x is VariableBtn || x is OutputBtn || x is StartBtn || x is CreateVarBtn) {
+            }
+            else if(x is IfBtn)
+            {
+                x[4].layoutParams.height -= dragBlock.height - x[0].layoutParams.height / 2
+                oldX = oldX.parent.parent as ConstraintLayout
+                x = x.parent.parent as View
+            }
+            else if(x is IfElseBtn)
+            {
+                if(oldX == x[2] as ConstraintLayout)
+                    x[5].layoutParams.height -= dragBlock.height - x[0].layoutParams.height / 2
+                else
+                    x[7].layoutParams.height -= dragBlock.height - x[0].layoutParams.height / 2
+                oldX = oldX.parent.parent as ConstraintLayout
+                x = x.parent.parent as View
+            }
+            else if (x is VariableBtn || x is OutputBtn || x is StartBtn || x is CreateVarBtn) {
+                oldX = oldX.parent.parent as ConstraintLayout
                 x = x.parent.parent as View
             } else {
                 break

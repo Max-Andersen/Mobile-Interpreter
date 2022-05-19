@@ -29,10 +29,18 @@ class MainActivity : AppCompatActivity() {
         val whileBlock = WhileBtn(this)
         whileBlock.y += 1200
 
+        val ifBlock = IfBtn(this)
+        ifBlock.y += 1575
+
+        val ifElseBlock = IfElseBtn(this)
+        ifElseBlock.y += 1950
+
         blockscreen.addView(createVarBlock)
         blockscreen.addView(variable1)
         blockscreen.addView(outputBlock)
         blockscreen.addView(whileBlock)
+        blockscreen.addView(ifBlock)
+        blockscreen.addView(ifElseBlock)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -198,7 +206,7 @@ class MainActivity : AppCompatActivity() {
         //ЗАПУСК!!!!!!!!!!!!!ИУУУУУУУУУУУУ!!!!!!!!
         imageButton4.setOnClickListener {
 
-            //printNodes(start)
+            printNodes(start)
 
             val program = StartProgram(this, start)
             program.main()
@@ -224,6 +232,35 @@ class MainActivity : AppCompatActivity() {
                 {
                     println("parent: PFD ${node}\n child: ${(node[5] as ViewGroup)[0]}")
                     printNodes((node[5] as ViewGroup)[0])
+                }
+            }
+            is IfBtn -> {
+                if ((node[2] as ViewGroup).children.count() != 0)
+                {
+                    println("parent: INSIDE ${node}\n child: ${(node[2] as ViewGroup)[0]}")
+                    printNodes((node[2] as ViewGroup)[0])
+                }
+                if ((node[5] as ViewGroup).children.count() != 0)
+                {
+                    println("parent: PFD ${node}\n child: ${(node[5] as ViewGroup)[0]}")
+                    printNodes((node[5] as ViewGroup)[0])
+                }
+            }
+            is IfElseBtn -> {
+                if ((node[2] as ViewGroup).children.count() != 0)
+                {
+                    println("parent: INSIDE ${node}\n child: ${(node[2] as ViewGroup)[0]}")
+                    printNodes((node[2] as ViewGroup)[0])
+                }
+                if ((node[3] as ViewGroup).children.count() != 0)
+                {
+                    println("parent: INSIDE ${node}\n child: ${(node[3] as ViewGroup)[0]}")
+                    printNodes((node[3] as ViewGroup)[0])
+                }
+                if ((node[10] as ViewGroup).children.count() != 0)
+                {
+                    println("parent: PFD ${node}\n child: ${(node[10] as ViewGroup)[0]}")
+                    printNodes((node[10] as ViewGroup)[0])
                 }
             }
             is OutputBtn -> {

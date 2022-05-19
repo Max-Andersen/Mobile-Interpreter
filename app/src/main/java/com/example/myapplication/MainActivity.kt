@@ -16,8 +16,9 @@ import kotlinx.android.synthetic.main.activity_main.view.*
 class MainActivity : AppCompatActivity() {
 
     private fun blockInit(){
-        val whileBlock = WhileBtn(this)
-        whileBlock.y += 450
+
+        val createVarBlock = CreateVarBtn(this)
+        createVarBlock.y += 450
 
         val variable1 = VariableBtn(this)
         variable1.y += 700
@@ -25,13 +26,13 @@ class MainActivity : AppCompatActivity() {
         val outputBlock = OutputBtn(this)
         outputBlock.y += 950
 
-        val createVarBlock = CreateVarBtn(this)
-        createVarBlock.y += 1200
+        val whileBlock = WhileBtn(this)
+        whileBlock.y += 1200
 
-        blockscreen.addView(whileBlock)
-        blockscreen.addView(outputBlock)
-        blockscreen.addView(variable1)
         blockscreen.addView(createVarBlock)
+        blockscreen.addView(variable1)
+        blockscreen.addView(outputBlock)
+        blockscreen.addView(whileBlock)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -198,6 +199,13 @@ class MainActivity : AppCompatActivity() {
                 {
                     println("parent: ${node}\n child: ${(node[2] as ViewGroup)[0]}")
                     printNodes((node[2] as ViewGroup)[0])
+                }
+            }
+            is CreateVarBtn -> {
+                if ((node[1] as ViewGroup).children.count() != 0)
+                {
+                    println("parent: ${node}\n child: ${(node[1] as ViewGroup)[0]}")
+                    printNodes((node[1] as ViewGroup)[1])
                 }
             }
         }

@@ -44,6 +44,10 @@ class StartProgram(context: Context, start: StartBtn) {
                     tree.add(TreeNode("assign"))
                     workWithVarAssignment(tree.children.last(), (view[2] as ViewGroup)[0] as VariableBtn)
                 }
+                is CreateVarBtn->{
+                    tree.add(TreeNode("new"))
+                    workWithNewVar(tree.children.last(), (view[2] as ViewGroup)[0] as CreateVarBtn)
+                }
             }
         }
         if((view[5] as ViewGroup).children.count()!=0){
@@ -60,6 +64,10 @@ class StartProgram(context: Context, start: StartBtn) {
                 is VariableBtn->{
                     tree.parent?.add(TreeNode("assign"))
                     workWithVarAssignment(tree.parent?.children?.last()!!, (view[5] as ViewGroup)[0] as VariableBtn)
+                }
+                is CreateVarBtn->{
+                    tree.parent?.add(TreeNode("new"))
+                    workWithNewVar(tree.parent?.children?.last()!!, (view[5] as ViewGroup)[0] as CreateVarBtn)
                 }
             }
         }
@@ -80,6 +88,10 @@ class StartProgram(context: Context, start: StartBtn) {
                 is VariableBtn->{
                     tree.parent?.add(TreeNode("assign"))
                     workWithVarAssignment(tree.parent?.children?.last()!!, (view[2] as ViewGroup)[0] as VariableBtn)
+                }
+                is CreateVarBtn->{
+                    tree.parent?.add(TreeNode("new"))
+                    workWithNewVar(tree.parent?.children?.last()!!, (view[2] as ViewGroup)[0] as CreateVarBtn)
                 }
             }
         }
@@ -102,6 +114,35 @@ class StartProgram(context: Context, start: StartBtn) {
                     tree.parent?.add(TreeNode("assign"))
                     workWithVarAssignment(tree.parent?.children?.last()!!, (view[1] as ViewGroup)[0] as VariableBtn)
                 }
+                is CreateVarBtn->{
+                    tree.parent?.add(TreeNode("new"))
+                    workWithNewVar(tree.parent?.children?.last()!!, (view[1] as ViewGroup)[0] as CreateVarBtn)
+                }
+            }
+        }
+    }
+
+    private fun workWithNewVar(tree: TreeNode<String>, view: CreateVarBtn){
+
+        if((view[1] as ViewGroup).children.count()!=0){
+
+            when((view[1] as ViewGroup)[0]){
+                is WhileBtn-> {
+                    tree.parent?.add(TreeNode("while"))
+                    workWithWhile(tree.parent?.children?.last()!!, (view[1] as ViewGroup)[0] as WhileBtn)
+                }
+                is OutputBtn->{
+                    tree.parent?.add(TreeNode("print"))
+                    workWithPrint(tree.parent?.children?.last()!!, (view[1] as ViewGroup)[0] as OutputBtn)
+                }
+                is VariableBtn->{
+                    tree.parent?.add(TreeNode("assign"))
+                    workWithVarAssignment(tree.parent?.children?.last()!!, (view[1] as ViewGroup)[0] as VariableBtn)
+                }
+                is CreateVarBtn->{
+                    tree.parent?.add(TreeNode("new"))
+                    workWithNewVar(tree.parent?.children?.last()!!, (view[1] as ViewGroup)[0] as CreateVarBtn)
+                }
             }
         }
     }
@@ -121,6 +162,10 @@ class StartProgram(context: Context, start: StartBtn) {
                 is VariableBtn->{
                     myTree.add(TreeNode("assign"))
                     workWithVarAssignment(myTree.children.last(), (start[2] as ViewGroup)[0] as VariableBtn)
+                }
+                is CreateVarBtn->{
+                    myTree.add(TreeNode("new"))
+                    workWithNewVar(myTree.children.last(), (start[2] as ViewGroup)[0] as CreateVarBtn)
                 }
             }
         }

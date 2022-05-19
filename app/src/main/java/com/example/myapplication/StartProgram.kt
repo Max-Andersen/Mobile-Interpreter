@@ -44,6 +44,10 @@ class StartProgram(context: Context, start: StartBtn) {
                     tree.add(TreeNode("assign"))
                     workWithVarAssignment(tree.children.last(), (view[2] as ViewGroup)[0] as VariableBtn)
                 }
+                is CreateVarBtn->{
+                    tree.add(TreeNode("new"))
+                    workWithNewVar(tree.children.last(), (view[2] as ViewGroup)[0] as CreateVarBtn)
+                }
             }
         }
         if((view[5] as ViewGroup).children.count()!=0){
@@ -60,6 +64,10 @@ class StartProgram(context: Context, start: StartBtn) {
                 is VariableBtn->{
                     tree.parent?.add(TreeNode("assign"))
                     workWithVarAssignment(tree.parent?.children?.last()!!, (view[5] as ViewGroup)[0] as VariableBtn)
+                }
+                is CreateVarBtn->{
+                    tree.parent?.add(TreeNode("new"))
+                    workWithNewVar(tree.parent?.children?.last()!!, (view[5] as ViewGroup)[0] as CreateVarBtn)
                 }
             }
         }
@@ -80,6 +88,10 @@ class StartProgram(context: Context, start: StartBtn) {
                 is VariableBtn->{
                     tree.parent?.add(TreeNode("assign"))
                     workWithVarAssignment(tree.parent?.children?.last()!!, (view[2] as ViewGroup)[0] as VariableBtn)
+                }
+                is CreateVarBtn->{
+                    tree.parent?.add(TreeNode("new"))
+                    workWithNewVar(tree.parent?.children?.last()!!, (view[2] as ViewGroup)[0] as CreateVarBtn)
                 }
             }
         }
@@ -102,6 +114,35 @@ class StartProgram(context: Context, start: StartBtn) {
                     tree.parent?.add(TreeNode("assign"))
                     workWithVarAssignment(tree.parent?.children?.last()!!, (view[1] as ViewGroup)[0] as VariableBtn)
                 }
+                is CreateVarBtn->{
+                    tree.parent?.add(TreeNode("new"))
+                    workWithNewVar(tree.parent?.children?.last()!!, (view[1] as ViewGroup)[0] as CreateVarBtn)
+                }
+            }
+        }
+    }
+
+    private fun workWithNewVar(tree: TreeNode<String>, view: CreateVarBtn){
+
+        if((view[1] as ViewGroup).children.count()!=0){
+
+            when((view[1] as ViewGroup)[0]){
+                is WhileBtn-> {
+                    tree.parent?.add(TreeNode("while"))
+                    workWithWhile(tree.parent?.children?.last()!!, (view[1] as ViewGroup)[0] as WhileBtn)
+                }
+                is OutputBtn->{
+                    tree.parent?.add(TreeNode("print"))
+                    workWithPrint(tree.parent?.children?.last()!!, (view[1] as ViewGroup)[0] as OutputBtn)
+                }
+                is VariableBtn->{
+                    tree.parent?.add(TreeNode("assign"))
+                    workWithVarAssignment(tree.parent?.children?.last()!!, (view[1] as ViewGroup)[0] as VariableBtn)
+                }
+                is CreateVarBtn->{
+                    tree.parent?.add(TreeNode("new"))
+                    workWithNewVar(tree.parent?.children?.last()!!, (view[1] as ViewGroup)[0] as CreateVarBtn)
+                }
             }
         }
     }
@@ -122,6 +163,10 @@ class StartProgram(context: Context, start: StartBtn) {
                     myTree.add(TreeNode("assign"))
                     workWithVarAssignment(myTree.children.last(), (start[2] as ViewGroup)[0] as VariableBtn)
                 }
+                is CreateVarBtn->{
+                    myTree.add(TreeNode("new"))
+                    workWithNewVar(myTree.children.last(), (start[2] as ViewGroup)[0] as CreateVarBtn)
+                }
             }
         }
     }
@@ -131,6 +176,9 @@ class StartProgram(context: Context, start: StartBtn) {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Блоки~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     private fun blockMain(tree: TreeNode<String>) {
+
+        val localVarsIntMap: MutableMap<String, Int> = mutableMapOf()
+
         for (i in tree.children) {
             if (i.value == "while") {
                 if (i.children.size == 2) {
@@ -156,7 +204,17 @@ class StartProgram(context: Context, start: StartBtn) {
                 } else
                     errorList += "Empty assign_block found"
             }
+            if (i.value == "new") {
+                if (i.children.size == 2) {
+                    blockNew(i, localVarsIntMap)
+                } else
+                    errorList += "Empty new_var block found"
+            }
         }
+
+        for(i in localVarsIntMap.keys)
+            if(varsIntMap.containsKey(i))
+                varsIntMap.remove(i)
     }
 
     private fun blockWhile(children: TreeNode<String>) {
@@ -192,6 +250,21 @@ class StartProgram(context: Context, start: StartBtn) {
     private fun blockAssign(children: TreeNode<String>) {
         if (children.children[0].value == "varInt") {
             varsIntMap[children.children[0].children[0].value] = blockIntExpression(children.children[1])
+        }
+    }
+
+
+    private fun blockNew(children: TreeNode<String>, localVarsIntMap: MutableMap<String, Int>) {
+        if (children.children[0].value == "int") {
+            for(i in children.children[1].children){
+                if(varsIntMap.containsKey(i.value)){
+                    errorList.add("Var with name ${i.value} already exists")
+                }
+                else{
+                    varsIntMap[i.value] = 0
+                    localVarsIntMap[i.value] = 0
+                }
+            }
         }
     }
 

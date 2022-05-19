@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,7 @@ import androidx.core.view.get
 import com.example.myapplication.blocks.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlin.system.exitProcess
 
 
 class MainActivity : AppCompatActivity() {
@@ -41,6 +43,28 @@ class MainActivity : AppCompatActivity() {
         //-------------------------------------------------------------------------------------
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~СЛУШАТЕЛИ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+        burgerOpen.setOnClickListener{
+            burgerMenu.visibility = View.VISIBLE
+            plus1.visibility = View.GONE
+            consoleBtn.visibility = View.GONE
+            zoomLayout.setVerticalPanEnabled(false)
+            zoomLayout.setHorizontalPanEnabled(false)
+            zoomLayout.setZoomEnabled(false)
+        }
+
+        exit.setOnClickListener{
+            exitProcess(-1)
+        }
+
+        closeBurgerMenu.setOnClickListener{
+            burgerMenu.visibility = View.INVISIBLE
+            plus1.visibility = View.VISIBLE
+            consoleBtn.visibility = View.VISIBLE
+            zoomLayout.setVerticalPanEnabled(true)
+            zoomLayout.setHorizontalPanEnabled(true)
+            zoomLayout.setZoomEnabled(true)
+        }
+
         plus1.setOnClickListener {
             for (i in 0..zoomLayout.Workspace.childCount){
                 val child = zoomLayout.Workspace.getChildAt(i)
@@ -55,6 +79,7 @@ class MainActivity : AppCompatActivity() {
             consoleBtn.visibility = View.GONE
             zoomLayout.setVerticalPanEnabled(false)
             zoomLayout.setHorizontalPanEnabled(false)
+            zoomLayout.setZoomEnabled(false)
         }
 
         closeBlockScreen.setOnClickListener{
@@ -70,6 +95,7 @@ class MainActivity : AppCompatActivity() {
             plus1.visibility = View.VISIBLE
             zoomLayout.setVerticalPanEnabled(true)
             zoomLayout.setHorizontalPanEnabled(true)
+            zoomLayout.setZoomEnabled(true)
         }
 
         blockbtn.setOnClickListener{
@@ -99,6 +125,27 @@ class MainActivity : AppCompatActivity() {
             consoleBtn.visibility = View.GONE
             zoomLayout.setVerticalPanEnabled(false)
             zoomLayout.setHorizontalPanEnabled(false)
+            zoomLayout.setZoomEnabled(false)
+
+            val handler = Handler()
+            var time = 0;
+            while (time < 10000) {
+                handler.postDelayed({
+                    StartConsoleMessage.text = "TTKSMT is ready to work . "
+                }, time.toLong())
+                time += 1000
+                handler.postDelayed({
+                    StartConsoleMessage.text = "TTKSMT is ready to work . ."
+                }, time.toLong())
+                time += 1000
+                handler.postDelayed({
+                    StartConsoleMessage.text = "TTKSMT is ready to work . . ."
+                }, time.toLong())
+                time += 1000
+                if(CreateConsole.visibility == View.INVISIBLE){
+                    break
+                }
+            }
         }
 
         consoleCloseBtn.setOnClickListener{
@@ -114,6 +161,7 @@ class MainActivity : AppCompatActivity() {
             consoleBtn.visibility = View.VISIBLE
             zoomLayout.setVerticalPanEnabled(true)
             zoomLayout.setHorizontalPanEnabled(true)
+            zoomLayout.setZoomEnabled(true)
         }
 
 

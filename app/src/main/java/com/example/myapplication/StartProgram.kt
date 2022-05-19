@@ -2,6 +2,9 @@ package com.example.myapplication
 
 import android.content.Context
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.Spinner
+import android.widget.Toast
 import androidx.core.view.children
 import com.example.myapplication.structs.tree.TreeNode
 
@@ -123,6 +126,26 @@ class StartProgram(context: Context, start: StartBtn) {
     }
 
     private fun workWithNewVar(tree: TreeNode<String>, view: CreateVarBtn){
+
+        if((view[3] as Spinner).selectedItem.toString() == "Int"){
+            tree.add(TreeNode("int"))
+            tree.add(TreeNode("children"))
+
+            var matchResult = "[a-zA-Z_0-9\\s,]*".toRegex().find((view[4] as EditText).text.toString())
+
+            if(matchResult?.value.toString() == (view[4] as EditText).text.toString() && !(view[4] as EditText).text.toString().contains(",\\s*,".toRegex()) && !(view[4] as EditText).text.toString().contains("^\\s*,".toRegex())){
+                val str = (view[4] as EditText).text.toString().replace("\\s\\s".toRegex(), " ")
+
+                matchResult = "[a-zA-Z_][a-zA-Z0-9_]*".toRegex().find(str)
+
+                while(matchResult != null){
+
+                    tree.children[1].add(TreeNode(matchResult.value.toString()))
+
+                    matchResult = matchResult.next()
+                }
+            }
+        }
 
         if((view[1] as ViewGroup).children.count()!=0){
 

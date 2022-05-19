@@ -11,5 +11,7 @@
     <color name="darkGreen">#0F7D00</color>
     <color name="gray">#C4C4C4</color>
     <color name="variable_purple">#6E44C9</color>
+    <color name='ifcolor'>#03A9F4</color>
+    <color name="BreakColor">#930B0B</color>
 
 </resources>

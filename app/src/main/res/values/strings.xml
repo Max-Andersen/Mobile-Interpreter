@@ -12,4 +12,7 @@
     <string name="When">When</string>
     <string name="Click">Clicked</string>
     <string name="Output">Output</string>
+    <string-array name="varTypes">
+        <item>Int</item>
+    </string-array>
 </resources>

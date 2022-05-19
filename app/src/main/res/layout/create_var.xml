@@ -38,22 +38,15 @@
         app:layout_constraintStart_toStartOf="@+id/createVarBeginView"
         app:layout_constraintTop_toTopOf="@+id/createVarBeginView" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
-        android:layout_width="100dp"
+    <Spinner
+
+        android:id="@+id/spinner"
+        android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginStart="10dp"
-        android:hint="type"
+        android:entries="@array/varTypes"
         app:layout_constraintBottom_toBottomOf="@+id/createVarBeginView"
         app:layout_constraintStart_toEndOf="@+id/textView7"
-        app:layout_constraintTop_toTopOf="@+id/createVarBeginView">
-
-        <AutoCompleteTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
+        app:layout_constraintTop_toTopOf="@+id/createVarBeginView" />
 
     <EditText
         android:id="@+id/createVarName"

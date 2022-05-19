@@ -250,24 +250,8 @@ class MainActivity : AppCompatActivity() {
                 Workspace.addView(v)
 
 
-                //---------------------------------
-                //---------------------------------
-                //УМЕНЬШЕНИЕ ПОЛОСКИ ВЛОЖЕННОСТИ!!!
+                decreaseLineHeight(owner, v)
 
-                var x = owner.parent as View
-
-                while(true){
-                    if(x is WhileBtn){
-                        x[4].layoutParams.height -= v.height-x[0].layoutParams.height/2
-                        x = x.parent.parent as View
-                    }
-                    else if(x is VariableBtn || x is OutputBtn || x is StartBtn){
-                        x = x.parent.parent as View
-                    }
-                    else{
-                        break
-                    }
-                }
 
                 // ставим обработчик на вложенный place for drop:
                 (event.localState as? StartBtn)?.onSet()

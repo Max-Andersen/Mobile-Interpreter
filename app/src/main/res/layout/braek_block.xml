@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/BreakNode"
+    android:layout_width="250dp"
+    android:layout_height="105dp"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
+
+    >
+
+    <View
+        android:id="@+id/beginBreakView"
+        android:layout_width="250dp"
+        android:layout_height="70dp"
+        android:background="@color/BreakColor"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/breakText"
+        android:layout_width="73dp"
+        android:layout_height="36dp"
+        android:text="@string/Break"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/beginBreakView"
+        app:layout_constraintEnd_toEndOf="@+id/beginBreakView"
+        app:layout_constraintHorizontal_bias="0.09"
+        app:layout_constraintStart_toStartOf="@+id/beginBreakView"
+        app:layout_constraintTop_toTopOf="@+id/beginBreakView"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/outputPlaceForDrop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="250dp"
+        android:minHeight="35dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/beginBreakView">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <!--    <View-->
+    <!--        android:id="@+id/placeForDrop"-->
+    <!--        android:layout_width="236dp"-->
+    <!--        android:layout_height="69dp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/startView" />-->
+
+
+</merge>

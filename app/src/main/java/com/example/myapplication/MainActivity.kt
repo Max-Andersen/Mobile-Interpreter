@@ -145,7 +145,7 @@ class MainActivity : AppCompatActivity() {
 
         Workspace.x = 0F
         Workspace.y = 0F
-        Workspace.setOnDragListener(dragAndDropListener)
+        Workspace.setOnDragListener(mainActivityDandD(zoomLayout, CreateConsole, blockAndVariable, plus1, consoleBtn, Workspace))
 
         //----------------------------------------
         //----------------------------------------
@@ -201,82 +201,6 @@ class MainActivity : AppCompatActivity() {
                     printNodes((node[2] as ViewGroup)[0])
                 }
             }
-            is CreateVarBtn -> {
-                if ((node[1] as ViewGroup).children.count() != 0)
-                {
-                    println("parent: ${node}\n child: ${(node[1] as ViewGroup)[0]}")
-                    printNodes((node[1] as ViewGroup)[1])
-                }
-            }
-        }
-    }
-
-    //-----------------------------------------------------------------------------------------
-    //-----------------------------------------------------------------------------------------
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~DRAG_AND_DROP~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    private val dragAndDropListener = View.OnDragListener{ view, event ->
-        when (event.action){
-            DragEvent.ACTION_DRAG_STARTED -> {
-                for (i in 0..zoomLayout.Workspace.childCount){
-                    val child = zoomLayout.Workspace.getChildAt(i)
-                    if (child is View){
-                        child.visibility = View.VISIBLE
-                    }
-                }
-                CreateConsole.visibility = View.GONE
-                blockAndVariable.visibility = View.GONE
-                plus1.visibility = View.VISIBLE
-                consoleBtn.visibility = View.VISIBLE
-                zoomLayout.setVerticalPanEnabled(true)
-                zoomLayout.setHorizontalPanEnabled(true)
-                true
-            }
-
-            DragEvent.ACTION_DRAG_ENTERED -> {
-                view.invalidate()
-                true
-            }
-
-            DragEvent.ACTION_DRAG_LOCATION -> {
-                true
-            }
-
-            DragEvent.ACTION_DRAG_EXITED -> {
-                view.invalidate()
-                true
-            }
-
-            DragEvent.ACTION_DROP -> {
-
-                val v = event.localState as ConstraintLayout
-                v.x = event.x - (v.width / 2)
-                v.y = event.y - (v.height / 2)
-
-                val owner = v.parent as ViewGroup
-                owner.removeView(v)
-                Workspace.addView(v)
-
-
-                decreaseLineHeight(owner, v)
-
-
-                // ставим обработчик на вложенный place for drop:
-                (event.localState as? StartBtn)?.onSet()
-                (event.localState as? WhileBtn)?.onSet()
-                (event.localState as? VariableBtn)?.onSet()
-                (event.localState as? OutputBtn)?.onSet()
-                (event.localState as? CreateVarBtn)?.onSet()
-
-                true
-            }
-
-            DragEvent.ACTION_DRAG_ENDED -> {
-                view.invalidate()
-                true
-            }
-
-            else -> {false}
         }
     }
 }

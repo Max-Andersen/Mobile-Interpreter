@@ -10,87 +10,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.get
-import com.example.myapplication.checkForChildren
-import com.example.myapplication.checkForLink
 import com.example.myapplication.databinding.CreateVarBinding
-import com.example.myapplication.decreaseLineHeight
-import com.example.myapplication.increaseLineHeight
+import com.example.myapplication.structs.BlockInterface
 
 class CreateVarBtn @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-): ConstraintLayout(context, attrs, defStyleAttr){
+):BlockInterface, ConstraintLayout(context, attrs, defStyleAttr){
     private var binding = CreateVarBinding.inflate(LayoutInflater.from(context), this)
-
-    private val dragAndDropListener = OnDragListener{ view, event ->
-        val dragBlock = event.localState as View
-        val destination = view as ConstraintLayout
-        val owner = dragBlock.parent as ViewGroup
-
-        when (event.action){
-            DragEvent.ACTION_DRAG_STARTED -> {
-                view.invalidate()
-                true
-            }
-
-            DragEvent.ACTION_DRAG_ENTERED -> {
-                if(checkForLink(destination, dragBlock) && checkForChildren(destination))
-                    destination.setBackgroundColor(Color.GRAY)
-                view.invalidate()
-                true
-            }
-
-            DragEvent.ACTION_DRAG_LOCATION -> {
-                true
-            }
-
-            DragEvent.ACTION_DRAG_EXITED -> {
-                view.invalidate()
-                destination.setBackgroundColor(Color.TRANSPARENT)
-                true
-            }
-
-            DragEvent.ACTION_DROP -> {
-
-                if(checkForLink(destination, dragBlock) && checkForChildren(destination)) {
-
-                    increaseLineHeight(destination, dragBlock)
-
-                    decreaseLineHeight(owner, dragBlock)
-
-                    //---------------------------------------------
-                    //подтягиваем drag block ровно в place for drop
-                    dragBlock.x = (destination.rootView as ViewGroup)[0].x
-                    dragBlock.y = (destination.rootView as ViewGroup)[0].y
-
-                    //-------------------------
-                    //устанавливаем новые связи
-                    owner.removeView(dragBlock)
-                    destination.addView(dragBlock)
-                }
-
-
-                destination.setBackgroundColor(Color.TRANSPARENT)
-
-                (event.localState as? StartBtn)?.onSet()
-                (event.localState as? WhileBtn)?.onSet()
-                (event.localState as? VariableBtn)?.onSet()
-                (event.localState as? OutputBtn)?.onSet()
-                (event.localState as? CreateVarBtn)?.onSet()
-
-                view.invalidate()
-                true
-            }
-
-            DragEvent.ACTION_DRAG_ENDED -> {
-                view.invalidate()
-                true
-            }
-
-            else -> {false}
-        }
-    }
 
     init {
         binding.root.setOnLongClickListener{
@@ -105,10 +33,9 @@ class CreateVarBtn @JvmOverloads constructor(
 
             true
         }
-
     }
 
     fun onSet(){
-        binding.createVarPlaceForDrop.setOnDragListener(dragAndDropListener)
+        binding.createVarPlaceForDrop.setOnDragListener(dragAndDropListener())
     }
 }

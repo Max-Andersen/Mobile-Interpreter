@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/ifElseNode"
+    android:layout_width="250dp"
+    android:layout_height="245dp"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <View
+        android:id="@+id/beginIfElseView"
+        android:layout_width="250dp"
+        android:layout_height="70dp"
+        android:background="@color/ifcolor"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/iffText"
+        android:layout_width="73dp"
+        android:layout_height="36dp"
+        android:text="@string/iftext"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/beginIfElseView"
+        app:layout_constraintEnd_toEndOf="@+id/beginIfElseView"
+        app:layout_constraintHorizontal_bias="0.09"
+        app:layout_constraintStart_toStartOf="@+id/beginIfElseView"
+        app:layout_constraintTop_toTopOf="@+id/beginifView"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ifElseInsidePlace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:minWidth="225dp"
+        android:minHeight="35dp"
+        app:layout_constraintStart_toEndOf="@+id/ifelseLine"
+        app:layout_constraintTop_toBottomOf="@+id/beginIfElseView" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ifElseInsideSecondPlace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:minWidth="225dp"
+        android:minHeight="35dp"
+        app:layout_constraintStart_toEndOf="@+id/ifelseSecondLine"
+        app:layout_constraintTop_toBottomOf="@+id/secondIfElseView" />
+
+    <EditText
+        android:id="@+id/iffTextEdit"
+        android:layout_width="131dp"
+        android:layout_height="36dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/beginIfElseView"
+        app:layout_constraintEnd_toEndOf="@+id/beginIfElseView"
+        app:layout_constraintStart_toEndOf="@+id/iffText" />
+
+    <View
+        android:id="@+id/ifelseLine"
+        android:layout_width="21dp"
+        android:layout_height="35dp"
+        android:background="@color/ifcolor"
+        android:maxWidth="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/beginIfElseView" />
+
+
+    <!--    <View-->
+    <!--        android:id="@+id/placeForDrop"-->
+    <!--        android:layout_width="236dp"-->
+    <!--        android:layout_height="69dp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/startView" />-->
+
+    <View
+        android:id="@+id/secondIfElseView"
+        android:layout_width="250dp"
+        android:layout_height="70dp"
+
+        android:background="@color/ifcolor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ifElseInsidePlace" />
+
+    <View
+        android:id="@+id/ifelseSecondLine"
+        android:layout_width="21dp"
+        android:layout_height="35dp"
+        android:background="@color/ifcolor"
+        android:maxWidth="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/secondIfElseView" />
+
+    <TextView
+        android:id="@+id/elseText"
+        android:layout_width="73dp"
+        android:layout_height="36dp"
+        android:text="@string/Else"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/secondIfElseView"
+        app:layout_constraintEnd_toEndOf="@+id/secondIfElseView"
+        app:layout_constraintHorizontal_bias="0.09"
+        app:layout_constraintStart_toStartOf="@+id/secondIfElseView"
+        app:layout_constraintTop_toTopOf="@+id/secondIfElseView"
+        app:layout_constraintVertical_bias="1.0" />
+    <EditText
+        android:id="@+id/elseTextEdit"
+        android:layout_width="131dp"
+        android:layout_height="36dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/secondIfElseView"
+        app:layout_constraintEnd_toEndOf="@+id/secondIfElseView"
+        app:layout_constraintStart_toEndOf="@+id/elseText" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ifElsePlaceForDrop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="250dp"
+        android:minHeight="35dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ifElseInsideSecondPlace">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</merge>

@@ -13,4 +13,5 @@
     <string name="Click">Clicked</string>
     <string name="Output">Output</string>
     <string name="iftext">If</string>
+    <string name="Else">Else</string>
 </resources>

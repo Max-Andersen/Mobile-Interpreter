@@ -78,6 +78,20 @@ class StartProgram(context: Context, start: StartBtn) {
 
     private fun workWithPrint(tree: TreeNode<String>, view: OutputBtn){
 
+
+        //-----------------------------------------------------
+        //-----------------------------------------------------
+        //-----------------------------------------------------
+
+
+        //ВНИМАНИЕ!!!!!!!!!!!! ТЕСТОВЫЙ ОБРАЗЕЦ!!!!
+        tree.add(TreeNode("varInt"))
+        tree.children[0].add(TreeNode((view[3] as EditText).text.toString()))
+
+        //-----------------------------------------------------
+        //-----------------------------------------------------
+        //-----------------------------------------------------
+
         if((view[2] as ViewGroup).children.count()!=0){
             when((view[2] as ViewGroup)[0]){
                 is WhileBtn-> {
@@ -259,7 +273,10 @@ class StartProgram(context: Context, start: StartBtn) {
 
         when (children.value) {
             "varInt" -> {
-                outputList += varsIntMap[children.children[0].value].toString()
+                if(varsIntMap.containsKey(children.children[0].value))
+                    outputList += varsIntMap[children.children[0].value].toString()
+                else
+                    errorList.add("Unknown var name")
             }
             "..." -> {
 
@@ -367,7 +384,7 @@ class StartProgram(context: Context, start: StartBtn) {
         myTree.printEachLevel()
 
         //Запуск программы
-        //blockMain(myTree)
+        blockMain(myTree)
 
         //Вывод полученных ошибок
         if (errorList.size != 0) {

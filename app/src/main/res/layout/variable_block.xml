@@ -50,6 +50,7 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/russo_one"
         android:text="@string/VariableSolo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -58,6 +59,7 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/russo_one"
         android:text="="
         app:layout_constraintBottom_toBottomOf="@+id/beginView"
         app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName2"

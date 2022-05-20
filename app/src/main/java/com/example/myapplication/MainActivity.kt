@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -12,14 +13,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.children
 import androidx.core.view.get
 import com.example.myapplication.blocks.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
-import java.util.*
 import java.io.*
-import java.lang.Exception
+import java.util.*
 import kotlin.system.exitProcess
 
 
@@ -310,6 +311,7 @@ class MainActivity : AppCompatActivity() {
             //printNodes(start)
 
             StartProgram(start).main()
+            printInConsole("textdsada")
         }
     }
 
@@ -434,14 +436,16 @@ class MainActivity : AppCompatActivity() {
         flagFirstOutInConsole = true
 
         val tv = TextView(this)
+        tv.typeface = ResourcesCompat.getFont(this, R.font.russo_one)
         tv.text = ">>"
-        tv.textSize = 15f
+        tv.textSize = 25f
         tv.setTextColor(Color.WHITE)
         CreateConsole.addView(tv)
 
         val textViewToConsole = TextView(this)
         textViewToConsole.text = text
-        textViewToConsole.textSize = 15f
+        textViewToConsole.textSize = 25f
+        textViewToConsole.typeface = ResourcesCompat.getFont(this, R.font.russo_one)
         textViewToConsole.setTextColor(Color.WHITE)
         CreateConsole.addView(textViewToConsole)
 

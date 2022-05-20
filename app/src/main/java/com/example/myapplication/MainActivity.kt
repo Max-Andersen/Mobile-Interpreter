@@ -6,17 +6,23 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.view.children
 import androidx.core.view.get
 import com.example.myapplication.blocks.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
 import java.util.*
+import java.io.*
+import java.lang.Exception
 import kotlin.system.exitProcess
 
 
 class MainActivity : AppCompatActivity() {
+    var flagFirstOutInConsole = false
 
     private fun blockInit(){
 
@@ -131,33 +137,42 @@ class MainActivity : AppCompatActivity() {
                     child.visibility = View.GONE
                 }
             }
-            CreateConsole.visibility = View.VISIBLE
+
+            consoleScroll.visibility = View.VISIBLE
             consoleCloseBtn.visibility = View.VISIBLE
             plus1.visibility = View.GONE
             consoleBtn.visibility = View.GONE
+            startEnd.visibility = View.GONE
             zoomLayout.setVerticalPanEnabled(false)
             zoomLayout.setHorizontalPanEnabled(false)
             zoomLayout.setZoomEnabled(false)
 
-            val handler = Handler()
-            var time = 0
-            while (time < 10000) {
-                handler.postDelayed({
-                    StartConsoleMessage.text = "TTKSMT is ready to work . "
-                }, time.toLong())
-                time += 1000
-                handler.postDelayed({
-                    StartConsoleMessage.text = "TTKSMT is ready to work . ."
-                }, time.toLong())
-                time += 1000
-                handler.postDelayed({
-                    StartConsoleMessage.text = "TTKSMT is ready to work . . ."
-                }, time.toLong())
-                time += 1000
-                if(CreateConsole.visibility == View.INVISIBLE){
-                    break
+            if (!flagFirstOutInConsole){
+                val handler = Handler()
+                var time = 0;
+                while (time < 100000) {
+                    handler.postDelayed({
+                        StartConsoleMessage?.text = "TTKSMT is ready to work . "
+                    }, time.toLong())
+                    time += 1000
+                    handler.postDelayed({
+                        StartConsoleMessage?.text = "TTKSMT is ready to work . ."
+                    }, time.toLong())
+                    time += 1000
+                    handler.postDelayed({
+                        StartConsoleMessage?.text = "TTKSMT is ready to work . . ."
+                    }, time.toLong())
+                    time += 1000
+                    if(consoleScroll.visibility == View.INVISIBLE){
+                        break
+                    }
                 }
             }
+            else{
+                CreateConsole?.removeView(StartConsoleMessage)
+            }
+
+
         }
 
         consoleCloseBtn.setOnClickListener{
@@ -167,10 +182,11 @@ class MainActivity : AppCompatActivity() {
                     child.visibility = View.VISIBLE
                 }
             }
-            CreateConsole.visibility = View.GONE
+            consoleScroll.visibility = View.GONE
             consoleCloseBtn.visibility = View.GONE
             plus1.visibility = View.VISIBLE
             consoleBtn.visibility = View.VISIBLE
+            startEnd.visibility = View.VISIBLE
             zoomLayout.setVerticalPanEnabled(true)
             zoomLayout.setHorizontalPanEnabled(true)
             zoomLayout.setZoomEnabled(true)
@@ -282,7 +298,7 @@ class MainActivity : AppCompatActivity() {
 
         Workspace.x = 0F
         Workspace.y = 0F
-        Workspace.setOnDragListener(mainActivityDandD(zoomLayout, CreateConsole, blockAndVariable, plus1, consoleBtn, Workspace))
+        Workspace.setOnDragListener(mainActivityDandD(zoomLayout, consoleScroll, blockAndVariable, plus1, consoleBtn, Workspace))
 
         //----------------------------------------
         //----------------------------------------
@@ -293,7 +309,50 @@ class MainActivity : AppCompatActivity() {
 
             StartProgram(start).main()
         }
+    }
 
+
+    private fun isStoragePermissionGranted(): Boolean {
+        return if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            == PackageManager.PERMISSION_GRANTED
+        ) {
+            //Permission is granted
+            true
+        } else {
+            //Permission is revoked
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                1
+            )
+            false
+        }
+
+    }
+
+    private fun save(fileContent: String) {
+        Toast.makeText(this, "зашёл", Toast.LENGTH_SHORT).show();
+        if (isStoragePermissionGranted()) {
+            if (fileContent != "") {
+                val filename = "Prikol.txt"
+                val filepath = "DirForSaves"
+                val myExternalFile = File(getExternalFilesDir(filepath), filename);
+                try {
+                    val fos = FileOutputStream(myExternalFile);
+                    fos.write(fileContent.toByteArray());
+                    fos.close();
+                } catch (e: Exception) {
+                    e.printStackTrace();
+                    Toast.makeText(this, "Не сохранился :(", Toast.LENGTH_SHORT).show();
+                }
+
+                Toast.makeText(this, "Сохранился", Toast.LENGTH_SHORT).show();
+            } else {
+
+                Toast.makeText(this, "Не сохранился :(", Toast.LENGTH_SHORT).show();
+            }
+        }
+        Toast.makeText(this, "вышел", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -367,5 +426,22 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    fun printInConsole(text: String){
+        flagFirstOutInConsole = true
+
+        val tv = TextView(this)
+        tv.text = ">>"
+        tv.textSize = 15f
+        tv.setTextColor(Color.WHITE)
+        CreateConsole.addView(tv)
+
+        val textViewToConsole = TextView(this)
+        textViewToConsole.text = text
+        textViewToConsole.textSize = 15f
+        textViewToConsole.setTextColor(Color.WHITE)
+        CreateConsole.addView(textViewToConsole)
+
     }
 }

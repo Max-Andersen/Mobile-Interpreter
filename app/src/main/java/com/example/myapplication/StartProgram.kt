@@ -7,8 +7,8 @@ import android.widget.Spinner
 import androidx.core.view.children
 import androidx.core.view.get
 import com.example.myapplication.blocks.*
-import com.example.myapplication.polish.PolishString
 import com.example.myapplication.polish.calculatePolishString
+import com.example.myapplication.polish.expressionBlock
 import com.example.myapplication.structs.tree.TreeNode
 
 
@@ -97,19 +97,26 @@ class StartProgram(context: Context, start: StartBtn) {
 
     private fun workWithPrint(tree: TreeNode<String>, view: OutputBtn){
 
+        val expression = (view[3] as EditText).text.toString()
 
-        //-----------------------------------------------------
-        //-----------------------------------------------------
-        //-----------------------------------------------------
+        //лишние символы
+        var matchResult = "^[a-zA-Z_0-9+\\-/*%(),\\s]*$".toRegex().find(expression)
 
+        if(matchResult?.value.toString() == expression
+            && !expression.contains(",\\s*,".toRegex())
+            && !expression.contains(",\\s*$".toRegex())
+            && !expression.contains("^\\s*,".toRegex()))
+        {
+            matchResult = "[^,]+".toRegex().find(expression)
 
-        //ВНИМАНИЕ!!!!!!!!!!!! ТЕСТОВЫЙ ОБРАЗЕЦ!!!!
-        tree.add(TreeNode("varInt"))
-        tree.children[0].add(TreeNode((view[3] as EditText).text.toString()))
+            while(matchResult != null){
 
-        //-----------------------------------------------------
-        //-----------------------------------------------------
-        //-----------------------------------------------------
+                expressionBlock(tree, matchResult.value.trim(), errorList)
+
+                matchResult = matchResult.next()
+            }
+
+        }
 
         if((view[2] as ViewGroup).children.count()!=0){
             when((view[2] as ViewGroup)[0]){
@@ -145,63 +152,10 @@ class StartProgram(context: Context, start: StartBtn) {
     private fun workWithVarAssignment(tree: TreeNode<String>, view: VariableBtn){
 
         val textVar = (view[3] as EditText).text.toString()
-        var textExpression = (view[2] as EditText).text.toString()
+        val textExpression = (view[2] as EditText).text.toString()
 
         tree.add(TreeNode(textVar.trim()))
-
-
-        //проверка по скобкам
-        var checkBrackets = 0
-        var normBrackets = true
-        for(i in textExpression)
-        {
-            if(i == '(')
-                checkBrackets++
-            else if(i==')')
-                checkBrackets--
-            if(checkBrackets<0)
-                normBrackets = false
-        }
-        if(checkBrackets != 0)
-            normBrackets = false
-
-        //лишние символы
-        val matchResult2 = "^[a-zA-Z_0-9+\\-/*%()\\s]*$".toRegex().find(textExpression)
-
-        if(matchResult2?.value.toString() == textExpression
-            && normBrackets
-            && !textExpression.contains("[+\\-*/%]\\s*[+\\-*/%)]".toRegex())
-            && !textExpression.contains("\\(\\s*\\*".toRegex())
-            && !textExpression.contains("\\(\\s*/".toRegex())
-            && !textExpression.contains("[^0-9a-zA-Z_]0[0-9]".toRegex())
-            && !textExpression.contains("[a-zA-Z0-9_]\\s+[a-zA-Z0-9_]".toRegex())
-            && !textExpression.contains("[^a-zA-Z_]+[0-9]+[a-zA-Z_]".toRegex()))
-        {
-
-            textExpression = "^-".toRegex().replace(textExpression, "0-")
-
-            textExpression = "^\\+".toRegex().replace(textExpression, "0+")
-
-            textExpression = "\\(\\s*-".toRegex().replace(textExpression, "(0-")
-
-            textExpression = "\\(\\s*\\+".toRegex().replace(textExpression, "(0+")
-
-            textExpression = "(?<=[0-9a-zA-Z_])\\(".toRegex().replace(textExpression, "*(")
-
-            textExpression = "\\)(?<=[0-9a-zA-Z_])".toRegex().replace(textExpression, ")*")
-
-            //прогон по польской строке
-            val polString = PolishString(textExpression)
-
-            if(polString.isExpressionCorrect)
-            {
-                tree.add(TreeNode(",+".toRegex().replace(polString.expression, ",")))
-            }
-            else
-                errorList.add("Invalid expression in assignment")
-        }
-        else
-            errorList.add("Invalid expression in assignment")
+        expressionBlock(tree, textExpression, errorList)
 
 
         if((view[1] as ViewGroup).children.count()!=0){
@@ -511,8 +465,8 @@ class StartProgram(context: Context, start: StartBtn) {
                     errorList += "Empty if_block found"
             }
             if (i.value == "print") {
-                if (i.children.size == 1) {
-                    blockPrint(i.children[0])
+                if (i.children.size > 0) {
+                    blockPrint(i)
                 } else
                     errorList += "Empty print_block found"
             }
@@ -556,22 +510,10 @@ class StartProgram(context: Context, start: StartBtn) {
         }
     }
 
-    //НЕ ДОДЕЛАН
     private fun blockPrint(children: TreeNode<String>) {
-
-        when (children.value) {
-            "varInt" -> {
-                if(varsIntMap.containsKey(children.children[0].value))
-                    outputList += varsIntMap[children.children[0].value].toString()
-                else
-                    errorList.add("Unknown var name in output")
-            }
-            "..." -> {
-
-            }
-            else -> errorList += "Unknown var type in output"
+        for(i in children.children){
+            outputList.add(calculatePolishString(i.value, varsIntMap).toString())
         }
-
     }
 
     private fun blockAssign(children: TreeNode<String>) {
@@ -669,7 +611,7 @@ class StartProgram(context: Context, start: StartBtn) {
         fillTree(receivedRoot)
 
         //Вывод дерева
-        myTree.printEachLevel()
+        //myTree.printEachLevel()
 
         //Запуск программы
         blockMain(myTree)

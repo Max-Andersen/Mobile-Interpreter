@@ -109,15 +109,12 @@
         app:layout_constraintStart_toStartOf="@+id/secondIfElseView"
         app:layout_constraintTop_toTopOf="@+id/secondIfElseView"
         app:layout_constraintVertical_bias="1.0" />
-    <EditText
-        android:id="@+id/elseTextEdit"
-        android:layout_width="131dp"
-        android:layout_height="36dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="@+id/secondIfElseView"
-        app:layout_constraintEnd_toEndOf="@+id/secondIfElseView"
-        app:layout_constraintStart_toEndOf="@+id/elseText" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ifElsePlaceForDrop"

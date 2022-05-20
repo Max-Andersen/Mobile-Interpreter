@@ -4,7 +4,6 @@ import java.lang.Exception
 
 
 fun calculatePolishString (polishString: String, variables: MutableMap<String, Int>) : Int{
-    println(polishString)
     val stack = Stack()
     var localPolishString = polishString
     while (localPolishString.isNotEmpty()){

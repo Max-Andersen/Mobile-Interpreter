@@ -138,7 +138,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            CreateConsole.visibility = View.VISIBLE
+            consoleScroll.visibility = View.VISIBLE
             consoleCloseBtn.visibility = View.VISIBLE
             plus1.visibility = View.GONE
             consoleBtn.visibility = View.GONE
@@ -163,7 +163,7 @@ class MainActivity : AppCompatActivity() {
                         StartConsoleMessage?.text = "TTKSMT is ready to work . . ."
                     }, time.toLong())
                     time += 1000
-                    if(CreateConsole.visibility == View.INVISIBLE){
+                    if(consoleScroll.visibility == View.INVISIBLE){
                         break
                     }
                 }
@@ -182,7 +182,7 @@ class MainActivity : AppCompatActivity() {
                     child.visibility = View.VISIBLE
                 }
             }
-            CreateConsole.visibility = View.GONE
+            consoleScroll.visibility = View.GONE
             consoleCloseBtn.visibility = View.GONE
             plus1.visibility = View.VISIBLE
             consoleBtn.visibility = View.VISIBLE
@@ -217,7 +217,7 @@ class MainActivity : AppCompatActivity() {
 
         Workspace.x = 0F
         Workspace.y = 0F
-        Workspace.setOnDragListener(mainActivityDandD(zoomLayout, CreateConsole, blockAndVariable, plus1, consoleBtn, Workspace))
+        Workspace.setOnDragListener(mainActivityDandD(zoomLayout, consoleScroll, blockAndVariable, plus1, consoleBtn, Workspace))
 
         //----------------------------------------
         //----------------------------------------

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.ScrollView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.children
@@ -21,7 +22,7 @@ import kotlinx.android.synthetic.main.activity_main.view.*
 //-----------------------------------------------------------------------------------------
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~DRAG_AND_DROP~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-fun mainActivityDandD(zoomLayout: ZoomLayout, CreateConsole: LinearLayout, blockAndVariable: ConstraintLayout, plus1: ImageButton, consoleBtn: ImageButton, Workspace: ConstraintLayout): View.OnDragListener {
+fun mainActivityDandD(zoomLayout: ZoomLayout, consoleScroll: ScrollView, blockAndVariable: ConstraintLayout, plus1: ImageButton, consoleBtn: ImageButton, Workspace: ConstraintLayout): View.OnDragListener {
     return View.OnDragListener{ view, event ->
         when (event.action){
             DragEvent.ACTION_DRAG_STARTED -> {
@@ -31,7 +32,7 @@ fun mainActivityDandD(zoomLayout: ZoomLayout, CreateConsole: LinearLayout, block
                         child.visibility = View.VISIBLE
                     }
                 }
-                CreateConsole.visibility = View.GONE
+                consoleScroll.visibility = View.GONE
                 blockAndVariable.visibility = View.GONE
                 plus1.visibility = View.VISIBLE
                 consoleBtn.visibility = View.VISIBLE

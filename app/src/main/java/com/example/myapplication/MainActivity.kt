@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -43,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         blockscreen.addView(ifElseBlock)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -136,7 +138,7 @@ class MainActivity : AppCompatActivity() {
             zoomLayout.setZoomEnabled(false)
 
             val handler = Handler()
-            var time = 0;
+            var time = 0
             while (time < 10000) {
                 handler.postDelayed({
                     StartConsoleMessage.text = "TTKSMT is ready to work . "
@@ -208,8 +210,7 @@ class MainActivity : AppCompatActivity() {
 
             //printNodes(start)
 
-            val program = StartProgram(this, start)
-            program.main()
+            StartProgram(start).main()
         }
 
     }

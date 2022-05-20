@@ -111,8 +111,8 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <View
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="0.0001dp"
+        android:layout_height="0.0001dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -12,7 +12,7 @@ fun calculatePolishString (polishString: String, variables: MutableMap<String, I
             stack.ordinaryPush(variables[expr])
         }
         else{
-            if (expr.matches(Regex("[1-9][\\d]*"))){
+            if (expr.matches(Regex("[1-9][\\d]*|0"))){
                 try {
                     stack.ordinaryPush(expr.toInt())
                 }

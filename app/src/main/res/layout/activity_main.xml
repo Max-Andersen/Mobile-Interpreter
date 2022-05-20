@@ -39,7 +39,7 @@
             android:id="@+id/Workspace"
             android:layout_width="10000dp"
             android:layout_height="10000dp"
-            android:background="#9F9C9C"
+            android:background="@color/raisinblack"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="parent">
 
@@ -51,7 +51,7 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:background="#9FEF4F"
+        android:background="@color/lightgray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -89,7 +89,7 @@
         android:id="@+id/startEnd"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/white"
+        android:background="@color/mint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header">
@@ -130,7 +130,7 @@
         android:id="@+id/burgerMenu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#9FEF4F"
+        android:background="@color/blizzardblue"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -228,6 +228,56 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/maxTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:width="200dp"
+            android:background="@color/ghostwhite"
+            android:fadeScrollbars="false"
+            android:text="CyberMax"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line5" />
+
+        <Button
+            android:id="@+id/titTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:width="200dp"
+            android:background="@color/ghostwhite"
+            android:text="LEON"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/maxTheme" />
+
+        <Button
+            android:id="@+id/kirillTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:width="200dp"
+            android:background="@color/ghostwhite"
+            android:text="RetroKirill"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titTheme" />
+
+        <Button
+            android:id="@+id/randomTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:width="200dp"
+            android:background="@color/ghostwhite"
+            android:text="RANDOMTHEME"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/kirillTheme" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -236,7 +286,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="1"
-        android:background="#1B2549"
+        android:background="@color/raisinblack"
         android:orientation="vertical"
         android:visibility="invisible"
         android:weightSum="100"
@@ -279,7 +329,7 @@
         android:id="@+id/blockAndVariable"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#4AE37D"
+        android:background="@color/blizzardblue"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -290,7 +340,7 @@
             android:id="@+id/blockscreen"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#4AE37D"
+            android:background="@color/blizzardblue"
             android:visibility="visible"
             app:layout_constraintTop_toBottomOf="@+id/blockbtn"
             tools:layout_editor_absoluteX="0dp">
@@ -303,7 +353,7 @@
             android:layout_height="48dp"
             android:background="#9FEF4F"
             android:fontFamily="@font/jura"
-            android:text="variables"
+            android:text="morebloks"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@+id/closeBlockScreen"
@@ -326,7 +376,7 @@
             android:id="@+id/variableBlock"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#4AE37D"
+            android:background="@color/blizzardblue"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

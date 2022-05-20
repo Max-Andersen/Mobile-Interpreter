@@ -12,7 +12,7 @@
         android:id="@+id/beginView"
         android:layout_width="250dp"
         android:layout_height="70dp"
-        android:background="@color/gray"
+        android:background="@color/ghostwhite"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

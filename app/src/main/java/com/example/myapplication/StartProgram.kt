@@ -5,12 +5,12 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Spinner
 import androidx.core.view.children
-import com.example.myapplication.structs.tree.TreeNode
-
 import androidx.core.view.get
 import com.example.myapplication.blocks.*
 import com.example.myapplication.polish.PolishString
 import com.example.myapplication.polish.calculatePolishString
+import com.example.myapplication.structs.tree.TreeNode
+
 
 class StartProgram(context: Context, start: StartBtn) {
 

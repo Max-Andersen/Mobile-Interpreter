@@ -13,7 +13,6 @@ import com.example.myapplication.blocks.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
 import java.util.*
-import kotlin.math.max
 import kotlin.system.exitProcess
 
 

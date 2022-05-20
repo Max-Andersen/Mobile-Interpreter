@@ -25,7 +25,7 @@ import kotlin.system.exitProcess
 
 
 class MainActivity : AppCompatActivity() {
-    private var flagFirstOutInConsole = false
+    var flagFirstOutInConsole = false
 
     private fun blockInit(){
 
@@ -305,13 +305,14 @@ class MainActivity : AppCompatActivity() {
 
         //----------------------------------------
         //----------------------------------------
-        //ЗАПУСК!!!!!!!!!!!!!ИУУУУУУУУУУУУ!!!!!!!!
+        //ЗАПУСК
         imageButton4.setOnClickListener {
 
             //printNodes(start)
 
-            StartProgram(start).main()
-            printInConsole("textdsada")
+            flagFirstOutInConsole = true
+
+            StartProgram(start).main(CreateConsole, this)
         }
     }
 
@@ -320,10 +321,8 @@ class MainActivity : AppCompatActivity() {
         return if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
             == PackageManager.PERMISSION_GRANTED
         ) {
-            //Permission is granted
             true
         } else {
-            //Permission is revoked
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
@@ -331,7 +330,6 @@ class MainActivity : AppCompatActivity() {
             )
             false
         }
-
     }
 
     private fun save(fileContent: String) {
@@ -430,24 +428,5 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-
-    fun printInConsole(text: String){
-        flagFirstOutInConsole = true
-
-        val tv = TextView(this)
-        tv.typeface = ResourcesCompat.getFont(this, R.font.russo_one)
-        tv.text = ">>"
-        tv.textSize = 25f
-        tv.setTextColor(Color.WHITE)
-        CreateConsole.addView(tv)
-
-        val textViewToConsole = TextView(this)
-        textViewToConsole.text = text
-        textViewToConsole.textSize = 25f
-        textViewToConsole.typeface = ResourcesCompat.getFont(this, R.font.russo_one)
-        textViewToConsole.setTextColor(Color.WHITE)
-        CreateConsole.addView(textViewToConsole)
-
     }
 }

@@ -1,43 +1,46 @@
 package com.example.myapplication.interpreter
 
+import android.content.Context
+import android.widget.LinearLayout
 import com.example.myapplication.polish.calculatePolishString
+import com.example.myapplication.printInConsole
 import com.example.myapplication.structs.tree.TreeNode
 
 
-fun blockMain(tree: TreeNode<String>, varsIntMap: MutableMap<String, Int>, errorList: MutableList<String>) {
+fun blockMain(tree: TreeNode<String>, varsIntMap: MutableMap<String, Int>, console: LinearLayout, ctx: Context) {
 
     val localVarsIntMap: MutableMap<String, Int> = mutableMapOf()
 
     for (i in tree.children) {
         if (i.value == "while") {
             if (i.children.size == 2) {
-                blockWhile(i, varsIntMap, errorList)
+                blockWhile(i, varsIntMap, console, ctx)
             } else
-                errorList += "Empty while_block found"
+                printInConsole("#Empty while_block found", console, ctx)
         }
         if (i.value == "if_block") {
             if (i.children.size == 2 || i.children.size == 3) {
-                blockIf(i, varsIntMap, errorList)
+                blockIf(i, varsIntMap, console, ctx)
             } else
-                errorList += "Empty if_block found"
+                printInConsole( "#Empty if_block found", console, ctx)
         }
         if (i.value == "print") {
             if (i.children.size > 0) {
-                blockPrint(i, varsIntMap, errorList)
+                blockPrint(i, varsIntMap, console, ctx)
             } else
-                errorList += "Empty print_block found"
+                printInConsole( "#Empty print_block found", console, ctx)
         }
         if (i.value == "assign") {
             if (i.children.size == 2) {
-                blockAssign(i, varsIntMap, errorList)
+                blockAssign(i, varsIntMap, console, ctx)
             } else
-                errorList += "Empty assign_block found"
+                printInConsole( "#Empty assign_block found", console, ctx)
         }
         if (i.value == "new") {
             if (i.children.size == 2) {
-                blockNew(i, localVarsIntMap, varsIntMap, errorList)
+                blockNew(i, localVarsIntMap, varsIntMap, console, ctx)
             } else
-                errorList += "Empty new_var block found"
+                printInConsole( "#Empty new_var block found", console, ctx)
         }
     }
 
@@ -46,46 +49,46 @@ fun blockMain(tree: TreeNode<String>, varsIntMap: MutableMap<String, Int>, error
             varsIntMap.remove(i)
 }
 
-private fun blockWhile(children: TreeNode<String>, varsIntMap: MutableMap<String, Int>, errorList: MutableList<String>) {
-    while (blockCondition(children.children[0], varsIntMap, errorList)) {
-        blockMain(children.children[1], varsIntMap, errorList)
+private fun blockWhile(children: TreeNode<String>, varsIntMap: MutableMap<String, Int>, console: LinearLayout, ctx: Context) {
+    while (blockCondition(children.children[0], varsIntMap, console, ctx)) {
+        blockMain(children.children[1], varsIntMap, console, ctx)
     }
 }
 
-private fun blockIf(children: TreeNode<String>, varsIntMap: MutableMap<String, Int>, errorList: MutableList<String>) {
+private fun blockIf(children: TreeNode<String>, varsIntMap: MutableMap<String, Int>, console: LinearLayout, ctx: Context) {
     if(children.children.size == 3) {
-        if (blockCondition(children.children[0], varsIntMap, errorList)) {
-            blockMain(children.children[1], varsIntMap, errorList)
+        if (blockCondition(children.children[0], varsIntMap, console, ctx)) {
+            blockMain(children.children[1], varsIntMap, console, ctx)
         } else {
-            blockMain(children.children[2], varsIntMap, errorList)
+            blockMain(children.children[2], varsIntMap, console, ctx)
         }
     }
     else if(children.children.size == 2){
-        if (blockCondition(children.children[0], varsIntMap, errorList)) {
-            blockMain(children.children[1], varsIntMap, errorList)
+        if (blockCondition(children.children[0], varsIntMap, console, ctx)) {
+            blockMain(children.children[1], varsIntMap, console, ctx)
         }
     }
 }
 
-private fun blockPrint(children: TreeNode<String>, varsIntMap: MutableMap<String, Int>, errorList: MutableList<String>) {
+private fun blockPrint(children: TreeNode<String>, varsIntMap: MutableMap<String, Int>, console: LinearLayout, ctx: Context) {
     for(i in children.children){
-        println(calculatePolishString(i.value, varsIntMap).toString())
+        printInConsole(calculatePolishString(i.value, varsIntMap).toString(), console, ctx)
     }
 }
 
-private fun blockAssign(children: TreeNode<String>, varsIntMap: MutableMap<String, Int>, errorList: MutableList<String>) {
+private fun blockAssign(children: TreeNode<String>, varsIntMap: MutableMap<String, Int>, console: LinearLayout, ctx: Context) {
     if (varsIntMap.containsKey(children.children[0].value)) {
         varsIntMap[children.children[0].value] = calculatePolishString(children.children[1].value, varsIntMap)
     }
     else
-        errorList.add("Unknown var name in assignment")
+        printInConsole("#Unknown var name in assignment", console, ctx)
 }
 
-private fun blockNew(children: TreeNode<String>, localVarsIntMap: MutableMap<String, Int>, varsIntMap: MutableMap<String, Int>, errorList: MutableList<String>) {
+private fun blockNew(children: TreeNode<String>, localVarsIntMap: MutableMap<String, Int>, varsIntMap: MutableMap<String, Int>, console: LinearLayout, ctx: Context) {
     if (children.children[0].value == "int") {
         for(i in children.children[1].children){
             if(varsIntMap.containsKey(i.value)){
-                errorList.add("Var with name \"${i.value}\" already exists")
+                printInConsole("#Var with name \"${i.value}\" already exists", console, ctx)
             }
             else{
                 varsIntMap[i.value] = 0
@@ -95,7 +98,7 @@ private fun blockNew(children: TreeNode<String>, localVarsIntMap: MutableMap<Str
     }
 }
 
-private fun blockCondition(children: TreeNode<String>, varsIntMap: MutableMap<String, Int>, errorList: MutableList<String>): Boolean {
+private fun blockCondition(children: TreeNode<String>, varsIntMap: MutableMap<String, Int>, console: LinearLayout, ctx: Context): Boolean {
 
     var res = false
 
@@ -132,7 +135,7 @@ private fun blockCondition(children: TreeNode<String>, varsIntMap: MutableMap<St
         }
     }
     else
-        errorList.add("Invalid condition block")
+        printInConsole("#Invalid condition block", console, ctx)
 
     return res
 }

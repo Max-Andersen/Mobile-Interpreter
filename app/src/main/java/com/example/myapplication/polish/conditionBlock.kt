@@ -1,18 +1,21 @@
 package com.example.myapplication.polish
 
+import android.content.Context
+import android.widget.LinearLayout
+import com.example.myapplication.printInConsole
 import com.example.myapplication.structs.tree.TreeNode
 
-private fun helpWithRegExp(tree: TreeNode<String>, text: String, errorList: MutableList<String>){
+private fun helpWithRegExp(tree: TreeNode<String>, text: String, console: LinearLayout, ctx: Context){
     var matchResult = "[^<=!>]+".toRegex().find(text)
 
     if(matchResult != null)
-        expressionBlock(tree.children[0], matchResult.value.trim(), errorList)
+        expressionBlock(tree.children[0], matchResult.value.trim(), console, ctx)
     matchResult = matchResult?.next()
     if(matchResult != null)
-        expressionBlock(tree.children[0], matchResult.value.trim(), errorList)
+        expressionBlock(tree.children[0], matchResult.value.trim(), console, ctx)
 }
 
-fun conditionBlock(tree: TreeNode<String>, text: String, errorList: MutableList<String>){
+fun conditionBlock(tree: TreeNode<String>, text: String, console: LinearLayout, ctx: Context){
 
     //лишние символы
     var matchResult = "^[a-zA-Z_0-9+\\-/*%()<!=>\\s]*$".toRegex().find(text)
@@ -20,31 +23,31 @@ fun conditionBlock(tree: TreeNode<String>, text: String, errorList: MutableList<
     if(matchResult?.value == text){
         if(text.contains("^[^<=!>]*<[^<=!>]*$".toRegex())){
             tree.children[0].add(TreeNode("<"))
-            helpWithRegExp(tree, text, errorList)
+            helpWithRegExp(tree, text, console, ctx)
         }
         else if(text.contains("^[^<=!>]*>[^<=!>]*$".toRegex())){
             tree.children[0].add(TreeNode(">"))
-            helpWithRegExp(tree, text, errorList)
+            helpWithRegExp(tree, text, console, ctx)
         }
         else if(text.contains("^[^<=!>]*<=[^<=!>]*$".toRegex())){
             tree.children[0].add(TreeNode("<="))
-            helpWithRegExp(tree, text, errorList)
+            helpWithRegExp(tree, text, console, ctx)
         }
         else if(text.contains("^[^<=!>]*>=[^<=!>]*$".toRegex())){
             tree.children[0].add(TreeNode(">="))
-            helpWithRegExp(tree, text, errorList)
+            helpWithRegExp(tree, text, console, ctx)
         }
         else if(text.contains("^[^<=!>]*==[^<=!>]*$".toRegex())){
             tree.children[0].add(TreeNode("=="))
-            helpWithRegExp(tree, text, errorList)
+            helpWithRegExp(tree, text, console, ctx)
         }
         else if(text.contains("^[^<=!>]*!=[^<=!>]*$".toRegex())){
             tree.children[0].add(TreeNode("!="))
-            helpWithRegExp(tree, text, errorList)
+            helpWithRegExp(tree, text, console, ctx)
         }
         else
-            errorList.add("Invalid condition block")
+            printInConsole("#Invalid condition block", console, ctx)
     }
     else
-        errorList.add("Invalid condition block")
+        printInConsole("#Invalid condition block", console, ctx)
 }

@@ -1,8 +1,11 @@
 package com.example.myapplication.polish
 
+import android.content.Context
+import android.widget.LinearLayout
+import com.example.myapplication.printInConsole
 import com.example.myapplication.structs.tree.TreeNode
 
-fun expressionBlock(tree: TreeNode<String>, text: String, errorList: MutableList<String>){
+fun expressionBlock(tree: TreeNode<String>, text: String, console: LinearLayout, ctx: Context){
 
     var textExpression = text
 
@@ -54,8 +57,8 @@ fun expressionBlock(tree: TreeNode<String>, text: String, errorList: MutableList
             tree.add(TreeNode(",+".toRegex().replace(polString.expression, ",")))
         }
         else
-            errorList.add("Invalid expression")
+            printInConsole("#Invalid expression", console, ctx)
     }
     else
-        errorList.add("Invalid expression")
+        printInConsole("#Invalid expression", console, ctx)
 }

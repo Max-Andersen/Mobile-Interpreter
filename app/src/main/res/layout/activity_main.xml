@@ -47,6 +47,7 @@
 
     </com.otaliastudios.zoom.ZoomLayout>
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
@@ -84,6 +85,49 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/menu" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:id="@+id/consoleScroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="10"
+        android:fillViewport="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/CreateConsole"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="1"
+            android:background="#1B2549"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingBottom="100dp"
+            android:visibility="invisible"
+            android:weightSum="100">
+
+            <ImageButton
+                android:id="@+id/consoleCloseBtn"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="0"
+                android:alpha="1"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="fitStart"
+                app:srcCompat="@drawable/close" />
+
+            <TextView
+                android:id="@+id/StartConsoleMessage"
+                android:layout_width="307dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/jura"
+                android:text="TTKSMT is ready to work . . ."
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+    </ScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/startEnd"
@@ -124,7 +168,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/burgerMenu"
@@ -229,51 +272,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <LinearLayout
-        android:id="@+id/CreateConsole"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:alpha="1"
-        android:background="#1B2549"
-        android:orientation="vertical"
-        android:visibility="invisible"
-        android:weightSum="100"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageButton
-            android:id="@+id/consoleCloseBtn"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_weight="10"
-            android:alpha="1"
-            android:backgroundTint="@android:color/transparent"
-            android:scaleType="fitStart"
-            app:srcCompat="@drawable/close" />
-
-        <TextView
-            android:id="@+id/StartConsoleMessage"
-            android:layout_width="307dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/jura"
-            android:text="TTKSMT is ready to work . . ."
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="10"
-            android:fontFamily="@font/jura"
-            android:text=">>"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
-    </LinearLayout>
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/blockAndVariable"

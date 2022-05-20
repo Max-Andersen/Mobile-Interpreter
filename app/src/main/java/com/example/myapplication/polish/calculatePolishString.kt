@@ -1,5 +1,7 @@
 package com.example.myapplication.polish
 
+import java.lang.Exception
+
 
 fun calculatePolishString (polishString: String, variables: MutableMap<String, Int>) : Int{
     println(polishString)
@@ -12,7 +14,12 @@ fun calculatePolishString (polishString: String, variables: MutableMap<String, I
         }
         else{
             if (expr.matches(Regex("[1-9][\\d]*"))){
-                stack.ordinaryPush(expr.toInt())
+                try {
+                    stack.ordinaryPush(expr.toInt())
+                }
+                catch (e: Exception){
+                    stack.ordinaryPush(0)
+                }
             }
             else{
                 val second = stack.ordinaryPop()

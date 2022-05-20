@@ -31,25 +31,35 @@ class StartProgram(context: Context, start: StartBtn) {
 
     private fun workWithWhile(tree: TreeNode<String>, view: WhileBtn){
 
+        tree.add(TreeNode("condition"))
+        tree.add(TreeNode("body"))
+
         if((view[2] as ViewGroup).children.count()!=0)
         {
-
             when((view[2] as ViewGroup)[0]){
                 is WhileBtn-> {
-                    tree.add(TreeNode("while"))
-                    workWithWhile(tree.children.last(), (view[2] as ViewGroup)[0] as WhileBtn)
+                    tree.children[1].add(TreeNode("while"))
+                    workWithWhile(tree.children[1].children.last(), (view[2] as ViewGroup)[0] as WhileBtn)
                 }
                 is OutputBtn->{
-                    tree.add(TreeNode("print"))
-                    workWithPrint(tree.children.last(), (view[2] as ViewGroup)[0] as OutputBtn)
+                    tree.children[1].add(TreeNode("print"))
+                    workWithPrint(tree.children[1].children.last(), (view[2] as ViewGroup)[0] as OutputBtn)
                 }
                 is VariableBtn->{
-                    tree.add(TreeNode("assign"))
-                    workWithVarAssignment(tree.children.last(), (view[2] as ViewGroup)[0] as VariableBtn)
+                    tree.children[1].add(TreeNode("assign"))
+                    workWithVarAssignment(tree.children[1].children.last(), (view[2] as ViewGroup)[0] as VariableBtn)
                 }
                 is CreateVarBtn->{
-                    tree.add(TreeNode("new"))
-                    workWithNewVar(tree.children.last(), (view[2] as ViewGroup)[0] as CreateVarBtn)
+                    tree.children[1].add(TreeNode("new"))
+                    workWithNewVar(tree.children[1].children.last(), (view[2] as ViewGroup)[0] as CreateVarBtn)
+                }
+                is IfBtn->{
+                    tree.children[1].add(TreeNode("if_block"))
+                    workWithIf(tree.children[1].children.last(), (view[2] as ViewGroup)[0] as IfBtn)
+                }
+                is IfElseBtn->{
+                    tree.children[1].add(TreeNode("if_block"))
+                    workWithIfElse(tree.children[1].children.last(), (view[2] as ViewGroup)[0] as IfElseBtn)
                 }
             }
         }
@@ -71,6 +81,14 @@ class StartProgram(context: Context, start: StartBtn) {
                 is CreateVarBtn->{
                     tree.parent?.add(TreeNode("new"))
                     workWithNewVar(tree.parent?.children?.last()!!, (view[5] as ViewGroup)[0] as CreateVarBtn)
+                }
+                is IfBtn->{
+                    tree.parent?.add(TreeNode("if_block"))
+                    workWithIf(tree.parent?.children?.last()!!, (view[5] as ViewGroup)[0] as IfBtn)
+                }
+                is IfElseBtn->{
+                    tree.parent?.add(TreeNode("if_block"))
+                    workWithIfElse(tree.parent?.children?.last()!!, (view[5] as ViewGroup)[0] as IfElseBtn)
                 }
             }
         }
@@ -110,6 +128,14 @@ class StartProgram(context: Context, start: StartBtn) {
                     tree.parent?.add(TreeNode("new"))
                     workWithNewVar(tree.parent?.children?.last()!!, (view[2] as ViewGroup)[0] as CreateVarBtn)
                 }
+                is IfBtn->{
+                    tree.parent?.add(TreeNode("if_block"))
+                    workWithIf(tree.parent?.children?.last()!!, (view[2] as ViewGroup)[0] as IfBtn)
+                }
+                is IfElseBtn->{
+                    tree.parent?.add(TreeNode("if_block"))
+                    workWithIfElse(tree.parent?.children?.last()!!, (view[2] as ViewGroup)[0] as IfElseBtn)
+                }
             }
         }
     }
@@ -134,6 +160,14 @@ class StartProgram(context: Context, start: StartBtn) {
                 is CreateVarBtn->{
                     tree.parent?.add(TreeNode("new"))
                     workWithNewVar(tree.parent?.children?.last()!!, (view[1] as ViewGroup)[0] as CreateVarBtn)
+                }
+                is IfBtn->{
+                    tree.parent?.add(TreeNode("if_block"))
+                    workWithIf(tree.parent?.children?.last()!!, (view[1] as ViewGroup)[0] as IfBtn)
+                }
+                is IfElseBtn->{
+                    tree.parent?.add(TreeNode("if_block"))
+                    workWithIfElse(tree.parent?.children?.last()!!, (view[1] as ViewGroup)[0] as IfElseBtn)
                 }
             }
         }
@@ -187,6 +221,176 @@ class StartProgram(context: Context, start: StartBtn) {
                     tree.parent?.add(TreeNode("new"))
                     workWithNewVar(tree.parent?.children?.last()!!, (view[1] as ViewGroup)[0] as CreateVarBtn)
                 }
+                is IfBtn->{
+                    tree.parent?.add(TreeNode("if_block"))
+                    workWithIf(tree.parent?.children?.last()!!, (view[1] as ViewGroup)[0] as IfBtn)
+                }
+                is IfElseBtn->{
+                    tree.parent?.add(TreeNode("if_block"))
+                    workWithIfElse(tree.parent?.children?.last()!!, (view[1] as ViewGroup)[0] as IfElseBtn)
+                }
+            }
+        }
+    }
+
+    private fun workWithIf(tree: TreeNode<String>, view: IfBtn){
+
+        tree.add(TreeNode("condition"))
+        tree.add(TreeNode("true_body"))
+
+
+        if((view[2] as ViewGroup).children.count()!=0)
+        {
+            when((view[2] as ViewGroup)[0]){
+                is WhileBtn-> {
+                    tree.children[1].add(TreeNode("while"))
+                    workWithWhile(tree.children[1].children.last(), (view[2] as ViewGroup)[0] as WhileBtn)
+                }
+                is OutputBtn->{
+                    tree.children[1].add(TreeNode("print"))
+                    workWithPrint(tree.children[1].children.last(), (view[2] as ViewGroup)[0] as OutputBtn)
+                }
+                is VariableBtn->{
+                    tree.children[1].add(TreeNode("assign"))
+                    workWithVarAssignment(tree.children[1].children.last(), (view[2] as ViewGroup)[0] as VariableBtn)
+                }
+                is CreateVarBtn->{
+                    tree.children[1].add(TreeNode("new"))
+                    workWithNewVar(tree.children[1].children.last(), (view[2] as ViewGroup)[0] as CreateVarBtn)
+                }
+                is IfBtn->{
+                    tree.children[1].add(TreeNode("if_block"))
+                    workWithIf(tree.children[1].children.last(), (view[2] as ViewGroup)[0] as IfBtn)
+                }
+                is IfElseBtn->{
+                    tree.children[1].add(TreeNode("if_block"))
+                    workWithIfElse(tree.children[1].children.last(), (view[2] as ViewGroup)[0] as IfElseBtn)
+                }
+            }
+        }
+        if((view[5] as ViewGroup).children.count()!=0){
+
+            when((view[5] as ViewGroup)[0]){
+                is WhileBtn-> {
+                    tree.parent?.add(TreeNode("while"))
+                    workWithWhile(tree.parent?.children?.last()!!, (view[5] as ViewGroup)[0] as WhileBtn)
+                }
+                is OutputBtn->{
+                    tree.parent?.add(TreeNode("print"))
+                    workWithPrint(tree.parent?.children?.last()!!, (view[5] as ViewGroup)[0] as OutputBtn)
+                }
+                is VariableBtn->{
+                    tree.parent?.add(TreeNode("assign"))
+                    workWithVarAssignment(tree.parent?.children?.last()!!, (view[5] as ViewGroup)[0] as VariableBtn)
+                }
+                is CreateVarBtn->{
+                    tree.parent?.add(TreeNode("new"))
+                    workWithNewVar(tree.parent?.children?.last()!!, (view[5] as ViewGroup)[0] as CreateVarBtn)
+                }
+                is IfBtn->{
+                    tree.parent?.add(TreeNode("if_block"))
+                    workWithIf(tree.parent?.children?.last()!!, (view[5] as ViewGroup)[0] as IfBtn)
+                }
+                is IfElseBtn->{
+                    tree.parent?.add(TreeNode("if_block"))
+                    workWithIfElse(tree.parent?.children?.last()!!, (view[5] as ViewGroup)[0] as IfElseBtn)
+                }
+            }
+        }
+    }
+
+    private fun workWithIfElse(tree: TreeNode<String>, view: IfElseBtn){
+
+        tree.add(TreeNode("condition"))
+        tree.add(TreeNode("true_body"))
+        tree.add(TreeNode("false_body"))
+
+
+        if((view[2] as ViewGroup).children.count()!=0)
+        {
+            when((view[2] as ViewGroup)[0]){
+                is WhileBtn-> {
+                    tree.children[1].add(TreeNode("while"))
+                    workWithWhile(tree.children.last(), (view[2] as ViewGroup)[0] as WhileBtn)
+                }
+                is OutputBtn->{
+                    tree.children[1].add(TreeNode("print"))
+                    workWithPrint(tree.children[1].children.last(), (view[2] as ViewGroup)[0] as OutputBtn)
+                }
+                is VariableBtn->{
+                    tree.children[1].add(TreeNode("assign"))
+                    workWithVarAssignment(tree.children[1].children.last(), (view[2] as ViewGroup)[0] as VariableBtn)
+                }
+                is CreateVarBtn->{
+                    tree.children[1].add(TreeNode("new"))
+                    workWithNewVar(tree.children[1].children.last(), (view[2] as ViewGroup)[0] as CreateVarBtn)
+                }
+                is IfBtn->{
+                    tree.children[1].add(TreeNode("if_block"))
+                    workWithIf(tree.children[1].children.last(), (view[2] as ViewGroup)[0] as IfBtn)
+                }
+                is IfElseBtn->{
+                    tree.children[1].add(TreeNode("if_block"))
+                    workWithIfElse(tree.children[1].children.last(), (view[2] as ViewGroup)[0] as IfElseBtn)
+                }
+            }
+        }
+        if((view[3] as ViewGroup).children.count()!=0)
+        {
+            when((view[3] as ViewGroup)[0]){
+                is WhileBtn-> {
+                    tree.children[2].add(TreeNode("while"))
+                    workWithWhile(tree.children.last(), (view[3] as ViewGroup)[0] as WhileBtn)
+                }
+                is OutputBtn->{
+                    tree.children[2].add(TreeNode("print"))
+                    workWithPrint(tree.children[2].children.last(), (view[3] as ViewGroup)[0] as OutputBtn)
+                }
+                is VariableBtn->{
+                    tree.children[2].add(TreeNode("assign"))
+                    workWithVarAssignment(tree.children[2].children.last(), (view[3] as ViewGroup)[0] as VariableBtn)
+                }
+                is CreateVarBtn->{
+                    tree.children[2].add(TreeNode("new"))
+                    workWithNewVar(tree.children[2].children.last(), (view[3] as ViewGroup)[0] as CreateVarBtn)
+                }
+                is IfBtn->{
+                    tree.children[2].add(TreeNode("if_block"))
+                    workWithIf(tree.children[2].children.last(), (view[3] as ViewGroup)[0] as IfBtn)
+                }
+                is IfElseBtn->{
+                    tree.children[2].add(TreeNode("if_block"))
+                    workWithIfElse(tree.children[2].children.last(), (view[3] as ViewGroup)[0] as IfElseBtn)
+                }
+            }
+        }
+        if((view[10] as ViewGroup).children.count()!=0){
+
+            when((view[10] as ViewGroup)[0]){
+                is WhileBtn-> {
+                    tree.parent?.add(TreeNode("while"))
+                    workWithWhile(tree.parent?.children?.last()!!, (view[10] as ViewGroup)[0] as WhileBtn)
+                }
+                is OutputBtn->{
+                    tree.parent?.add(TreeNode("print"))
+                    workWithPrint(tree.parent?.children?.last()!!, (view[10] as ViewGroup)[0] as OutputBtn)
+                }
+                is VariableBtn->{
+                    tree.parent?.add(TreeNode("assign"))
+                    workWithVarAssignment(tree.parent?.children?.last()!!, (view[10] as ViewGroup)[0] as VariableBtn)
+                }
+                is CreateVarBtn->{
+                    tree.parent?.add(TreeNode("new"))
+                    workWithNewVar(tree.parent?.children?.last()!!, (view[10] as ViewGroup)[0] as CreateVarBtn)
+                }
+                is IfBtn->{
+                    tree.parent?.add(TreeNode("if_block"))
+                    workWithIf(tree.parent?.children?.last()!!, (view[10] as ViewGroup)[0] as IfBtn)
+                }
+                is IfElseBtn->{
+                    tree.parent?.add(TreeNode("if_block"))
+                    workWithIfElse(tree.parent?.children?.last()!!, (view[10] as ViewGroup)[0] as IfElseBtn)
+                }
             }
         }
     }
@@ -211,6 +415,14 @@ class StartProgram(context: Context, start: StartBtn) {
                     myTree.add(TreeNode("new"))
                     workWithNewVar(myTree.children.last(), (start[2] as ViewGroup)[0] as CreateVarBtn)
                 }
+                is IfBtn->{
+                    myTree.add(TreeNode("if_block"))
+                    workWithIf(myTree.children.last(), (start[2] as ViewGroup)[0] as IfBtn)
+                }
+                is IfElseBtn->{
+                    myTree.add(TreeNode("if_block"))
+                    workWithIfElse(myTree.children.last(), (start[2] as ViewGroup)[0] as IfElseBtn)
+                }
             }
         }
     }
@@ -231,7 +443,7 @@ class StartProgram(context: Context, start: StartBtn) {
                     errorList += "Empty while_block found"
             }
             if (i.value == "if_block") {
-                if (i.children.size == 3) {
+                if (i.children.size == 2 || i.children.size == 3) {
                     blockIf(i)
                 } else
                     errorList += "Empty if_block found"
@@ -268,10 +480,17 @@ class StartProgram(context: Context, start: StartBtn) {
     }
 
     private fun blockIf(children: TreeNode<String>) {
-        if (blockCondition(children.children[0])) {
-            blockMain(children.children[1])
-        } else {
-            blockMain(children.children[2])
+        if(children.children.size == 3) {
+            if (blockCondition(children.children[0])) {
+                blockMain(children.children[1])
+            } else {
+                blockMain(children.children[2])
+            }
+        }
+        else if(children.children.size == 2){
+            if (blockCondition(children.children[0])) {
+                blockMain(children.children[1])
+            }
         }
     }
 
@@ -393,7 +612,7 @@ class StartProgram(context: Context, start: StartBtn) {
         myTree.printEachLevel()
 
         //Запуск программы
-        blockMain(myTree)
+        //blockMain(myTree)
 
         //Вывод полученных ошибок
         if (errorList.size != 0) {

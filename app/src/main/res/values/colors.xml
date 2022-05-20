@@ -13,5 +13,15 @@
     <color name="variable_purple">#6E44C9</color>
     <color name='ifcolor'>#03A9F4</color>
     <color name="BreakColor">#930B0B</color>
+    <color name='ghostwhite'>#E8E9F3</color>
+    <color name="lightgray">#CECECE</color>
+    <color name="quicksilver">#A6A6A8</color>
+    <color name="raisinblack">#272635</color>
+    <color name="blizzardblue">#B1E5FE</color>
+    <color name="mint">#F1F7EE</color>
+    <color name="orangeaerospcae">#FE5D26</color>
+    <color name="maxpurple">#DA0342</color>
+    <color name="maxyellow">#FDF108</color>
+    <color name="maxblue">#5DA1B1</color>
 
 </resources>

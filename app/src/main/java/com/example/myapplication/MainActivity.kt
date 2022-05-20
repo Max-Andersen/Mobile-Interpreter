@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -11,6 +12,8 @@ import androidx.core.view.get
 import com.example.myapplication.blocks.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
+import java.util.*
+import kotlin.math.max
 import kotlin.system.exitProcess
 
 
@@ -173,6 +176,85 @@ class MainActivity : AppCompatActivity() {
             zoomLayout.setHorizontalPanEnabled(true)
             zoomLayout.setZoomEnabled(true)
         }
+
+
+        //------------------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------------------
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ТЕМЫ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        maxTheme.setOnClickListener{
+            header.setBackgroundColor(Color.parseColor("#00EAFD"))
+            startEnd.setBackgroundColor(Color.parseColor("#EF799F"))
+            blockscreen.setBackgroundColor(Color.parseColor("#5DA1B1"))
+            variableBlock.setBackgroundColor(Color.parseColor("#5DA1B1"))
+            Workspace.setBackgroundColor(Color.parseColor("#4D5397"))
+            CreateConsole.setBackgroundColor(Color.parseColor("#4D5397"))
+            burgerMenu.setBackgroundColor(Color.parseColor("#9864BA"))
+            maxTheme.setBackgroundColor(Color.parseColor("#00EAFD"))
+            kirillTheme.setBackgroundColor(Color.parseColor("#00EAFD"))
+            titTheme.setBackgroundColor(Color.parseColor("#00EAFD"))
+            randomTheme.setBackgroundColor(Color.parseColor("#00EAFD"))
+            blockbtn.setBackgroundColor(Color.parseColor("#00EAFD"))
+            varbtn.setBackgroundColor(Color.parseColor("#00EAFD"))
+            headerText.setTextColor(Color.parseColor("#000000"))
+            consoleBtn.setImageResource(R.drawable.cyber)
+        }
+        kirillTheme.setOnClickListener{
+            header.setBackgroundColor(Color.parseColor("#D1DEDE"))
+            startEnd.setBackgroundColor(Color.parseColor("#C58882"))
+            blockscreen.setBackgroundColor(Color.parseColor("#D1DEDE"))
+            variableBlock.setBackgroundColor(Color.parseColor("#D1DEDE"))
+            Workspace.setBackgroundColor(Color.parseColor("#EAD2AC"))
+            CreateConsole.setBackgroundColor(Color.parseColor("#C58882"))
+            burgerMenu.setBackgroundColor(Color.parseColor("#D1DEDE"))
+            maxTheme.setBackgroundColor(Color.parseColor("#AE5B42"))
+            kirillTheme.setBackgroundColor(Color.parseColor("#AE5B42"))
+            titTheme.setBackgroundColor(Color.parseColor("#AE5B42"))
+            randomTheme.setBackgroundColor(Color.parseColor("#AE5B42"))
+            blockbtn.setBackgroundColor(Color.parseColor("#AE5B42"))
+            varbtn.setBackgroundColor(Color.parseColor("#AE5B42"))
+            headerText.setTextColor(Color.parseColor("#AE5B42"))
+            consoleBtn.setImageResource(R.drawable.glaz)
+        }
+        titTheme.setOnClickListener{
+            header.setBackgroundColor(Color.parseColor("#E0CF3E"))
+            startEnd.setBackgroundColor(Color.parseColor("#872380"))
+            blockscreen.setBackgroundColor(Color.parseColor("#E0CF3E"))
+            variableBlock.setBackgroundColor(Color.parseColor("#E0CF3E"))
+            Workspace.setBackgroundColor(Color.parseColor("#284281"))
+            CreateConsole.setBackgroundColor(Color.parseColor("#284281"))
+            burgerMenu.setBackgroundColor(Color.parseColor("#C5E961"))
+            maxTheme.setBackgroundColor(Color.parseColor("#E0CF3E"))
+            kirillTheme.setBackgroundColor(Color.parseColor("#E0CF3E"))
+            titTheme.setBackgroundColor(Color.parseColor("#E0CF3E"))
+            randomTheme.setBackgroundColor(Color.parseColor("#E0CF3E"))
+            blockbtn.setBackgroundColor(Color.parseColor("#2CAECD"))
+            varbtn.setBackgroundColor(Color.parseColor("#2CAECD"))
+            headerText.setTextColor(Color.parseColor("#872380"))
+            consoleBtn.setImageResource(R.drawable.spikeee)
+        }
+        randomTheme.setOnClickListener{
+
+            val rnd = Random()
+            header.setBackgroundColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)))
+            startEnd.setBackgroundColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)))
+            blockscreen.setBackgroundColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)))
+            variableBlock.setBackgroundColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)))
+            Workspace.setBackgroundColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)))
+            CreateConsole.setBackgroundColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)))
+            burgerMenu.setBackgroundColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)))
+            maxTheme.setBackgroundColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)))
+            kirillTheme.setBackgroundColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)))
+            titTheme.setBackgroundColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)))
+            randomTheme.setBackgroundColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)))
+            blockbtn.setBackgroundColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)))
+            varbtn.setBackgroundColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)))
+            headerText.setTextColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)))
+            consoleBtn.setImageResource(R.drawable.command)
+        }
+
+        //------------------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------------------
 
 
 

@@ -1,6 +1,8 @@
 package com.example.myapplication
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
@@ -22,7 +24,7 @@ import kotlin.system.exitProcess
 
 
 class MainActivity : AppCompatActivity() {
-    var flagFirstOutInConsole = false
+    private var flagFirstOutInConsole = false
 
     private fun blockInit(){
 
@@ -149,7 +151,7 @@ class MainActivity : AppCompatActivity() {
 
             if (!flagFirstOutInConsole){
                 val handler = Handler()
-                var time = 0;
+                var time = 0
                 while (time < 100000) {
                     handler.postDelayed({
                         StartConsoleMessage?.text = "TTKSMT is ready to work . "
@@ -331,28 +333,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun save(fileContent: String) {
-        Toast.makeText(this, "зашёл", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "зашёл", Toast.LENGTH_SHORT).show()
         if (isStoragePermissionGranted()) {
             if (fileContent != "") {
                 val filename = "Prikol.txt"
                 val filepath = "DirForSaves"
-                val myExternalFile = File(getExternalFilesDir(filepath), filename);
+                val myExternalFile = File(getExternalFilesDir(filepath), filename)
                 try {
-                    val fos = FileOutputStream(myExternalFile);
-                    fos.write(fileContent.toByteArray());
-                    fos.close();
+                    val fos = FileOutputStream(myExternalFile)
+                    fos.write(fileContent.toByteArray())
+                    fos.close()
                 } catch (e: Exception) {
-                    e.printStackTrace();
-                    Toast.makeText(this, "Не сохранился :(", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace()
+                    Toast.makeText(this, "Не сохранился :(", Toast.LENGTH_SHORT).show()
                 }
 
-                Toast.makeText(this, "Сохранился", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Сохранился", Toast.LENGTH_SHORT).show()
             } else {
 
-                Toast.makeText(this, "Не сохранился :(", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Не сохранился :(", Toast.LENGTH_SHORT).show()
             }
         }
-        Toast.makeText(this, "вышел", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "вышел", Toast.LENGTH_SHORT).show()
     }
 
 

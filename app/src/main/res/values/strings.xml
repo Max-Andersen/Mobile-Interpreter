@@ -12,6 +12,9 @@
     <string name="When">When</string>
     <string name="Click">Clicked</string>
     <string name="Output">Output</string>
+    <string name="iftext">If</string>
+    <string name="Else">Else</string>
+    <string name="Break">Break</string>
     <string-array name="varTypes">
         <item>Int</item>
     </string-array>

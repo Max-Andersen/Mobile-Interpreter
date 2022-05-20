@@ -147,7 +147,12 @@ class StartProgram(context: Context, start: StartBtn) {
 
             var matchResult = "[a-zA-Z_0-9\\s,]*".toRegex().find((view[4] as EditText).text.toString())
 
-            if(matchResult?.value.toString() == (view[4] as EditText).text.toString() && !(view[4] as EditText).text.toString().contains(",\\s*,".toRegex()) && !(view[4] as EditText).text.toString().contains("^\\s*,".toRegex())){
+            if(matchResult?.value.toString() == (view[4] as EditText).text.toString()
+                && !(view[4] as EditText).text.toString().contains(",\\s*,".toRegex())
+                && !(view[4] as EditText).text.toString().contains("^\\s*[,0-9]".toRegex())
+                && !(view[4] as EditText).text.toString().contains(",\\s*$".toRegex())
+                && !(view[4] as EditText).text.toString().contains(",\\s*[0-9]".toRegex())
+                && !(view[4] as EditText).text.toString().contains("[a-zA-Z0-9_]\\s+[a-zA-Z0-9_]".toRegex())){
                 val str = (view[4] as EditText).text.toString().replace("\\s\\s".toRegex(), " ")
 
                 matchResult = "[a-zA-Z_][a-zA-Z0-9_]*".toRegex().find(str)
@@ -159,6 +164,8 @@ class StartProgram(context: Context, start: StartBtn) {
                     matchResult = matchResult.next()
                 }
             }
+            else
+                errorList.add("Invalid variable name")
         }
 
         if((view[1] as ViewGroup).children.count()!=0){
@@ -276,12 +283,12 @@ class StartProgram(context: Context, start: StartBtn) {
                 if(varsIntMap.containsKey(children.children[0].value))
                     outputList += varsIntMap[children.children[0].value].toString()
                 else
-                    errorList.add("Unknown var name")
+                    errorList.add("Unknown var name in output")
             }
             "..." -> {
 
             }
-            else -> errorList += "Unknown var type found"
+            else -> errorList += "Unknown var type in output"
         }
 
     }
@@ -291,6 +298,8 @@ class StartProgram(context: Context, start: StartBtn) {
         if (children.children[0].value == "varInt") {
             varsIntMap[children.children[0].children[0].value] = blockIntExpression(children.children[1])
         }
+        else
+            errorList.add("Unknown var type in var creation")
     }
 
 
@@ -298,7 +307,7 @@ class StartProgram(context: Context, start: StartBtn) {
         if (children.children[0].value == "int") {
             for(i in children.children[1].children){
                 if(varsIntMap.containsKey(i.value)){
-                    errorList.add("Var with name ${i.value} already exists")
+                    errorList.add("Var with name \"${i.value}\" already exists")
                 }
                 else{
                     varsIntMap[i.value] = 0

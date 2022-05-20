@@ -206,7 +206,7 @@ class MainActivity : AppCompatActivity() {
         //ЗАПУСК!!!!!!!!!!!!!ИУУУУУУУУУУУУ!!!!!!!!
         imageButton4.setOnClickListener {
 
-            printNodes(start)
+            //printNodes(start)
 
             val program = StartProgram(this, start)
             program.main()

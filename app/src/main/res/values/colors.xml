@@ -23,5 +23,19 @@
     <color name="maxpurple">#DA0342</color>
     <color name="maxyellow">#FDF108</color>
     <color name="maxblue">#5DA1B1</color>
-
+    <color name="maxheader">#00EAFD</color>
+    <color name="maxstart">#EF799F</color>
+    <color name="maxblock">#5DA1B1</color>
+    <color name="maxwork">#4D5397</color>
+    <color name="maxburger">#9864BA</color>
+    <color name="maxbtn">#00EAFD</color>
+    <color name="kirillheader">#D1DEDE</color>
+    <color name="kirillstart">#C58882</color>
+    <color name="kirillwork">#EAD2AC</color>
+    <color name="kirillbtn">#AE5B42</color>
+    <color name="titheader">#E0CF3E</color>
+    <color name="titstart">#872380</color>
+    <color name="titwork">#284281</color>
+    <color name="titburger">#C5E961</color>
+    <color name="titbtn">#2CAECD</color>
 </resources>

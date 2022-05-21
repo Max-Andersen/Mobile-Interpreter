@@ -91,7 +91,7 @@ private fun blockPrint(
     ctx: Context
 ) {
     for (i in children.children) {
-        printInConsole(calculatePolishString(i.value, varsIntMap).toString(), console, ctx)
+        printInConsole(calculatePolishString(i.value, varsIntMap, console, ctx).toString(), console, ctx)
     }
 }
 
@@ -103,7 +103,7 @@ private fun blockAssign(
 ) {
     if (varsIntMap.containsKey(children.children[0].value)) {
         varsIntMap[children.children[0].value] =
-            calculatePolishString(children.children[1].value, varsIntMap)
+            calculatePolishString(children.children[1].value, varsIntMap, console, ctx)
     } else
         printInConsole("#Unknown var name in assignment", console, ctx)
 }
@@ -140,8 +140,10 @@ private fun blockCondition(
         if (children.children[0].value == "!=") {
             if (calculatePolishString(
                     children.children[1].value,
-                    varsIntMap
-                ) != calculatePolishString(children.children[2].value, varsIntMap)
+                    varsIntMap,
+                    console,
+                    ctx
+                ) != calculatePolishString(children.children[2].value, varsIntMap, console, ctx)
             ) {
                 res = true
             }
@@ -149,8 +151,10 @@ private fun blockCondition(
         if (children.children[0].value == "==") {
             if (calculatePolishString(
                     children.children[1].value,
-                    varsIntMap
-                ) == calculatePolishString(children.children[2].value, varsIntMap)
+                    varsIntMap,
+                    console,
+                    ctx
+                ) == calculatePolishString(children.children[2].value, varsIntMap, console, ctx)
             ) {
                 res = true
             }
@@ -158,8 +162,10 @@ private fun blockCondition(
         if (children.children[0].value == ">=") {
             if (calculatePolishString(
                     children.children[1].value,
-                    varsIntMap
-                ) >= calculatePolishString(children.children[2].value, varsIntMap)
+                    varsIntMap,
+                    console,
+                    ctx
+                ) >= calculatePolishString(children.children[2].value, varsIntMap, console, ctx)
             ) {
                 res = true
             }
@@ -167,8 +173,10 @@ private fun blockCondition(
         if (children.children[0].value == "<=") {
             if (calculatePolishString(
                     children.children[1].value,
-                    varsIntMap
-                ) <= calculatePolishString(children.children[2].value, varsIntMap)
+                    varsIntMap,
+                    console,
+                    ctx
+                ) <= calculatePolishString(children.children[2].value, varsIntMap, console, ctx)
             ) {
                 res = true
             }
@@ -176,8 +184,10 @@ private fun blockCondition(
         if (children.children[0].value == "<") {
             if (calculatePolishString(
                     children.children[1].value,
-                    varsIntMap
-                ) < calculatePolishString(children.children[2].value, varsIntMap)
+                    varsIntMap,
+                    console,
+                    ctx
+                ) < calculatePolishString(children.children[2].value, varsIntMap, console, ctx)
             ) {
                 res = true
             }
@@ -185,8 +195,10 @@ private fun blockCondition(
         if (children.children[0].value == ">") {
             if (calculatePolishString(
                     children.children[1].value,
-                    varsIntMap
-                ) > calculatePolishString(children.children[2].value, varsIntMap)
+                    varsIntMap,
+                    console,
+                    ctx
+                ) > calculatePolishString(children.children[2].value, varsIntMap, console, ctx)
             ) {
                 res = true
             }

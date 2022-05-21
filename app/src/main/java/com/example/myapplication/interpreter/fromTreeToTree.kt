@@ -247,7 +247,8 @@ private fun workWithVarAssignment(
     val textExpression = (view[2] as EditText).text.toString()
 
     tree.add(TreeNode(textVar.trim()))
-    expressionBlock(tree, textExpression, console, ctx)
+    if(textExpression.trim()!="")
+        expressionBlock(tree, textExpression, console, ctx)
 
 
     if ((view[1] as ViewGroup).children.count() != 0) {
@@ -338,7 +339,10 @@ private fun workWithNewVar(
 
             while (matchResult != null) {
 
-                tree.children[1].add(TreeNode(matchResult.value))
+                if(matchResult.value.trim()!="")
+                    tree.children[1].add(TreeNode(matchResult.value))
+                else
+                    printInConsole("#Invalid variable name", console, ctx)
 
                 matchResult = matchResult.next()
             }

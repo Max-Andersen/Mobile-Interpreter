@@ -1,9 +1,12 @@
 package com.example.myapplication.polish
 
+import android.content.Context
+import android.widget.LinearLayout
+import com.example.myapplication.printInConsole
 import java.lang.Exception
 
 
-fun calculatePolishString(polishString: String, variables: MutableMap<String, Int>): Int {
+fun calculatePolishString(polishString: String, variables: MutableMap<String, Int>, console: LinearLayout, ctx: Context): Int {
     val stack = Stack()
     var localPolishString = polishString
     while (localPolishString.isNotEmpty()) {
@@ -18,7 +21,15 @@ fun calculatePolishString(polishString: String, variables: MutableMap<String, In
                     stack.ordinaryPush(0)
                 }
             } else {
+                if(stack.isEmpty()){
+                    printInConsole("#Invalid expression", console, ctx)
+                    return 0
+                }
                 val second = stack.ordinaryPop()
+                if(stack.isEmpty()){
+                    printInConsole("#Invalid expression", console, ctx)
+                    return 0
+                }
                 val first = stack.ordinaryPop()
                 when (expr) {
                     "+" -> stack.ordinaryPush(first + second)

@@ -26,7 +26,7 @@ class PolishString constructor(expression: String) {
         for (char in str) {
             if (char in letterArray) {
                 reversePolish += char
-            } else {
+            } else if(reversePolish.isNotEmpty()){
                 when (char) {
                     '+', '-', '*', '/', '%', '(' -> {
                         if (reversePolish.last() in letterArray)

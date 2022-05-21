@@ -167,7 +167,8 @@ private fun workWithPrint(
 
         while (matchResult != null) {
 
-            expressionBlock(tree, matchResult.value.trim(), console, ctx)
+            if(matchResult.value.trim()!="")
+                expressionBlock(tree, matchResult.value.trim(), console, ctx)
 
             matchResult = matchResult.next()
         }

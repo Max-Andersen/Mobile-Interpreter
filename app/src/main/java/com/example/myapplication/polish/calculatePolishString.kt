@@ -47,8 +47,20 @@ fun calculatePolishString(polishString: String, variables: MutableMap<String, In
                     "+" -> stack.ordinaryPush(first + second)
                     "-" -> stack.ordinaryPush(first - second)
                     "*" -> stack.ordinaryPush(first * second)
-                    "/" -> stack.ordinaryPush(first / second)
-                    "%" -> stack.ordinaryPush(first % second)
+                    "/" -> {
+                        if(second == 0) {
+                            printInConsole("#Devision by 0", console, ctx)
+                            return 0
+                        }
+                        stack.ordinaryPush(first / second)
+                    }
+                    "%" -> {
+                        if(second == 0) {
+                            printInConsole("#Devision by 0", console, ctx)
+                            return 0
+                        }
+                        stack.ordinaryPush(first % second)
+                    }
                 }
             }
         }

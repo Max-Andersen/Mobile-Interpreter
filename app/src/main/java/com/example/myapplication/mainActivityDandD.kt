@@ -9,6 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.get
 import com.example.myapplication.blocks.*
 import com.otaliastudios.zoom.ZoomLayout
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
 
 //-----------------------------------------------------------------------------------------
@@ -21,7 +22,8 @@ fun mainActivityDandD(
     blockAndVariable: ConstraintLayout,
     plus1: ImageButton,
     consoleBtn: ImageButton,
-    Workspace: ConstraintLayout
+    Workspace: ConstraintLayout,
+    burgerOpen: ImageButton
 ): View.OnDragListener {
     return View.OnDragListener { view, event ->
         when (event.action) {
@@ -36,6 +38,7 @@ fun mainActivityDandD(
                 blockAndVariable.visibility = View.GONE
                 plus1.visibility = View.VISIBLE
                 consoleBtn.visibility = View.VISIBLE
+                burgerOpen.visibility = View.VISIBLE
                 zoomLayout.setVerticalPanEnabled(true)
                 zoomLayout.setHorizontalPanEnabled(true)
                 zoomLayout.setZoomEnabled(true)

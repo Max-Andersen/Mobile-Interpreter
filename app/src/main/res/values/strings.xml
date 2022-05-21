@@ -28,6 +28,10 @@
     <string name="blocks">blocks</string>
     <string name="new_">New</string>
     <string name="equals">=</string>
+    <string name="withLove">Сделано с любовью,</string>
+    <string name="withTit">с усидчивастью Тита</string>
+    <string name="withKirill">с нытьём Кирилла,</string>
+    <string name="withMaxim">с Максимом</string>
     <string-array name="varTypes">
         <item>Int</item>
     </string-array>

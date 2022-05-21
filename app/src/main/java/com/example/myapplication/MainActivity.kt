@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import ExitDialog
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
@@ -76,7 +77,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         exit.setOnClickListener {
-            exitProcess(-1)
+            val myDialogFragment = ExitDialog(this, burgerOpen, this)
+            myDialogFragment.onClick()
         }
 
         closeBurgerMenu.setOnClickListener {
@@ -399,7 +401,8 @@ class MainActivity : AppCompatActivity() {
                 blockAndVariable,
                 plus1,
                 consoleBtn,
-                Workspace
+                Workspace,
+                burgerOpen
             )
         )
 
@@ -414,6 +417,11 @@ class MainActivity : AppCompatActivity() {
 
             StartProgram(start).main(CreateConsole, this)
         }
+    }
+
+    override fun onDestroy() {
+        save("СОХРАНЕНИЕ ДЕРЕВА!")
+        super.onDestroy()
     }
 
 

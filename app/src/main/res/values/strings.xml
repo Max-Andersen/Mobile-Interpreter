@@ -7,7 +7,7 @@
     <string name="ttksmt">TTKSMT</string>
     <string name="While">While</string>
     <string name="Variable">Variable name:</string>
-    <string name="VariableSolo">Variable:</string>
+    <string name="VariableSolo">Variable</string>
     <string name="Get_name_block">Name</string>
     <string name="When">When</string>
     <string name="Click">Clicked</string>
@@ -15,6 +15,19 @@
     <string name="iftext">If</string>
     <string name="Else">Else</string>
     <string name="Break">Break</string>
+    <string name="description">description</string>
+    <string name="ttksmt_is_ready_to_work">TTKSMT is ready to work . . .</string>
+    <string name="new_project">New Project</string>
+    <string name="open_project">Open Project</string>
+    <string name="exit">Exit</string>
+    <string name="cybermax">CyberMax</string>
+    <string name="leon">LEON</string>
+    <string name="retrokirill">RetroKirill</string>
+    <string name="randomtheme">RANDOMTHEME</string>
+    <string name="more">more</string>
+    <string name="blocks">blocks</string>
+    <string name="new_">New</string>
+    <string name="equals">=</string>
     <string-array name="varTypes">
         <item>Int</item>
     </string-array>

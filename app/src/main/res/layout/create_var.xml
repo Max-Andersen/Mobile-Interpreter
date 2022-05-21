@@ -29,11 +29,12 @@
 
     <TextView
         android:id="@+id/textView7"
-        android:layout_width="50dp"
+        android:layout_width="70dp"
         android:layout_height="35dp"
         android:layout_marginStart="10dp"
         android:fontFamily="@font/russo_one"
-        android:text="new"
+        android:gravity="center_vertical"
+        android:text="@string/new_"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/createVarBeginView"
         app:layout_constraintStart_toStartOf="@+id/createVarBeginView"
@@ -52,12 +53,14 @@
     <EditText
         android:id="@+id/createVarName"
         android:layout_width="100dp"
-        android:layout_height="36dp"
+        android:layout_height="48dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="@+id/createVarBeginView"
         app:layout_constraintEnd_toEndOf="@+id/createVarBeginView"
-        app:layout_constraintTop_toTopOf="@+id/createVarBeginView" />
+        app:layout_constraintTop_toTopOf="@+id/createVarBeginView"
+        tools:ignore="SpeakableTextPresentCheck"
+        android:importantForAutofill="no" />
 
 
 </merge>

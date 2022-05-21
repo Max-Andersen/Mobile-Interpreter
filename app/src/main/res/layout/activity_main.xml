@@ -112,6 +112,7 @@
                 android:layout_weight="0"
                 android:alpha="1"
                 android:backgroundTint="@android:color/transparent"
+                android:contentDescription="@string/description"
                 android:scaleType="fitStart"
                 app:srcCompat="@drawable/close" />
 
@@ -120,7 +121,7 @@
                 android:layout_width="307dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/russo_one"
-                android:text="TTKSMT is ready to work . . ."
+                android:text="@string/ttksmt_is_ready_to_work"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
@@ -181,6 +182,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:backgroundTint="@android:color/transparent"
+            android:contentDescription="@string/description"
             android:scaleType="fitStart"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -212,7 +214,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/russo_one"
-            android:text="New Project"
+            android:text="@string/new_project"
             android:textSize="30sp"
             app:layout_constraintBottom_toTopOf="@+id/line2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -233,7 +235,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/russo_one"
-            android:text="Open Project"
+            android:text="@string/open_project"
             android:textSize="30sp"
             app:layout_constraintBottom_toTopOf="@+id/line4"
             app:layout_constraintEnd_toEndOf="parent"
@@ -254,7 +256,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/russo_one"
-            android:text="Exit"
+            android:text="@string/exit"
             android:textSize="30sp"
             app:layout_constraintBottom_toTopOf="@+id/line5"
             app:layout_constraintEnd_toEndOf="parent"
@@ -280,7 +282,7 @@
             android:background="@color/ghostwhite"
             android:fadeScrollbars="false"
             android:fontFamily="@font/russo_one"
-            android:text="CyberMax"
+            android:text="@string/cybermax"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/line5" />
@@ -293,7 +295,7 @@
             android:width="200dp"
             android:background="@color/ghostwhite"
             android:fontFamily="@font/russo_one"
-            android:text="LEON"
+            android:text="@string/leon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/maxTheme" />
@@ -306,7 +308,7 @@
             android:width="200dp"
             android:background="@color/ghostwhite"
             android:fontFamily="@font/russo_one"
-            android:text="RetroKirill"
+            android:text="@string/retrokirill"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/titTheme" />
@@ -319,7 +321,7 @@
             android:width="200dp"
             android:background="@color/ghostwhite"
             android:fontFamily="@font/russo_one"
-            android:text="RANDOMTHEME"
+            android:text="@string/randomtheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/kirillTheme" />
@@ -353,7 +355,7 @@
             android:layout_height="48dp"
             android:background="#9FEF4F"
             android:fontFamily="@font/russo_one"
-            android:text="more"
+            android:text="@string/more"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@+id/closeBlockScreen"
@@ -365,7 +367,7 @@
             android:layout_height="48dp"
             android:background="#9FEF4F"
             android:fontFamily="@font/russo_one"
-            android:text="blocks"
+            android:text="@string/blocks"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:visibility="invisible"
@@ -386,6 +388,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:backgroundTint="@android:color/transparent"
+            android:contentDescription="@string/description"
             android:scaleType="fitStart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -398,22 +401,28 @@
         android:id="@+id/plus1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
         android:backgroundTint="@android:color/transparent"
         android:contentDescription="@string/bottom_sheet_behavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/plus1" />
+        app:srcCompat="@drawable/plus1"
+        tools:ignore="ImageContrastCheck" />
 
     <ImageButton
         android:id="@+id/consoleBtn"
         android:layout_width="56dp"
         android:layout_height="52dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:backgroundTint="@android:color/transparent"
+        android:contentDescription="@string/description"
         android:scaleType="fitStart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/command"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

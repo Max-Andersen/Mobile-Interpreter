@@ -1,15 +1,11 @@
 package com.example.myapplication.blocks
+
 import android.content.Context
 import android.content.ClipData
 import android.content.ClipDescription
-import android.graphics.Color
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.DragEvent
-import android.view.View
-import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.get
 import com.example.myapplication.databinding.VariableBlockBinding
 import com.example.myapplication.structs.BlockInterface
 
@@ -17,11 +13,11 @@ class VariableBtn @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-):BlockInterface, ConstraintLayout(context, attrs, defStyleAttr){
+) : BlockInterface, ConstraintLayout(context, attrs, defStyleAttr) {
     private var binding = VariableBlockBinding.inflate(LayoutInflater.from(context), this)
 
     init {
-        binding.root.setOnLongClickListener{
+        binding.root.setOnLongClickListener {
             binding.varPlaceForDrop.setOnDragListener { _, _ -> false }
             val textOnBoard = ""
             val item = ClipData.Item(textOnBoard)
@@ -35,7 +31,7 @@ class VariableBtn @JvmOverloads constructor(
 
     }
 
-    fun onSet(){
+    fun onSet() {
         binding.varPlaceForDrop.setOnDragListener(dragAndDropListener())
     }
 

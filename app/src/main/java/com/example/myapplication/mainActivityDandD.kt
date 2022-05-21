@@ -1,34 +1,34 @@
 package com.example.myapplication
 
-import android.os.Bundle
 import android.view.DragEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.LinearLayout
 import android.widget.ScrollView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.children
 import androidx.core.view.get
 import com.example.myapplication.blocks.*
-import com.example.myapplication.databinding.IfBlockBinding
-import com.example.myapplication.databinding.IfElseBlockBinding
 import com.otaliastudios.zoom.ZoomLayout
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
 
 //-----------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~DRAG_AND_DROP~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-fun mainActivityDandD(zoomLayout: ZoomLayout, consoleScroll: ScrollView, blockAndVariable: ConstraintLayout, plus1: ImageButton, consoleBtn: ImageButton, Workspace: ConstraintLayout): View.OnDragListener {
-    return View.OnDragListener{ view, event ->
-        when (event.action){
+fun mainActivityDandD(
+    zoomLayout: ZoomLayout,
+    consoleScroll: ScrollView,
+    blockAndVariable: ConstraintLayout,
+    plus1: ImageButton,
+    consoleBtn: ImageButton,
+    Workspace: ConstraintLayout
+): View.OnDragListener {
+    return View.OnDragListener { view, event ->
+        when (event.action) {
             DragEvent.ACTION_DRAG_STARTED -> {
-                for (i in 0..zoomLayout.Workspace.childCount){
+                for (i in 0..zoomLayout.Workspace.childCount) {
                     val child = zoomLayout.Workspace.getChildAt(i)
-                    if (child is View){
+                    if (child is View) {
                         child.visibility = View.VISIBLE
                     }
                 }
@@ -79,23 +79,18 @@ fun mainActivityDandD(zoomLayout: ZoomLayout, consoleScroll: ScrollView, blockAn
                         x[4].layoutParams.height -= v.height - x[0].layoutParams.height / 2
                         oldX = oldX.parent.parent as ConstraintLayout
                         x = x.parent.parent as View
-                    }
-                    else if(x is IfBtn)
-                    {
+                    } else if (x is IfBtn) {
                         x[4].layoutParams.height -= v.height - x[0].layoutParams.height / 2
                         oldX = oldX.parent.parent as ConstraintLayout
                         x = x.parent.parent as View
-                    }
-                    else if(x is IfElseBtn)
-                    {
-                        if(oldX == x[2] as ConstraintLayout)
+                    } else if (x is IfElseBtn) {
+                        if (oldX == x[2] as ConstraintLayout)
                             x[5].layoutParams.height -= v.height - x[0].layoutParams.height / 2
                         else
                             x[7].layoutParams.height -= v.height - x[0].layoutParams.height / 2
                         oldX = oldX.parent.parent as ConstraintLayout
                         x = x.parent.parent as View
-                    }
-                    else if (x is VariableBtn || x is OutputBtn || x is StartBtn || x is CreateVarBtn) {
+                    } else if (x is VariableBtn || x is OutputBtn || x is StartBtn || x is CreateVarBtn) {
                         oldX = oldX.parent.parent as ConstraintLayout
                         x = x.parent.parent as View
                     } else {
@@ -120,7 +115,9 @@ fun mainActivityDandD(zoomLayout: ZoomLayout, consoleScroll: ScrollView, blockAn
                 true
             }
 
-            else -> {false}
+            else -> {
+                false
+            }
         }
     }
 }

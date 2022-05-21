@@ -1,4 +1,5 @@
 package com.example.myapplication.blocks
+
 import android.content.ClipData
 import android.content.ClipDescription
 import android.content.Context
@@ -12,12 +13,11 @@ class IfBtn @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-):BlockInterface, ConstraintLayout(context, attrs, defStyleAttr){
+) : BlockInterface, ConstraintLayout(context, attrs, defStyleAttr) {
     private var binding = IfBlockBinding.inflate(LayoutInflater.from(context), this)
-    private var c = context
 
     init {
-        binding.root.setOnLongClickListener{
+        binding.root.setOnLongClickListener {
             binding.ifInsidePlace.setOnDragListener { _, _ -> false }
             binding.ifPlaceForDrop.setOnDragListener { _, _ -> false }
             val textOnBoard = ""
@@ -31,7 +31,7 @@ class IfBtn @JvmOverloads constructor(
         }
     }
 
-    fun onSet(){
+    fun onSet() {
         binding.ifInsidePlace.setOnDragListener(dragAndDropListener())
         binding.ifPlaceForDrop.setOnDragListener(dragAndDropListener())
     }

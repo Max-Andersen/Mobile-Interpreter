@@ -1,4 +1,5 @@
 package com.example.myapplication.blocks
+
 import android.content.ClipData
 import android.content.ClipDescription
 import android.content.Context
@@ -12,12 +13,11 @@ class IfElseBtn @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-):BlockInterface, ConstraintLayout(context, attrs, defStyleAttr){
+) : BlockInterface, ConstraintLayout(context, attrs, defStyleAttr) {
     private var binding = IfElseBlockBinding.inflate(LayoutInflater.from(context), this)
-    private var c = context
 
     init {
-        binding.root.setOnLongClickListener{
+        binding.root.setOnLongClickListener {
             binding.ifElseInsidePlace.setOnDragListener { _, _ -> false }
             binding.ifElseInsideSecondPlace.setOnDragListener { _, _ -> false }
             binding.ifElsePlaceForDrop.setOnDragListener { _, _ -> false }
@@ -32,7 +32,7 @@ class IfElseBtn @JvmOverloads constructor(
         }
     }
 
-    fun onSet(){
+    fun onSet() {
         binding.ifElseInsidePlace.setOnDragListener(dragAndDropListener())
         binding.ifElseInsideSecondPlace.setOnDragListener(dragAndDropListener())
         binding.ifElsePlaceForDrop.setOnDragListener(dragAndDropListener())

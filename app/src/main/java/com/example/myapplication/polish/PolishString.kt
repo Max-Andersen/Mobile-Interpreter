@@ -1,8 +1,9 @@
 package com.example.myapplication.polish
 
-class PolishString constructor(expression: String){
+class PolishString constructor(expression: String) {
     var expression: String
     var isExpressionCorrect: Boolean = true
+
     init {
         this.expression = expression.filter { !it.isWhitespace() }
 
@@ -14,20 +15,19 @@ class PolishString constructor(expression: String){
         val stack = Stack()
 
         val letterArray = arrayListOf<Char>()
-        for(i in 48..57)
+        for (i in 48..57)
             letterArray.add(Char(i))
-        for(i in 65..90)
+        for (i in 65..90)
             letterArray.add(Char(i))
-        for(i in 97..122)
+        for (i in 97..122)
             letterArray.add(Char(i))
         letterArray.add(Char(95))
 
-        for(char in str){
-            if (char in letterArray){
+        for (char in str) {
+            if (char in letterArray) {
                 reversePolish += char
-            }
-            else{
-                when(char){
+            } else {
+                when (char) {
                     '+', '-', '*', '/', '%', '(' -> {
                         if (reversePolish.last() in letterArray)
                             reversePolish += ','
@@ -43,7 +43,7 @@ class PolishString constructor(expression: String){
                 }
             }
         }
-        while (!stack.isEmpty()){
+        while (!stack.isEmpty()) {
             reversePolish += ','
             reversePolish += stack.arrayOfChars.removeAt(stack.arrayOfChars.size - 1)
         }

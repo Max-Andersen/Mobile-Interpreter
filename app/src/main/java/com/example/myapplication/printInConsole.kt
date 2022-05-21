@@ -6,7 +6,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 
-fun printInConsole(text: String, CreateConsole: LinearLayout, ctx: Context){
+fun printInConsole(text: String, CreateConsole: LinearLayout, ctx: Context) {
 
     val tv = TextView(ctx)
     tv.typeface = ResourcesCompat.getFont(ctx, R.font.russo_one)

@@ -4,16 +4,13 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.graphics.Color
-import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.children
 import androidx.core.view.get
 import com.example.myapplication.blocks.*
@@ -25,34 +22,38 @@ import kotlin.system.exitProcess
 
 
 class MainActivity : AppCompatActivity() {
-    var flagFirstOutInConsole = false
+    private var flagFirstOutInConsole = false
 
-    private fun blockInit(){
+    private fun blockInit1() {
 
         val createVarBlock = CreateVarBtn(this)
-        createVarBlock.y += 450
+        createVarBlock.y += 500
 
         val variable1 = VariableBtn(this)
-        variable1.y += 700
+        variable1.y += 800
 
         val outputBlock = OutputBtn(this)
-        outputBlock.y += 950
-
-        val whileBlock = WhileBtn(this)
-        whileBlock.y += 1200
-
-        val ifBlock = IfBtn(this)
-        ifBlock.y += 1575
-
-        val ifElseBlock = IfElseBtn(this)
-        ifElseBlock.y += 1950
+        outputBlock.y += 1100
 
         blockscreen.addView(createVarBlock)
         blockscreen.addView(variable1)
         blockscreen.addView(outputBlock)
-        blockscreen.addView(whileBlock)
-        blockscreen.addView(ifBlock)
-        blockscreen.addView(ifElseBlock)
+    }
+
+    private fun blockInit2() {
+
+        val whileBlock = WhileBtn(this)
+        whileBlock.y += 500
+
+        val ifBlock = IfBtn(this)
+        ifBlock.y += 900
+
+        val ifElseBlock = IfElseBtn(this)
+        ifElseBlock.y += 1300
+
+        variableBlock.addView(whileBlock)
+        variableBlock.addView(ifBlock)
+        variableBlock.addView(ifElseBlock)
     }
 
     @SuppressLint("SetTextI18n")
@@ -64,49 +65,53 @@ class MainActivity : AppCompatActivity() {
         //-------------------------------------------------------------------------------------
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~СЛУШАТЕЛИ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-        burgerOpen.setOnClickListener{
+        burgerOpen.setOnClickListener {
             burgerMenu.visibility = View.VISIBLE
             plus1.visibility = View.GONE
             consoleBtn.visibility = View.GONE
+            burgerOpen.visibility = View.GONE
             zoomLayout.setVerticalPanEnabled(false)
             zoomLayout.setHorizontalPanEnabled(false)
             zoomLayout.setZoomEnabled(false)
         }
 
-        exit.setOnClickListener{
+        exit.setOnClickListener {
             exitProcess(-1)
         }
 
-        closeBurgerMenu.setOnClickListener{
-            burgerMenu.visibility = View.INVISIBLE
+        closeBurgerMenu.setOnClickListener {
+            burgerMenu.visibility = View.GONE
             plus1.visibility = View.VISIBLE
             consoleBtn.visibility = View.VISIBLE
+            burgerOpen.visibility = View.VISIBLE
             zoomLayout.setVerticalPanEnabled(true)
             zoomLayout.setHorizontalPanEnabled(true)
             zoomLayout.setZoomEnabled(true)
         }
 
         plus1.setOnClickListener {
-            for (i in 0..zoomLayout.Workspace.childCount){
+            for (i in 0..zoomLayout.Workspace.childCount) {
                 val child = zoomLayout.Workspace.getChildAt(i)
-                if (child is View){
+                if (child is View) {
                     child.visibility = View.GONE
                 }
             }
-            blockInit()
+            blockInit1()
+            blockInit2()
             blockAndVariable.visibility = View.VISIBLE
             closeBlockScreen.visibility = View.VISIBLE
             plus1.visibility = View.GONE
             consoleBtn.visibility = View.GONE
+            burgerOpen.visibility = View.GONE
             zoomLayout.setVerticalPanEnabled(false)
             zoomLayout.setHorizontalPanEnabled(false)
             zoomLayout.setZoomEnabled(false)
         }
 
-        closeBlockScreen.setOnClickListener{
-            for (i in 0..zoomLayout.Workspace.childCount){
+        closeBlockScreen.setOnClickListener {
+            for (i in 0..zoomLayout.Workspace.childCount) {
                 val child = zoomLayout.Workspace.getChildAt(i)
-                if (child is View){
+                if (child is View) {
                     child.visibility = View.VISIBLE
                 }
             }
@@ -114,29 +119,32 @@ class MainActivity : AppCompatActivity() {
             closeBlockScreen.visibility = View.GONE
             consoleBtn.visibility = View.VISIBLE
             plus1.visibility = View.VISIBLE
+            burgerOpen.visibility = View.VISIBLE
             zoomLayout.setVerticalPanEnabled(true)
             zoomLayout.setHorizontalPanEnabled(true)
             zoomLayout.setZoomEnabled(true)
         }
 
-        blockbtn.setOnClickListener{
+        blockbtn.setOnClickListener {
+            blockInit1()
             variableBlock.visibility = View.GONE
             blockbtn.visibility = View.GONE
             blockscreen.visibility = View.VISIBLE
             varbtn.visibility = View.VISIBLE
         }
 
-        varbtn.setOnClickListener{
+        varbtn.setOnClickListener {
+            blockInit2()
             blockscreen.visibility = View.GONE
             variableBlock.visibility = View.VISIBLE
             varbtn.visibility = View.GONE
             blockbtn.visibility = View.VISIBLE
         }
 
-        consoleBtn.setOnClickListener{
-            for (i in 0..zoomLayout.Workspace.childCount){
+        consoleBtn.setOnClickListener {
+            for (i in 0..zoomLayout.Workspace.childCount) {
                 val child = zoomLayout.Workspace.getChildAt(i)
-                if (child is View){
+                if (child is View) {
                     child.visibility = View.GONE
                 }
             }
@@ -146,11 +154,12 @@ class MainActivity : AppCompatActivity() {
             plus1.visibility = View.GONE
             consoleBtn.visibility = View.GONE
             startEnd.visibility = View.GONE
+            burgerOpen.visibility = View.GONE
             zoomLayout.setVerticalPanEnabled(false)
             zoomLayout.setHorizontalPanEnabled(false)
             zoomLayout.setZoomEnabled(false)
 
-            if (!flagFirstOutInConsole){
+            if (!flagFirstOutInConsole) {
                 val handler = Handler()
                 var time = 0
                 while (time < 100000) {
@@ -166,22 +175,21 @@ class MainActivity : AppCompatActivity() {
                         StartConsoleMessage?.text = "TTKSMT is ready to work . . ."
                     }, time.toLong())
                     time += 1000
-                    if(consoleScroll.visibility == View.INVISIBLE){
+                    if (consoleScroll.visibility == View.INVISIBLE) {
                         break
                     }
                 }
-            }
-            else{
+            } else {
                 CreateConsole?.removeView(StartConsoleMessage)
             }
 
 
         }
 
-        consoleCloseBtn.setOnClickListener{
-            for (i in 0..zoomLayout.Workspace.childCount){
+        consoleCloseBtn.setOnClickListener {
+            for (i in 0..zoomLayout.Workspace.childCount) {
                 val child = zoomLayout.Workspace.getChildAt(i)
-                if (child is View){
+                if (child is View) {
                     child.visibility = View.VISIBLE
                 }
             }
@@ -190,6 +198,7 @@ class MainActivity : AppCompatActivity() {
             plus1.visibility = View.VISIBLE
             consoleBtn.visibility = View.VISIBLE
             startEnd.visibility = View.VISIBLE
+            burgerOpen.visibility = View.VISIBLE
             zoomLayout.setVerticalPanEnabled(true)
             zoomLayout.setHorizontalPanEnabled(true)
             zoomLayout.setZoomEnabled(true)
@@ -200,7 +209,7 @@ class MainActivity : AppCompatActivity() {
         //------------------------------------------------------------------------------------------
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ТЕМЫ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-        maxTheme.setOnClickListener{
+        maxTheme.setOnClickListener {
             header.setBackgroundColor(Color.parseColor("#00EAFD"))
             startEnd.setBackgroundColor(Color.parseColor("#EF799F"))
             blockscreen.setBackgroundColor(Color.parseColor("#5DA1B1"))
@@ -217,7 +226,7 @@ class MainActivity : AppCompatActivity() {
             headerText.setTextColor(Color.parseColor("#000000"))
             consoleBtn.setImageResource(R.drawable.cyber)
         }
-        kirillTheme.setOnClickListener{
+        kirillTheme.setOnClickListener {
             header.setBackgroundColor(Color.parseColor("#D1DEDE"))
             startEnd.setBackgroundColor(Color.parseColor("#C58882"))
             blockscreen.setBackgroundColor(Color.parseColor("#D1DEDE"))
@@ -234,7 +243,7 @@ class MainActivity : AppCompatActivity() {
             headerText.setTextColor(Color.parseColor("#AE5B42"))
             consoleBtn.setImageResource(R.drawable.glaz)
         }
-        titTheme.setOnClickListener{
+        titTheme.setOnClickListener {
             header.setBackgroundColor(Color.parseColor("#E0CF3E"))
             startEnd.setBackgroundColor(Color.parseColor("#872380"))
             blockscreen.setBackgroundColor(Color.parseColor("#E0CF3E"))
@@ -251,29 +260,126 @@ class MainActivity : AppCompatActivity() {
             headerText.setTextColor(Color.parseColor("#872380"))
             consoleBtn.setImageResource(R.drawable.spikeee)
         }
-        randomTheme.setOnClickListener{
+        randomTheme.setOnClickListener {
 
             val rnd = Random()
-            header.setBackgroundColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)))
-            startEnd.setBackgroundColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)))
-            blockscreen.setBackgroundColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)))
-            variableBlock.setBackgroundColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)))
-            Workspace.setBackgroundColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)))
-            CreateConsole.setBackgroundColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)))
-            burgerMenu.setBackgroundColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)))
-            maxTheme.setBackgroundColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)))
-            kirillTheme.setBackgroundColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)))
-            titTheme.setBackgroundColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)))
-            randomTheme.setBackgroundColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)))
-            blockbtn.setBackgroundColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)))
-            varbtn.setBackgroundColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)))
-            headerText.setTextColor(Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)))
+            header.setBackgroundColor(
+                Color.argb(
+                    255,
+                    rnd.nextInt(256),
+                    rnd.nextInt(256),
+                    rnd.nextInt(256)
+                )
+            )
+            startEnd.setBackgroundColor(
+                Color.argb(
+                    255,
+                    rnd.nextInt(256),
+                    rnd.nextInt(256),
+                    rnd.nextInt(256)
+                )
+            )
+            blockscreen.setBackgroundColor(
+                Color.argb(
+                    255,
+                    rnd.nextInt(256),
+                    rnd.nextInt(256),
+                    rnd.nextInt(256)
+                )
+            )
+            variableBlock.setBackgroundColor(
+                Color.argb(
+                    255,
+                    rnd.nextInt(256),
+                    rnd.nextInt(256),
+                    rnd.nextInt(256)
+                )
+            )
+            Workspace.setBackgroundColor(
+                Color.argb(
+                    255,
+                    rnd.nextInt(256),
+                    rnd.nextInt(256),
+                    rnd.nextInt(256)
+                )
+            )
+            CreateConsole.setBackgroundColor(
+                Color.argb(
+                    255,
+                    rnd.nextInt(256),
+                    rnd.nextInt(256),
+                    rnd.nextInt(256)
+                )
+            )
+            burgerMenu.setBackgroundColor(
+                Color.argb(
+                    255,
+                    rnd.nextInt(256),
+                    rnd.nextInt(256),
+                    rnd.nextInt(256)
+                )
+            )
+            maxTheme.setBackgroundColor(
+                Color.argb(
+                    255,
+                    rnd.nextInt(256),
+                    rnd.nextInt(256),
+                    rnd.nextInt(256)
+                )
+            )
+            kirillTheme.setBackgroundColor(
+                Color.argb(
+                    255,
+                    rnd.nextInt(256),
+                    rnd.nextInt(256),
+                    rnd.nextInt(256)
+                )
+            )
+            titTheme.setBackgroundColor(
+                Color.argb(
+                    255,
+                    rnd.nextInt(256),
+                    rnd.nextInt(256),
+                    rnd.nextInt(256)
+                )
+            )
+            randomTheme.setBackgroundColor(
+                Color.argb(
+                    255,
+                    rnd.nextInt(256),
+                    rnd.nextInt(256),
+                    rnd.nextInt(256)
+                )
+            )
+            blockbtn.setBackgroundColor(
+                Color.argb(
+                    255,
+                    rnd.nextInt(256),
+                    rnd.nextInt(256),
+                    rnd.nextInt(256)
+                )
+            )
+            varbtn.setBackgroundColor(
+                Color.argb(
+                    255,
+                    rnd.nextInt(256),
+                    rnd.nextInt(256),
+                    rnd.nextInt(256)
+                )
+            )
+            headerText.setTextColor(
+                Color.argb(
+                    255,
+                    rnd.nextInt(256),
+                    rnd.nextInt(256),
+                    rnd.nextInt(256)
+                )
+            )
             consoleBtn.setImageResource(R.drawable.command)
         }
 
         //------------------------------------------------------------------------------------------
         //------------------------------------------------------------------------------------------
-
 
 
         //------------------------------------------------------------------------------------------
@@ -283,25 +389,20 @@ class MainActivity : AppCompatActivity() {
         val start = StartBtn(this)
         start.y += 200
 
-        val variable = VariableConsole(this)
-        variable.y += 200
-
-        var n = 2
-        plusvar.setOnClickListener{
-            plusvar.y += 270
-            val anotherVariable = VariableConsole(this)
-            anotherVariable.y += 270 * n
-            variableBlock.addView(anotherVariable)
-            n += 1
-        }
-
-        variableBlock.addView(variable)
         blockscreen.addView(start)
-
 
         Workspace.x = 0F
         Workspace.y = 0F
-        Workspace.setOnDragListener(mainActivityDandD(zoomLayout, consoleScroll, blockAndVariable, plus1, consoleBtn, Workspace))
+        Workspace.setOnDragListener(
+            mainActivityDandD(
+                zoomLayout,
+                consoleScroll,
+                blockAndVariable,
+                plus1,
+                consoleBtn,
+                Workspace
+            )
+        )
 
         //----------------------------------------
         //----------------------------------------
@@ -364,65 +465,55 @@ class MainActivity : AppCompatActivity() {
 
     private fun printNodes(node: View) {
 
-        when(node){
+        when (node) {
             is WhileBtn -> {
-                if ((node[2] as ViewGroup).children.count() != 0)
-                {
+                if ((node[2] as ViewGroup).children.count() != 0) {
                     println("parent: INSIDE ${node}\n child: ${(node[2] as ViewGroup)[0]}")
                     printNodes((node[2] as ViewGroup)[0])
                 }
-                if ((node[5] as ViewGroup).children.count() != 0)
-                {
+                if ((node[5] as ViewGroup).children.count() != 0) {
                     println("parent: PFD ${node}\n child: ${(node[5] as ViewGroup)[0]}")
                     printNodes((node[5] as ViewGroup)[0])
                 }
             }
             is IfBtn -> {
-                if ((node[2] as ViewGroup).children.count() != 0)
-                {
+                if ((node[2] as ViewGroup).children.count() != 0) {
                     println("parent: INSIDE ${node}\n child: ${(node[2] as ViewGroup)[0]}")
                     printNodes((node[2] as ViewGroup)[0])
                 }
-                if ((node[5] as ViewGroup).children.count() != 0)
-                {
+                if ((node[5] as ViewGroup).children.count() != 0) {
                     println("parent: PFD ${node}\n child: ${(node[5] as ViewGroup)[0]}")
                     printNodes((node[5] as ViewGroup)[0])
                 }
             }
             is IfElseBtn -> {
-                if ((node[2] as ViewGroup).children.count() != 0)
-                {
+                if ((node[2] as ViewGroup).children.count() != 0) {
                     println("parent: INSIDE ${node}\n child: ${(node[2] as ViewGroup)[0]}")
                     printNodes((node[2] as ViewGroup)[0])
                 }
-                if ((node[3] as ViewGroup).children.count() != 0)
-                {
+                if ((node[3] as ViewGroup).children.count() != 0) {
                     println("parent: INSIDE ${node}\n child: ${(node[3] as ViewGroup)[0]}")
                     printNodes((node[3] as ViewGroup)[0])
                 }
-                if ((node[10] as ViewGroup).children.count() != 0)
-                {
+                if ((node[10] as ViewGroup).children.count() != 0) {
                     println("parent: PFD ${node}\n child: ${(node[10] as ViewGroup)[0]}")
                     printNodes((node[10] as ViewGroup)[0])
                 }
             }
             is OutputBtn -> {
-                if ((node[2] as ViewGroup).children.count() != 0)
-                {
+                if ((node[2] as ViewGroup).children.count() != 0) {
                     println("parent: ${node}\n child: ${(node[2] as ViewGroup)[0]}")
                     printNodes((node[2] as ViewGroup)[0])
                 }
             }
             is VariableBtn -> {
-                if ((node[1] as ViewGroup).children.count() != 0)
-                {
+                if ((node[1] as ViewGroup).children.count() != 0) {
                     println("parent: ${node}\n child: ${(node[1] as ViewGroup)[0]}")
                     printNodes((node[1] as ViewGroup)[0])
                 }
             }
             is StartBtn -> {
-                if ((node[2] as ViewGroup).children.count() != 0)
-                {
+                if ((node[2] as ViewGroup).children.count() != 0) {
                     println("parent: ${node}\n child: ${(node[2] as ViewGroup)[0]}")
                     printNodes((node[2] as ViewGroup)[0])
                 }

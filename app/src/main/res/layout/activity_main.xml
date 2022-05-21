@@ -101,7 +101,7 @@
             android:alpha="1"
             android:background="#1B2549"
             android:orientation="vertical"
-            android:paddingLeft="10dp"
+            android:paddingHorizontal="10dp"
             android:paddingBottom="100dp"
             android:weightSum="100">
 
@@ -333,8 +333,6 @@
         android:layout_height="match_parent"
         android:background="@color/blizzardblue"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -344,8 +342,8 @@
             android:layout_height="match_parent"
             android:background="@color/blizzardblue"
             android:visibility="visible"
-            app:layout_constraintTop_toBottomOf="@+id/blockbtn"
-            tools:layout_editor_absoluteX="0dp">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/blockbtn">
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -355,7 +353,7 @@
             android:layout_height="48dp"
             android:background="#9FEF4F"
             android:fontFamily="@font/russo_one"
-            android:text="morebloks"
+            android:text="more"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@+id/closeBlockScreen"
@@ -367,7 +365,7 @@
             android:layout_height="48dp"
             android:background="#9FEF4F"
             android:fontFamily="@font/russo_one"
-            android:text="block"
+            android:text="blocks"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:visibility="invisible"
@@ -380,24 +378,8 @@
             android:layout_height="match_parent"
             android:background="@color/blizzardblue"
             android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageButton
-                android:id="@+id/plusvar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="230dp"
-                android:backgroundTint="@android:color/transparent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.501"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/plus1" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/closeBlockScreen"
@@ -430,7 +412,8 @@
         android:scaleType="fitStart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/command" />
+        app:srcCompat="@drawable/command"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

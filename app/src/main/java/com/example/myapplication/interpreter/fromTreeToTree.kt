@@ -18,14 +18,15 @@ private fun workWithWhile(
     tree: TreeNode<String>,
     view: WhileBtn,
     console: LinearLayout,
-    ctx: Context
+    ctx: Context,
+    variables: MutableMap<String, Int>
 ) {
 
     tree.add(TreeNode("condition"))
     tree.add(TreeNode("body"))
 
     val text = (view[3] as EditText).text.toString()
-    conditionBlock(tree, text, console, ctx)
+    conditionBlock(tree, text, console, ctx, variables)
 
     if ((view[2] as ViewGroup).children.count() != 0) {
         when ((view[2] as ViewGroup)[0]) {
@@ -35,7 +36,7 @@ private fun workWithWhile(
                     tree.children[1].children.last(),
                     (view[2] as ViewGroup)[0] as WhileBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is OutputBtn -> {
@@ -44,7 +45,7 @@ private fun workWithWhile(
                     tree.children[1].children.last(),
                     (view[2] as ViewGroup)[0] as OutputBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is VariableBtn -> {
@@ -53,7 +54,7 @@ private fun workWithWhile(
                     tree.children[1].children.last(),
                     (view[2] as ViewGroup)[0] as VariableBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is CreateVarBtn -> {
@@ -62,7 +63,7 @@ private fun workWithWhile(
                     tree.children[1].children.last(),
                     (view[2] as ViewGroup)[0] as CreateVarBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is IfBtn -> {
@@ -71,7 +72,7 @@ private fun workWithWhile(
                     tree.children[1].children.last(),
                     (view[2] as ViewGroup)[0] as IfBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is IfElseBtn -> {
@@ -80,7 +81,7 @@ private fun workWithWhile(
                     tree.children[1].children.last(),
                     (view[2] as ViewGroup)[0] as IfElseBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
         }
@@ -94,7 +95,7 @@ private fun workWithWhile(
                     tree.parent?.children?.last()!!,
                     (view[5] as ViewGroup)[0] as WhileBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is OutputBtn -> {
@@ -103,7 +104,7 @@ private fun workWithWhile(
                     tree.parent?.children?.last()!!,
                     (view[5] as ViewGroup)[0] as OutputBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is VariableBtn -> {
@@ -112,7 +113,7 @@ private fun workWithWhile(
                     tree.parent?.children?.last()!!,
                     (view[5] as ViewGroup)[0] as VariableBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is CreateVarBtn -> {
@@ -121,7 +122,7 @@ private fun workWithWhile(
                     tree.parent?.children?.last()!!,
                     (view[5] as ViewGroup)[0] as CreateVarBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is IfBtn -> {
@@ -130,7 +131,7 @@ private fun workWithWhile(
                     tree.parent?.children?.last()!!,
                     (view[5] as ViewGroup)[0] as IfBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is IfElseBtn -> {
@@ -139,7 +140,7 @@ private fun workWithWhile(
                     tree.parent?.children?.last()!!,
                     (view[5] as ViewGroup)[0] as IfElseBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
         }
@@ -150,7 +151,8 @@ private fun workWithPrint(
     tree: TreeNode<String>,
     view: OutputBtn,
     console: LinearLayout,
-    ctx: Context
+    ctx: Context,
+    variables: MutableMap<String, Int>
 ) {
 
     val expression = (view[3] as EditText).text.toString()
@@ -168,7 +170,7 @@ private fun workWithPrint(
         while (matchResult != null) {
 
             if(matchResult.value.trim()!="")
-                expressionBlock(tree, matchResult.value.trim(), console, ctx)
+                expressionBlock(tree, matchResult.value.trim(), console, ctx,variables)
 
             matchResult = matchResult.next()
         }
@@ -183,7 +185,7 @@ private fun workWithPrint(
                     tree.parent?.children?.last()!!,
                     (view[2] as ViewGroup)[0] as WhileBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is OutputBtn -> {
@@ -192,7 +194,7 @@ private fun workWithPrint(
                     tree.parent?.children?.last()!!,
                     (view[2] as ViewGroup)[0] as OutputBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is VariableBtn -> {
@@ -201,7 +203,7 @@ private fun workWithPrint(
                     tree.parent?.children?.last()!!,
                     (view[2] as ViewGroup)[0] as VariableBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is CreateVarBtn -> {
@@ -210,7 +212,7 @@ private fun workWithPrint(
                     tree.parent?.children?.last()!!,
                     (view[2] as ViewGroup)[0] as CreateVarBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is IfBtn -> {
@@ -219,7 +221,7 @@ private fun workWithPrint(
                     tree.parent?.children?.last()!!,
                     (view[2] as ViewGroup)[0] as IfBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is IfElseBtn -> {
@@ -228,7 +230,7 @@ private fun workWithPrint(
                     tree.parent?.children?.last()!!,
                     (view[2] as ViewGroup)[0] as IfElseBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
         }
@@ -240,7 +242,8 @@ private fun workWithVarAssignment(
     tree: TreeNode<String>,
     view: VariableBtn,
     console: LinearLayout,
-    ctx: Context
+    ctx: Context,
+    variables: MutableMap<String, Int>
 ) {
 
     val textVar = (view[3] as EditText).text.toString()
@@ -248,7 +251,7 @@ private fun workWithVarAssignment(
 
     tree.add(TreeNode(textVar.trim()))
     if(textExpression.trim()!="")
-        expressionBlock(tree, textExpression, console, ctx)
+        expressionBlock(tree, textExpression, console, ctx,variables)
 
 
     if ((view[1] as ViewGroup).children.count() != 0) {
@@ -260,7 +263,7 @@ private fun workWithVarAssignment(
                     tree.parent?.children?.last()!!,
                     (view[1] as ViewGroup)[0] as WhileBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is OutputBtn -> {
@@ -269,7 +272,7 @@ private fun workWithVarAssignment(
                     tree.parent?.children?.last()!!,
                     (view[1] as ViewGroup)[0] as OutputBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is VariableBtn -> {
@@ -278,7 +281,7 @@ private fun workWithVarAssignment(
                     tree.parent?.children?.last()!!,
                     (view[1] as ViewGroup)[0] as VariableBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is CreateVarBtn -> {
@@ -287,7 +290,7 @@ private fun workWithVarAssignment(
                     tree.parent?.children?.last()!!,
                     (view[1] as ViewGroup)[0] as CreateVarBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is IfBtn -> {
@@ -296,7 +299,7 @@ private fun workWithVarAssignment(
                     tree.parent?.children?.last()!!,
                     (view[1] as ViewGroup)[0] as IfBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is IfElseBtn -> {
@@ -305,7 +308,7 @@ private fun workWithVarAssignment(
                     tree.parent?.children?.last()!!,
                     (view[1] as ViewGroup)[0] as IfElseBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
         }
@@ -316,7 +319,8 @@ private fun workWithNewVar(
     tree: TreeNode<String>,
     view: CreateVarBtn,
     console: LinearLayout,
-    ctx: Context
+    ctx: Context,
+    variables: MutableMap<String, Int>
 ) {
 
     if ((view[3] as Spinner).selectedItem.toString() == "Int") {
@@ -359,7 +363,7 @@ private fun workWithNewVar(
                     tree.parent?.children?.last()!!,
                     (view[1] as ViewGroup)[0] as WhileBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is OutputBtn -> {
@@ -368,7 +372,7 @@ private fun workWithNewVar(
                     tree.parent?.children?.last()!!,
                     (view[1] as ViewGroup)[0] as OutputBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is VariableBtn -> {
@@ -377,7 +381,7 @@ private fun workWithNewVar(
                     tree.parent?.children?.last()!!,
                     (view[1] as ViewGroup)[0] as VariableBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is CreateVarBtn -> {
@@ -386,7 +390,7 @@ private fun workWithNewVar(
                     tree.parent?.children?.last()!!,
                     (view[1] as ViewGroup)[0] as CreateVarBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is IfBtn -> {
@@ -395,7 +399,7 @@ private fun workWithNewVar(
                     tree.parent?.children?.last()!!,
                     (view[1] as ViewGroup)[0] as IfBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is IfElseBtn -> {
@@ -404,21 +408,21 @@ private fun workWithNewVar(
                     tree.parent?.children?.last()!!,
                     (view[1] as ViewGroup)[0] as IfElseBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
         }
     }
 }
 
-private fun workWithIf(tree: TreeNode<String>, view: IfBtn, console: LinearLayout, ctx: Context) {
+private fun workWithIf(tree: TreeNode<String>, view: IfBtn, console: LinearLayout, ctx: Context, variables: MutableMap<String, Int>) {
 
     tree.add(TreeNode("condition"))
     tree.add(TreeNode("true_body"))
 
 
     val text = (view[3] as EditText).text.toString()
-    conditionBlock(tree, text, console, ctx)
+    conditionBlock(tree, text, console, ctx,variables)
 
 
     if ((view[2] as ViewGroup).children.count() != 0) {
@@ -429,7 +433,7 @@ private fun workWithIf(tree: TreeNode<String>, view: IfBtn, console: LinearLayou
                     tree.children[1].children.last(),
                     (view[2] as ViewGroup)[0] as WhileBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is OutputBtn -> {
@@ -438,7 +442,7 @@ private fun workWithIf(tree: TreeNode<String>, view: IfBtn, console: LinearLayou
                     tree.children[1].children.last(),
                     (view[2] as ViewGroup)[0] as OutputBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is VariableBtn -> {
@@ -447,7 +451,7 @@ private fun workWithIf(tree: TreeNode<String>, view: IfBtn, console: LinearLayou
                     tree.children[1].children.last(),
                     (view[2] as ViewGroup)[0] as VariableBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is CreateVarBtn -> {
@@ -456,7 +460,7 @@ private fun workWithIf(tree: TreeNode<String>, view: IfBtn, console: LinearLayou
                     tree.children[1].children.last(),
                     (view[2] as ViewGroup)[0] as CreateVarBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is IfBtn -> {
@@ -465,7 +469,7 @@ private fun workWithIf(tree: TreeNode<String>, view: IfBtn, console: LinearLayou
                     tree.children[1].children.last(),
                     (view[2] as ViewGroup)[0] as IfBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is IfElseBtn -> {
@@ -474,7 +478,7 @@ private fun workWithIf(tree: TreeNode<String>, view: IfBtn, console: LinearLayou
                     tree.children[1].children.last(),
                     (view[2] as ViewGroup)[0] as IfElseBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
         }
@@ -488,7 +492,7 @@ private fun workWithIf(tree: TreeNode<String>, view: IfBtn, console: LinearLayou
                     tree.parent?.children?.last()!!,
                     (view[5] as ViewGroup)[0] as WhileBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is OutputBtn -> {
@@ -497,7 +501,7 @@ private fun workWithIf(tree: TreeNode<String>, view: IfBtn, console: LinearLayou
                     tree.parent?.children?.last()!!,
                     (view[5] as ViewGroup)[0] as OutputBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is VariableBtn -> {
@@ -506,7 +510,7 @@ private fun workWithIf(tree: TreeNode<String>, view: IfBtn, console: LinearLayou
                     tree.parent?.children?.last()!!,
                     (view[5] as ViewGroup)[0] as VariableBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is CreateVarBtn -> {
@@ -515,7 +519,7 @@ private fun workWithIf(tree: TreeNode<String>, view: IfBtn, console: LinearLayou
                     tree.parent?.children?.last()!!,
                     (view[5] as ViewGroup)[0] as CreateVarBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is IfBtn -> {
@@ -524,7 +528,7 @@ private fun workWithIf(tree: TreeNode<String>, view: IfBtn, console: LinearLayou
                     tree.parent?.children?.last()!!,
                     (view[5] as ViewGroup)[0] as IfBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is IfElseBtn -> {
@@ -533,7 +537,7 @@ private fun workWithIf(tree: TreeNode<String>, view: IfBtn, console: LinearLayou
                     tree.parent?.children?.last()!!,
                     (view[5] as ViewGroup)[0] as IfElseBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
         }
@@ -544,7 +548,8 @@ private fun workWithIfElse(
     tree: TreeNode<String>,
     view: IfElseBtn,
     console: LinearLayout,
-    ctx: Context
+    ctx: Context,
+    variables: MutableMap<String, Int>
 ) {
 
     tree.add(TreeNode("condition"))
@@ -552,7 +557,7 @@ private fun workWithIfElse(
     tree.add(TreeNode("false_body"))
 
     val text = (view[4] as EditText).text.toString()
-    conditionBlock(tree, text, console, ctx)
+    conditionBlock(tree, text, console, ctx,variables)
 
 
     if ((view[2] as ViewGroup).children.count() != 0) {
@@ -563,7 +568,7 @@ private fun workWithIfElse(
                     tree.children.last(),
                     (view[2] as ViewGroup)[0] as WhileBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is OutputBtn -> {
@@ -572,7 +577,7 @@ private fun workWithIfElse(
                     tree.children[1].children.last(),
                     (view[2] as ViewGroup)[0] as OutputBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is VariableBtn -> {
@@ -581,7 +586,7 @@ private fun workWithIfElse(
                     tree.children[1].children.last(),
                     (view[2] as ViewGroup)[0] as VariableBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is CreateVarBtn -> {
@@ -590,7 +595,7 @@ private fun workWithIfElse(
                     tree.children[1].children.last(),
                     (view[2] as ViewGroup)[0] as CreateVarBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is IfBtn -> {
@@ -599,7 +604,7 @@ private fun workWithIfElse(
                     tree.children[1].children.last(),
                     (view[2] as ViewGroup)[0] as IfBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is IfElseBtn -> {
@@ -608,7 +613,7 @@ private fun workWithIfElse(
                     tree.children[1].children.last(),
                     (view[2] as ViewGroup)[0] as IfElseBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
         }
@@ -621,7 +626,7 @@ private fun workWithIfElse(
                     tree.children.last(),
                     (view[3] as ViewGroup)[0] as WhileBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is OutputBtn -> {
@@ -630,7 +635,7 @@ private fun workWithIfElse(
                     tree.children[2].children.last(),
                     (view[3] as ViewGroup)[0] as OutputBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is VariableBtn -> {
@@ -639,7 +644,7 @@ private fun workWithIfElse(
                     tree.children[2].children.last(),
                     (view[3] as ViewGroup)[0] as VariableBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is CreateVarBtn -> {
@@ -648,7 +653,7 @@ private fun workWithIfElse(
                     tree.children[2].children.last(),
                     (view[3] as ViewGroup)[0] as CreateVarBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is IfBtn -> {
@@ -657,7 +662,7 @@ private fun workWithIfElse(
                     tree.children[2].children.last(),
                     (view[3] as ViewGroup)[0] as IfBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is IfElseBtn -> {
@@ -666,7 +671,7 @@ private fun workWithIfElse(
                     tree.children[2].children.last(),
                     (view[3] as ViewGroup)[0] as IfElseBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
         }
@@ -680,7 +685,7 @@ private fun workWithIfElse(
                     tree.parent?.children?.last()!!,
                     (view[10] as ViewGroup)[0] as WhileBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is OutputBtn -> {
@@ -689,7 +694,7 @@ private fun workWithIfElse(
                     tree.parent?.children?.last()!!,
                     (view[10] as ViewGroup)[0] as OutputBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is VariableBtn -> {
@@ -698,7 +703,7 @@ private fun workWithIfElse(
                     tree.parent?.children?.last()!!,
                     (view[10] as ViewGroup)[0] as VariableBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is CreateVarBtn -> {
@@ -707,7 +712,7 @@ private fun workWithIfElse(
                     tree.parent?.children?.last()!!,
                     (view[10] as ViewGroup)[0] as CreateVarBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is IfBtn -> {
@@ -716,7 +721,7 @@ private fun workWithIfElse(
                     tree.parent?.children?.last()!!,
                     (view[10] as ViewGroup)[0] as IfBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is IfElseBtn -> {
@@ -725,14 +730,14 @@ private fun workWithIfElse(
                     tree.parent?.children?.last()!!,
                     (view[10] as ViewGroup)[0] as IfElseBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
         }
     }
 }
 
-fun fillTree(start: StartBtn, myTree: TreeNode<String>, console: LinearLayout, ctx: Context) {
+fun fillTree(start: StartBtn, myTree: TreeNode<String>, console: LinearLayout, ctx: Context, variables: MutableMap<String, Int>) {
 
     if ((start[2] as ViewGroup).children.count() != 0) {
         when ((start[2] as ViewGroup)[0]) {
@@ -742,7 +747,7 @@ fun fillTree(start: StartBtn, myTree: TreeNode<String>, console: LinearLayout, c
                     myTree.children.last(),
                     (start[2] as ViewGroup)[0] as WhileBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is OutputBtn -> {
@@ -751,7 +756,7 @@ fun fillTree(start: StartBtn, myTree: TreeNode<String>, console: LinearLayout, c
                     myTree.children.last(),
                     (start[2] as ViewGroup)[0] as OutputBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is VariableBtn -> {
@@ -760,7 +765,7 @@ fun fillTree(start: StartBtn, myTree: TreeNode<String>, console: LinearLayout, c
                     myTree.children.last(),
                     (start[2] as ViewGroup)[0] as VariableBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is CreateVarBtn -> {
@@ -769,7 +774,7 @@ fun fillTree(start: StartBtn, myTree: TreeNode<String>, console: LinearLayout, c
                     myTree.children.last(),
                     (start[2] as ViewGroup)[0] as CreateVarBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is IfBtn -> {
@@ -778,7 +783,7 @@ fun fillTree(start: StartBtn, myTree: TreeNode<String>, console: LinearLayout, c
                     myTree.children.last(),
                     (start[2] as ViewGroup)[0] as IfBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
             is IfElseBtn -> {
@@ -787,7 +792,7 @@ fun fillTree(start: StartBtn, myTree: TreeNode<String>, console: LinearLayout, c
                     myTree.children.last(),
                     (start[2] as ViewGroup)[0] as IfElseBtn,
                     console,
-                    ctx
+                    ctx,variables
                 )
             }
         }

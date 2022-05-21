@@ -17,7 +17,7 @@ class StartProgram(start: StartBtn) {
     fun main(console: LinearLayout, ctx: Context) {
 
         //Заполнение дерева
-        fillTree(receivedRoot, myTree, console, ctx)
+        fillTree(receivedRoot, myTree, console, ctx,varsIntMap)
 
         //Вывод дерева
         //myTree.printEachLevel()

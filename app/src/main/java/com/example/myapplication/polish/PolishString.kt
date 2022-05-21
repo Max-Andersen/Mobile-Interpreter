@@ -1,6 +1,6 @@
 package com.example.myapplication.polish
 
-class PolishString constructor(expression: String) {
+class PolishString constructor(expression: String, variables: MutableMap<String, Int>) {
     var expression: String
     var isExpressionCorrect: Boolean = true
 

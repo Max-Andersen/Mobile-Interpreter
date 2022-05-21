@@ -5,7 +5,7 @@ import android.widget.LinearLayout
 import com.example.myapplication.printInConsole
 import com.example.myapplication.structs.tree.TreeNode
 
-fun expressionBlock(tree: TreeNode<String>, text: String, console: LinearLayout, ctx: Context) {
+fun expressionBlock(tree: TreeNode<String>, text: String, console: LinearLayout, ctx: Context, variables: MutableMap<String, Int>) {
 
     var textExpression = text
 
@@ -49,7 +49,7 @@ fun expressionBlock(tree: TreeNode<String>, text: String, console: LinearLayout,
         textExpression = "\\)(?<=[0-9a-zA-Z_])".toRegex().replace(textExpression, ")*")
 
         //прогон по польской строке
-        val polString = PolishString(textExpression)
+        val polString = PolishString(textExpression, variables)
 
         if (polString.isExpressionCorrect) {
             tree.add(TreeNode(",+".toRegex().replace(polString.expression, ",")))

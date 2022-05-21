@@ -9,6 +9,18 @@ import java.lang.Exception
 fun calculatePolishString(polishString: String, variables: MutableMap<String, Int>, console: LinearLayout, ctx: Context): Int {
     val stack = Stack()
     var localPolishString = polishString
+
+
+    val regex = Regex("[a-zA-Z_][a-zA-Z_0-9]*")
+    val matches = regex.findAll(polishString)
+    for (key in matches){
+        if (!variables.containsKey(key.value)) {
+            printInConsole("#Invalid expression: ${key.value}", console, ctx)
+            return 0
+        }
+    }
+
+
     while (localPolishString.isNotEmpty()) {
         val expr = localPolishString.substringBefore(',')
         if (expr.matches(Regex("[a-zA-Z_][\\w]*"))) {
@@ -21,13 +33,13 @@ fun calculatePolishString(polishString: String, variables: MutableMap<String, In
                     stack.ordinaryPush(0)
                 }
             } else {
-                if(stack.isEmpty()){
-                    printInConsole("#Invalid expression", console, ctx)
+                if(stack.isEmpty2()){
+                    printInConsole("#Invalid expression: stack", console, ctx)
                     return 0
                 }
                 val second = stack.ordinaryPop()
-                if(stack.isEmpty()){
-                    printInConsole("#Invalid expression", console, ctx)
+                if(stack.isEmpty2()){
+                    printInConsole("#Invalid expression: stack", console, ctx)
                     return 0
                 }
                 val first = stack.ordinaryPop()

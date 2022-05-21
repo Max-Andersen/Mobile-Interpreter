@@ -9,6 +9,9 @@ class Stack {
     fun isEmpty(): Boolean {
         return arrayOfChars.isEmpty()
     }
+    fun isEmpty2(): Boolean {
+        return arrayOfInts.isEmpty()
+    }
 
     fun ordinaryPush(element: Int?) {
         if (element != null) {
